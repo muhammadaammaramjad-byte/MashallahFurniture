@@ -1,12 +1,13 @@
 /**
- * Centralized Data Service for Mashallah Furniture
- * Handles products, cart, wishlist with caching and real-time updates
+ * Enhanced Data Service for Mashallah Furniture
+ * Handles products, cart, wishlist with advanced caching, filtering, and real-time updates
  */
 
 class DataService {
     constructor() {
         this.cache = new Map();
-        this.cacheTimeout = 3600000; // 1 hour
+        this.cacheExpiry = new Map();
+        this.defaultCacheTime = 3600000; // 1 hour
         this.baseUrl = window.location.origin;
         this.setupEventListeners();
     }
@@ -31,11 +32,18 @@ class DataService {
         });
     }
 
+    // ==========================================
+    // PRODUCT MANAGEMENT
+    // ==========================================
+
+    /**
+     * Get all products with caching
+     * @returns {Promise<Array>} Array of products
+     */
     async getProducts() {
-        const cached = this.cache.get('products');
-        if (cached && Date.now() - cached.timestamp < this.cacheTimeout) {
+        if (this.isCacheValid('products')) {
             console.log('📦 Returning cached products');
-            return cached.data;
+            return this.cache.get('products');
         }
 
         try {
@@ -66,19 +74,26 @@ class DataService {
                 }
             });
 
-            // Ensure each product has required fields
-            allProducts = allProducts.map(product => ({
-                ...product,
-                id: product.id || Date.now() + Math.random(),
-                images: product.images && product.images[0] ? product.images[0] : (product.image || '/assets/images/placeholder.jpg'),
-                inStock: product.inStock !== false
-            }));
+            // Ensure each product has required fields and validate
+            allProducts = allProducts
+                .filter(product => this.validateProduct(product))
+                .map(product => ({
+                    ...product,
+                    id: product.id || Date.now() + Math.random(),
+                    images: Array.isArray(product.images) && product.images.length > 0
+                        ? product.images
+                        : [product.image || '/assets/images/placeholder.jpg'],
+                    inStock: product.inStock !== false,
+                    category: product.category || 'General',
+                    rating: product.rating || 0,
+                    reviews: product.reviews || 0,
+                    tags: Array.isArray(product.tags) ? product.tags : [],
+                    createdAt: product.createdAt || new Date().toISOString(),
+                    updatedAt: product.updatedAt || new Date().toISOString()
+                }));
 
             // Cache the result
-            this.cache.set('products', {
-                data: allProducts,
-                timestamp: Date.now()
-            });
+            this.setCache('products', allProducts);
 
             console.log(`✅ Loaded ${allProducts.length} products (${adminProducts.length} from admin, ${staticProducts.length} from static)`);
             return allProducts;
@@ -88,163 +103,106 @@ class DataService {
         }
     }
 
+    /**
+     * Get product by ID
+     * @param {number|string} id - Product ID
+     * @returns {Promise<Object|null>} Product object or null
+     */
     async getProductById(id) {
         const products = await this.getProducts();
         const productId = parseInt(id);
-        return products.find(p => parseInt(p.id) === productId);
+        return products.find(p => parseInt(p.id) === productId) || null;
     }
 
-    // Cart Operations
-    getCart() {
-        return JSON.parse(localStorage.getItem('cart') || '[]');
-    }
+    /**
+     * Filter and search products
+     * @param {Object} filters - Filter options
+     * @returns {Promise<Array>} Filtered products
+     */
+    async getFilteredProducts(filters = {}) {
+        let products = await this.getProducts();
 
-    addToCart(product, quantity = 1) {
-        const cart = this.getCart();
-        const existingItem = cart.find(item => item.id === product.id);
-
-        if (existingItem) {
-            existingItem.quantity += quantity;
-        } else {
-            cart.push({ ...product, quantity });
+        // Search by name or description
+        if (filters.search) {
+            const searchTerm = filters.search.toLowerCase();
+            products = products.filter(p =>
+                p.name.toLowerCase().includes(searchTerm) ||
+                (p.description && p.description.toLowerCase().includes(searchTerm)) ||
+                (p.tags && p.tags.some(tag => tag.toLowerCase().includes(searchTerm)))
+            );
         }
 
-        localStorage.setItem('cart', JSON.stringify(cart));
-        this.dispatchCartEvent();
-        return cart;
-    }
-
-    removeFromCart(productId) {
-        let cart = this.getCart();
-        cart = cart.filter(item => item.id !== productId);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        this.dispatchCartEvent();
-        return cart;
-    }
-
-    updateQuantity(productId, quantity) {
-        const cart = this.getCart();
-        const item = cart.find(item => item.id === productId);
-        if (item) {
-            if (quantity <= 0) {
-                return this.removeFromCart(productId);
-            }
-            item.quantity = quantity;
-            localStorage.setItem('cart', JSON.stringify(cart));
-            this.dispatchCartEvent();
+        // Filter by category
+        if (filters.category && filters.category !== 'all') {
+            products = products.filter(p => p.category === filters.category);
         }
-        return cart;
-    }
 
-    getCartTotal() {
-        const cart = this.getCart();
-        return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-    }
-
-    getCartCount() {
-        const cart = this.getCart();
-        return cart.reduce((count, item) => count + item.quantity, 0);
-    }
-
-    clearCart() {
-        localStorage.setItem('cart', JSON.stringify([]));
-        this.dispatchCartEvent();
-    }
-
-    // Wishlist Operations
-    getWishlist() {
-        return JSON.parse(localStorage.getItem('wishlist') || '[]');
-    }
-
-    addToWishlist(product) {
-        const wishlist = this.getWishlist();
-        if (!wishlist.find(item => item.id === product.id)) {
-            wishlist.push(product);
-            localStorage.setItem('wishlist', JSON.stringify(wishlist));
-            this.dispatchWishlistEvent();
+        // Filter by price range
+        if (filters.minPrice !== undefined) {
+            products = products.filter(p => p.price >= filters.minPrice);
         }
-        return wishlist;
-    }
+        if (filters.maxPrice !== undefined) {
+            products = products.filter(p => p.price <= filters.maxPrice);
+        }
 
-    removeFromWishlist(productId) {
-        let wishlist = this.getWishlist();
-        wishlist = wishlist.filter(item => item.id !== productId);
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-        this.dispatchWishlistEvent();
-        return wishlist;
-    }
-
-    isInWishlist(productId) {
-        return this.getWishlist().some(item => item.id === productId);
-    }
-
-    clearWishlist() {
-        localStorage.setItem('wishlist', JSON.stringify([]));
-        this.dispatchWishlistEvent();
-    }
-
-    // Event Dispatchers
-    dispatchCartEvent() {
-        window.dispatchEvent(new CustomEvent('cartUpdated', {
-            detail: { cart: this.getCart(), count: this.getCartCount(), total: this.getCartTotal() }
-        }));
-    }
-
-    dispatchWishlistEvent() {
-        window.dispatchEvent(new CustomEvent('wishlistUpdated', {
-            detail: { wishlist: this.getWishlist() }
-        }));
-    }
-
-    dispatchProductsUpdated() {
-        window.dispatchEvent(new CustomEvent('productsUpdated'));
-    }
-
-    // Utility Methods
-    clearCache() {
-        this.cache.clear();
-        console.log('🗑️ Cache cleared');
-    }
-
-    getCacheStats() {
-        return {
-            size: this.cache.size,
-            keys: Array.from(this.cache.keys()),
-            productsCached: this.cache.has('products')
-        };
-    }
-
-    exportData() {
-        return {
-            products: localStorage.getItem('mashallah_products'),
-            cart: this.getCart(),
-            wishlist: this.getWishlist(),
-            timestamp: new Date().toISOString()
-        };
-    }
-
-    importData(data) {
-        if (data.products) localStorage.setItem('mashallah_products', data.products);
-        if (data.cart) localStorage.setItem('cart', JSON.stringify(data.cart));
-        if (data.wishlist) localStorage.setItem('wishlist', JSON.stringify(data.wishlist));
-        this.clearCache();
-        this.dispatchCartEvent();
-        this.dispatchWishlistEvent();
-        this.dispatchProductsUpdated();
-    }
-}
-
-export default new DataService();
-
+        // Filter by stock status
         if (filters.inStock !== undefined) {
             products = products.filter(p => p.inStock === filters.inStock);
         }
 
+        // Filter by tags
+        if (filters.tags && filters.tags.length > 0) {
+            products = products.filter(p =>
+                filters.tags.some(tag => p.tags && p.tags.includes(tag))
+            );
+        }
+
+        // Sort products
         if (filters.sortBy) {
             products = this.sortProducts(products, filters.sortBy, filters.sortOrder || 'asc');
         }
 
         return products;
+    }
+
+    /**
+     * Get products by category
+     * @param {string} category - Category name
+     * @returns {Promise<Array>} Products in category
+     */
+    async getProductsByCategory(category) {
+        return this.getFilteredProducts({ category });
+    }
+
+    /**
+     * Get featured products
+     * @param {number} limit - Number of products to return
+     * @returns {Promise<Array>} Featured products
+     */
+    async getFeaturedProducts(limit = 8) {
+        const products = await this.getProducts();
+        return products
+            .filter(p => p.featured || p.rating >= 4.5)
+            .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+            .slice(0, limit);
+    }
+
+    /**
+     * Get related products
+     * @param {Object} product - Current product
+     * @param {number} limit - Number of related products
+     * @returns {Promise<Array>} Related products
+     */
+    async getRelatedProducts(product, limit = 4) {
+        const products = await this.getProducts();
+        return products
+            .filter(p =>
+                p.id !== product.id &&
+                (p.category === product.category ||
+                 p.tags.some(tag => product.tags.includes(tag)))
+            )
+            .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+            .slice(0, limit);
     }
 
     /**
@@ -368,7 +326,7 @@ export default new DataService();
     }
 
     /**
-     * Get cart total
+     * Get cart totals
      * @returns {Object} Cart totals
      */
     getCartTotals() {
@@ -493,43 +451,56 @@ export default new DataService();
     }
 
     // ==========================================
-    // USER DATA MANAGEMENT
+    // CATEGORIES & COLLECTIONS
     // ==========================================
 
     /**
-     * Get user data
-     * @returns {Object|null} User data or null
+     * Get categories
+     * @returns {Promise<Array>} Array of categories
      */
-    getUser() {
-        try {
-            return JSON.parse(localStorage.getItem('user')) || null;
-        } catch (error) {
-            console.error('Error loading user data:', error);
-            return null;
+    async getCategories() {
+        if (this.isCacheValid('categories')) {
+            return this.cache.get('categories');
         }
+
+        try {
+            const response = await fetch(`${this.baseUrl}/data/categories.json`);
+            if (response.ok) {
+                const categories = await response.json();
+                this.setCache('categories', categories);
+                return categories;
+            }
+        } catch (error) {
+            console.warn('Could not load categories:', error);
+        }
+
+        // Fallback: extract from products
+        const products = await this.getProducts();
+        const categories = [...new Set(products.map(p => p.category))].filter(Boolean);
+        return categories.map(name => ({ name, slug: name.toLowerCase().replace(/\s+/g, '-') }));
     }
 
     /**
-     * Save user data
-     * @param {Object} userData - User data to save
+     * Get collections
+     * @returns {Promise<Array>} Array of collections
      */
-    saveUser(userData) {
-        try {
-            localStorage.setItem('user', JSON.stringify(userData));
-            console.log('👤 User data saved');
-        } catch (error) {
-            console.error('Error saving user data:', error);
+    async getCollections() {
+        if (this.isCacheValid('collections')) {
+            return this.cache.get('collections');
         }
-    }
 
-    /**
-     * Clear user data (logout)
-     */
-    logout() {
-        localStorage.removeItem('user');
-        this.clearCart();
-        this.saveWishlist([]);
-        console.log('👋 User logged out');
+        try {
+            const response = await fetch(`${this.baseUrl}/data/collections.json`);
+            if (response.ok) {
+                const collections = await response.json();
+                this.setCache('collections', collections);
+                return collections;
+            }
+        } catch (error) {
+            console.warn('Could not load collections:', error);
+        }
+
+        return [];
     }
 
     // ==========================================
@@ -543,10 +514,10 @@ export default new DataService();
      */
     validateProduct(product) {
         return product &&
-               typeof product.id !== 'undefined' &&
+               (product.id || product.id === 0) &&
                product.name &&
                typeof product.price === 'number' &&
-               product.price > 0;
+               product.price >= 0;
     }
 
     /**
@@ -556,7 +527,7 @@ export default new DataService();
      */
     validateCartItem(item) {
         return item &&
-               item.id &&
+               (item.id || item.id === 0) &&
                item.quantity > 0 &&
                typeof item.price === 'number';
     }
@@ -593,11 +564,82 @@ export default new DataService();
     }
 
     /**
+     * Get cache statistics
+     * @returns {Object} Cache stats
+     */
+    getCacheStats() {
+        return {
+            size: this.cache.size,
+            keys: Array.from(this.cache.keys()),
+            expiryTimes: Array.from(this.cacheExpiry.entries())
+        };
+    }
+
+    // ==========================================
+    // EVENT DISPATCHERS
+    // ==========================================
+
+    /**
      * Dispatch cart update event
      */
     dispatchCartEvent() {
+        const totals = this.getCartTotals();
         window.dispatchEvent(new CustomEvent('cartUpdated', {
-            detail: { cart: this.getCart() }
+            detail: totals
+        }));
+    }
+
+    /**
+     * Dispatch wishlist update event
+     */
+    dispatchWishlistEvent() {
+        window.dispatchEvent(new CustomEvent('wishlistUpdated', {
+            detail: { wishlist: this.getWishlist() }
+        }));
+    }
+
+    /**
+     * Dispatch products update event
+     */
+    dispatchProductsUpdated() {
+        window.dispatchEvent(new CustomEvent('productsUpdated'));
+    }
+
+    // ==========================================
+    // DATA EXPORT/IMPORT
+    // ==========================================
+
+    /**
+     * Export all data
+     * @returns {Object} Exported data
+     */
+    exportData() {
+        return {
+            products: localStorage.getItem('mashallah_products'),
+            cart: this.getCart(),
+            wishlist: this.getWishlist(),
+            timestamp: new Date().toISOString(),
+            version: '2.0'
+        };
+    }
+
+    /**
+     * Import data
+     * @param {Object} data - Data to import
+     */
+    importData(data) {
+        if (data.products) localStorage.setItem('mashallah_products', data.products);
+        if (data.cart) this.saveCart(data.cart);
+        if (data.wishlist) this.saveWishlist(data.wishlist);
+        this.clearCache();
+        this.dispatchCartEvent();
+        this.dispatchWishlistEvent();
+        this.dispatchProductsUpdated();
+        console.log('📥 Data imported successfully');
+    }
+}
+
+export default new DataService();
         }));
     }
 

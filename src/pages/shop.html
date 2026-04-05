@@ -12,55 +12,68 @@
 
     <main class="shop-page">
         <div class="container">
+            <!-- Shop Header -->
             <div class="shop-header">
                 <h1>Our Collection</h1>
-                <div class="shop-controls">
-                    <div class="search-bar">
-                        <input type="text" id="search-input" placeholder="Search products...">
-                        <i class="fas fa-search"></i>
+                <p>Discover our premium furniture collection</p>
+            </div>
+
+            <div class="shop-layout">
+                <!-- Filters Sidebar -->
+                <aside class="filters-sidebar">
+                    <!-- Search -->
+                    <div class="filter-section">
+                        <h3>Search</h3>
+                        <div class="search-bar">
+                            <input type="text" id="search-input" placeholder="Search products...">
+                            <i class="fas fa-search"></i>
+                        </div>
                     </div>
-                    <select id="category-filter">
-                        <option value="all">All Categories</option>
-                        <option value="Living Room">Living Room</option>
-                        <option value="Bedroom">Bedroom</option>
-                        <option value="Dining">Dining</option>
-                        <option value="Office">Office</option>
-                    </select>
-                </div>
-            </div>
 
-            <div class="products-grid" id="products-grid">
-                <!-- Products loaded by shop.js -->
-            </div>
+                    <!-- Categories -->
+                    <div class="filter-section">
+                        <h3>Categories</h3>
+                        <select id="category-filter">
+                            <option value="all">All Categories</option>
+                            <option value="Living Room">Living Room</option>
+                            <option value="Bedroom">Bedroom</option>
+                            <option value="Dining">Dining</option>
+                            <option value="Office">Office</option>
+                        </select>
+                    </div>
 
-            <div class="pagination" id="pagination"></div>
-        </div>
-    </main>
+                    <!-- Price Range -->
+                    <div class="filter-section">
+                        <h3>Price Range</h3>
+                        <div class="price-range">
+                            <div class="price-inputs">
+                                <input type="number" id="minPrice" placeholder="Min" min="0">
+                                <span>-</span>
+                                <input type="number" id="maxPrice" placeholder="Max" min="0">
+                            </div>
+                            <button id="applyPriceFilter" class="apply-filter-btn">Apply</button>
+                        </div>
+                    </div>
 
-    <div id="footer-container"></div>
-    <div id="cart-sidebar"></div>
+                    <!-- Stock Status -->
+                    <div class="filter-section">
+                        <h3>Availability</h3>
+                        <label><input type="checkbox" id="inStockOnly" checked> In Stock Only</label>
+                    </div>
 
-    <script type="module" src="/js/main.js"></script>
-</body>
-</html>
+                    <!-- Tags/Materials -->
+                    <div class="filter-section">
+                        <h3>Materials</h3>
+                        <div class="filter-options" id="materialFilters">
+                            <label><input type="checkbox" value="wood"> Wood</label>
                             <label><input type="checkbox" value="metal"> Metal</label>
                             <label><input type="checkbox" value="fabric"> Fabric</label>
                             <label><input type="checkbox" value="leather"> Leather</label>
                         </div>
                     </div>
-
-                    <div class="filter-section">
-                        <h3>Color</h3>
-                        <div class="filter-options" id="colorFilters">
-                            <label><input type="checkbox" value="brown"> Brown</label>
-                            <label><input type="checkbox" value="black"> Black</label>
-                            <label><input type="checkbox" value="white"> White</label>
-                            <label><input type="checkbox" value="gray"> Gray</label>
-                        </div>
-                    </div>
                 </aside>
 
-                <!-- Products Grid -->
+                <!-- Products Section -->
                 <div class="shop-content">
                     <!-- Sort and View Options -->
                     <div class="shop-controls">
@@ -70,10 +83,11 @@
                         <div class="sort-options">
                             <select id="sortSelect">
                                 <option value="name">Name A-Z</option>
-                                <option value="price-low">Price: Low to High</option>
-                                <option value="price-high">Price: High to Low</option>
-                                <option value="newest">Newest First</option>
+                                <option value="name-desc">Name Z-A</option>
+                                <option value="price">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
                                 <option value="rating">Highest Rated</option>
+                                <option value="newest">Newest First</option>
                             </select>
                         </div>
                         <div class="view-options">
@@ -86,118 +100,24 @@
                         </div>
                     </div>
 
-                    <!-- Products Container -->
-                    <div class="products-container" id="productsContainer">
-                        <!-- Products will be populated by JS -->
+                    <!-- Products Grid -->
+                    <div class="products-grid" id="products-grid">
+                        <!-- Products loaded by shop.js -->
                     </div>
 
                     <!-- Pagination -->
-                    <div class="pagination" id="pagination">
-                        <!-- Pagination will be populated by JS -->
-                    </div>
+                    <div class="pagination" id="pagination"></div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Cart Sidebar -->
-    <div id="cartSidebar"></div>
+    <div id="footer-container"></div>
+    <div id="cart-sidebar"></div>
 
-    <!-- Footer -->
-    <footer id="footer"></footer>
-
-    <!-- Scripts -->
-    <script type="module" src="/src/js/main.js"></script>
-    <script type="module" src="/src/js/pages/shop.js"></script>
+    <script type="module" src="/js/main.js"></script>
 </body>
 </html>
-        <li class="sidebar-nav-item">
-          <a href="/nav-btn/favourite.html" class="sidebar-nav-link">
-            <i class="fas fa-heart"></i>
-            <span>Wishlist</span>
-          </a>
-        </li>
-        <li class="sidebar-nav-item">
-          <a href="/Offers/offers.html" class="sidebar-nav-link">
-            <i class="fas fa-gift"></i>
-            <span>Offers</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Left Sidebar (Desktop) -->
-    <div class="left-sidebar" id="leftSidebar">
-      <ul class="sidebar-nav-items">
-        <li class="sidebar-nav-item">
-          <a href="/Home/home.html" class="sidebar-nav-link">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="sidebar-nav-item">
-          <a href="/Shop/shop.html" class="sidebar-nav-link">
-            <i class="fas fa-shopping-cart"></i>
-            <span>Shop</span>
-          </a>
-        </li>
-        <li class="sidebar-nav-item">
-          <a href="/Collections/collections.html" class="sidebar-nav-link">
-            <i class="fas fa-layer-group"></i>
-            <span>Collections</span>
-          </a>
-        </li>
-        <li class="sidebar-nav-item">
-          <a href="/About/about.html" class="sidebar-nav-link">
-            <i class="fas fa-info-circle"></i>
-            <span>About</span>
-          </a>
-        </li>
-        <li class="sidebar-nav-item">
-          <a href="/Contact/contact.html" class="sidebar-nav-link">
-            <i class="fas fa-phone"></i>
-            <span>Contact</span>
-          </a>
-        </li>
-        <li class="sidebar-nav-item">
-          <a href="/nav-btn/favourite.html" class="sidebar-nav-link">
-            <i class="fas fa-heart"></i>
-            <span>Wishlist</span>
-          </a>
-        </li>
-        <li class="sidebar-nav-item">
-          <a href="/Offers/offers.html" class="sidebar-nav-link">
-            <i class="fas fa-gift"></i>
-            <span>Offers</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Bottom Bar (Mobile) -->
-    <div class="bottom-bar">
-      <ul class="bottom-nav-items">
-        <li class="bottom-nav-item">
-          <a href="/Home/home.html" class="bottom-nav-link">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="bottom-nav-item">
-          <a href="/Shop/shop.html" class="bottom-nav-link">
-            <i class="fas fa-shopping-cart"></i>
-            <span>Shop</span>
-          </a>
-        </li>
-        <li class="bottom-nav-item">
-          <a href="/Search/search.html" class="bottom-nav-link" id="mobileSearchIcon">
-            <i class="fas fa-search"></i>
-            <span>Search</span>
-          </a>
-        </li>
-        <li class="bottom-nav-item">
-          <a href="/nav-btn/favourite.html" class="bottom-nav-link">
-            <i class="fas fa-heart"></i>
             <span>Wishlist</span>
           </a>
         </li>

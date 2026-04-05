@@ -8,31 +8,53 @@ class ShopPage {
         this.filteredProducts = [];
         this.currentPage = 1;
         this.itemsPerPage = 12;
-        this.currentCategory = 'all';
-        this.searchQuery = '';
+        this.filters = {
+            category: 'all',
+            search: '',
+            minPrice: null,
+            maxPrice: null,
+            inStock: true,
+            tags: [],
+            sortBy: 'name',
+            sortOrder: 'asc'
+        };
         this.init();
     }
 
     async init() {
         await this.loadProducts();
         this.setupEventListeners();
-        this.setupCategoryFilter();
-        this.setupSearch();
+        this.setupFilters();
+        this.setupSorting();
+        this.setupViewOptions();
+    }
+
+    setupEventListeners() {
+        // Listen for product updates from admin
+        window.addEventListener('productsUpdated', () => {
+            console.log('🔄 Products updated, refreshing shop...');
+            this.loadProducts();
+        });
+
+        // Listen for cart updates to refresh wishlist icons
+        window.addEventListener('cartUpdated', () => {
+            // Cart updates don't affect shop display
+        });
+
+        // Listen for wishlist updates to refresh icons
+        window.addEventListener('wishlistUpdated', () => {
+            this.updateWishlistIcons();
+        });
     }
 
     async loadProducts() {
         try {
-            // Show loading state
             this.showLoading();
 
-            // Get products from data service (combines admin + static)
             this.allProducts = await dataService.getProducts();
-            this.filteredProducts = [...this.allProducts];
+            await this.applyFilters();
 
-            console.log(`✅ Shop loaded ${this.filteredProducts.length} products`);
-
-            this.renderProducts();
-            this.setupPagination();
+            console.log(`✅ Shop loaded ${this.allProducts.length} products`);
         } catch (error) {
             console.error('Failed to load products:', error);
             this.showError('Unable to load products. Please refresh the page.');
@@ -184,50 +206,151 @@ class ShopPage {
         });
     }
 
-    setupCategoryFilter() {
-        const categoryFilter = document.querySelector('#category-filter');
-        if (categoryFilter) {
-            categoryFilter.addEventListener('change', (e) => {
-                this.currentCategory = e.target.value;
-                this.applyFilters();
-            });
+    updateResultsCount() {
+        const countElement = document.getElementById('resultsCount');
+        if (countElement) {
+            countElement.textContent = this.filteredProducts.length;
         }
     }
 
-    setupSearch() {
-        const searchInput = document.querySelector('#search-input');
+    setupFilters() {
+        // Category filter
+        const categoryFilter = document.getElementById('category-filter');
+        if (categoryFilter) {
+            categoryFilter.addEventListener('change', (e) => {
+                this.filters.category = e.target.value;
+                this.applyFilters();
+            });
+        }
+
+        // Search input
+        const searchInput = document.getElementById('search-input');
         if (searchInput) {
             let debounceTimer;
             searchInput.addEventListener('input', (e) => {
                 clearTimeout(debounceTimer);
                 debounceTimer = setTimeout(() => {
-                    this.searchQuery = e.target.value.toLowerCase();
+                    this.filters.search = e.target.value.toLowerCase();
                     this.applyFilters();
                 }, 300);
+            });
+        }
+
+        // Price range filter
+        const minPriceInput = document.getElementById('minPrice');
+        const maxPriceInput = document.getElementById('maxPrice');
+        const applyPriceBtn = document.getElementById('applyPriceFilter');
+
+        if (applyPriceBtn) {
+            applyPriceBtn.addEventListener('click', () => {
+                this.filters.minPrice = minPriceInput.value ? parseFloat(minPriceInput.value) : null;
+                this.filters.maxPrice = maxPriceInput.value ? parseFloat(maxPriceInput.value) : null;
+                this.applyFilters();
+            });
+        }
+
+        // In stock filter
+        const inStockCheckbox = document.getElementById('inStockOnly');
+        if (inStockCheckbox) {
+            inStockCheckbox.addEventListener('change', (e) => {
+                this.filters.inStock = e.target.checked;
+                this.applyFilters();
+            });
+        }
+
+        // Material/tag filters
+        const materialFilters = document.querySelectorAll('#materialFilters input[type="checkbox"]');
+        materialFilters.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const checkedMaterials = Array.from(materialFilters)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.value);
+                this.filters.tags = checkedMaterials;
+                this.applyFilters();
+            });
+        });
+    }
+
+    setupSorting() {
+        const sortSelect = document.getElementById('sortSelect');
+        if (sortSelect) {
+            sortSelect.addEventListener('change', (e) => {
+                const value = e.target.value;
+                if (value === 'price') {
+                    this.filters.sortBy = 'price';
+                    this.filters.sortOrder = 'asc';
+                } else if (value === 'price-desc') {
+                    this.filters.sortBy = 'price';
+                    this.filters.sortOrder = 'desc';
+                } else if (value === 'name-desc') {
+                    this.filters.sortBy = 'name';
+                    this.filters.sortOrder = 'desc';
+                } else if (value === 'rating') {
+                    this.filters.sortBy = 'rating';
+                    this.filters.sortOrder = 'desc';
+                } else if (value === 'newest') {
+                    this.filters.sortBy = 'createdAt';
+                    this.filters.sortOrder = 'desc';
+                } else {
+                    this.filters.sortBy = 'name';
+                    this.filters.sortOrder = 'asc';
+                }
+                this.applyFilters();
+            });
+        }
+    }
+
+    setupViewOptions() {
+        const gridView = document.getElementById('gridView');
+        const listView = document.getElementById('listView');
+        const productsGrid = document.querySelector('.products-grid');
+
+        if (gridView && listView && productsGrid) {
+            gridView.addEventListener('click', () => {
+                gridView.classList.add('active');
+                listView.classList.remove('active');
+                productsGrid.classList.remove('list-view');
+                productsGrid.classList.add('grid-view');
+            });
+
+            listView.addEventListener('click', () => {
+                listView.classList.add('active');
+                gridView.classList.remove('active');
+                productsGrid.classList.remove('grid-view');
+                productsGrid.classList.add('list-view');
             });
         }
     }
 
     applyFilters() {
-        let filtered = [...this.allProducts];
+        // Use the improved dataService filtering
+        const filters = {
+            category: this.filters.category !== 'all' ? this.filters.category : undefined,
+            search: this.filters.search || undefined,
+            minPrice: this.filters.minPrice || undefined,
+            maxPrice: this.filters.maxPrice || undefined,
+            inStock: this.filters.inStock ? true : undefined,
+            tags: this.filters.tags.length > 0 ? this.filters.tags : undefined,
+            sortBy: this.filters.sortBy || 'name',
+            sortOrder: this.filters.sortBy === 'price' && this.filters.sortOrder === 'desc' ? 'desc' :
+                      this.filters.sortBy === 'name' && this.filters.sortOrder === 'desc' ? 'desc' : 'asc'
+        };
 
-        // Apply category filter
-        if (this.currentCategory !== 'all') {
-            filtered = filtered.filter(p => p.category === this.currentCategory);
-        }
-
-        // Apply search filter
-        if (this.searchQuery) {
-            filtered = filtered.filter(p =>
-                p.name.toLowerCase().includes(this.searchQuery) ||
-                (p.description && p.description.toLowerCase().includes(this.searchQuery))
-            );
-        }
-
-        this.filteredProducts = filtered;
-        this.currentPage = 1;
-        this.renderProducts();
-        this.setupPagination();
+        // Get filtered products from dataService
+        dataService.getFilteredProducts(filters).then(filtered => {
+            this.filteredProducts = filtered;
+            this.updateResultsCount();
+            this.currentPage = 1;
+            this.renderProducts();
+            this.setupPagination();
+        }).catch(error => {
+            console.error('Error filtering products:', error);
+            this.filteredProducts = [];
+            this.renderProducts();
+        });
+    }
+            this.renderProducts();
+        });
     }
 
     setupPagination() {
