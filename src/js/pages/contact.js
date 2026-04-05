@@ -1,33 +1,153 @@
-// Wait for DOM to be fully loaded
+// Contact Page JavaScript
+import { sendContactEmail, initEmailJS, showToast } from '../services/emailService.js';
 
-document.addEventListener('DOMContentLoaded', function () {
+let recaptchaToken = null;
 
-  // Hide loading screen
-  setTimeout(() => {
-    document.getElementById('loadingScreen').style.opacity = '0';
-    document.getElementById('loadingScreen').style.visibility = 'hidden';
-  }
+document.addEventListener('DOMContentLoaded', () => {
+    initializeContactForm();
+});
 
-    , 1500);
-
-  // Initialize particles.js
-  particlesJS('particles-js', {
-    particles: {
-      number: {
-        value: 80, density: {
-          enable: true, value_area: 800
+function initializeContactForm() {
+    // Initialize EmailJS
+    initEmailJS();
+    
+    // Execute reCAPTCHA v3 when page loads
+    grecaptcha.ready(() => {
+        grecaptcha.execute('6Lfc76csAAAAADEPPeVFFDSpO_qSCeqWms1VLXvy', { action: 'contact_form' })
+            .then(token => {
+                recaptchaToken = token;
+                document.getElementById('recaptchaToken').value = token;
+                console.log('✅ reCAPTCHA token obtained');
+            })
+            .catch(error => {
+                console.error('❌ reCAPTCHA failed:', error);
+            });
+    });
+    
+    const form = document.getElementById('contactForm');
+    const statusDiv = document.getElementById('formStatus');
+    
+    if (!form) return;
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Clear previous status
+        statusDiv.innerHTML = '';
+        
+        // Get form elements
+        const submitBtn = form.querySelector('#submitBtn');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoader = submitBtn.querySelector('.btn-loader');
+        
+        // Validate form
+        if (!validateForm(form)) {
+            showToast('Please fill in all required fields correctly.', 'error');
+            return;
         }
-      }
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnLoader.style.display = 'inline';
+        
+        // Get form data
+        const formData = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            subject: document.getElementById('subject').value.trim(),
+            message: document.getElementById('message').value.trim()
+        };
+        
+        // Send email via EmailJS
+        const result = await sendContactEmail(formData);
+        
+        if (result.success) {
+            // Show success message
+            statusDiv.innerHTML = `
+                <div class="status-box success">
+                    <span class="status-icon">✅</span>
+                    <div class="status-text">
+                        <strong>Message sent successfully!</strong>
+                        <p>Thank you for contacting us. We'll get back to you within 24 hours.</p>
+                    </div>
+                </div>
+            `;
+            
+            // Reset form
+            form.reset();
+            showToast('Message sent! Check your email for confirmation.', 'success');
+            
+            // Track event in GA4
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'contact_form_submission', {
+                    event_category: 'engagement',
+                    event_label: formData.subject,
+                    user_email: formData.email
+                });
+            }
+        } else {
+            // Show error message
+            statusDiv.innerHTML = `
+                <div class="status-box error">
+                    <span class="status-icon">❌</span>
+                    <div class="status-text">
+                        <strong>Failed to send message</strong>
+                        <p>Please try again later or contact us directly at muhammad.aammar.amjad@gmail.com</p>
+                    </div>
+                </div>
+            `;
+            showToast('Failed to send message. Please try again.', 'error');
+        }
+        
+        // Reset button
+        submitBtn.disabled = false;
+        btnText.style.display = 'inline';
+        btnLoader.style.display = 'none';
+        
+        // Clear status after 8 seconds
+        setTimeout(() => {
+            statusDiv.innerHTML = '';
+        }, 8000);
+    });
+}
 
-      ,
-      color: {
-        value: "#000000"
-      }
-
-      ,
-      shape: {
-        type: "circle"
-      }
+function validateForm(form) {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    // Check all required fields
+    if (!name || !email || !subject || !message) {
+        showToast('Please fill in all required fields.', 'error');
+        return false;
+    }
+    
+    // Validate email format
+    if (!emailRegex.test(email)) {
+        showToast('Please enter a valid email address.', 'error');
+        return false;
+    }
+    
+    // Check name length
+    if (name.length < 3) {
+        showToast('Name must be at least 3 characters long.', 'error');
+        return false;
+    }
+    
+    // Check message length
+    if (message.length < 10) {
+        showToast('Message must be at least 10 characters long.', 'error');
+        return false;
+    }
+    
+    return true;
+}
 
       ,
       opacity: {
