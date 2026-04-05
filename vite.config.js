@@ -8,6 +8,7 @@ export default defineConfig({
             input: {
                 main: 'src/pages/index.html',
                 shop: 'src/pages/shop.html',
+                product: 'src/pages/product.html',
                 about: 'src/pages/about.html',
                 collections: 'src/pages/collections.html',
                 contact: 'src/pages/contact.html',

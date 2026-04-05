@@ -155,21 +155,37 @@ class ShopPage {
         document.addEventListener('click', (e) => {
             if (e.target.closest('.add-cart-btn')) {
                 e.preventDefault();
+                e.stopPropagation(); // Prevent card click
                 const productId = e.target.closest('.product-card').dataset.id;
                 this.addToCart(productId);
             }
 
             if (e.target.closest('.wishlist-btn')) {
                 e.preventDefault();
+                e.stopPropagation(); // Prevent card click
                 const productId = e.target.closest('.product-card').dataset.id;
                 this.toggleWishlist(productId);
             }
 
             if (e.target.closest('.quick-view-btn')) {
                 e.preventDefault();
+                e.stopPropagation(); // Prevent card click
                 const productId = e.target.closest('.product-card').dataset.id;
-                this.showQuickView(productId);
+                this.viewProductDetails(productId);
             }
+        });
+    }
+
+    attachProductCardListeners() {
+        // Add click listeners to product cards for navigation to detail page
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Only navigate if not clicking on action buttons
+                if (!e.target.closest('.action-btn')) {
+                    const productId = card.dataset.id;
+                    this.viewProductDetails(productId);
+                }
+            });
         });
     }
 
@@ -277,21 +293,21 @@ class ShopPage {
             <div class="product-card" data-id="${product.id}">
                 ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
                 <div class="product-img">
-                    <img src="${product.images[0]}" alt="${product.name}">
+                    <img src="${this.getProductImage(product, 0)}" alt="${product.name}">
                     <div class="product-actions">
-                        <button class="action-btn quick-view-btn" data-id="${product.id}">
+                        <button class="action-btn quick-view-btn" data-id="${product.id}" title="View Details">
                             <i class="fas fa-eye"></i>
                         </button>
-                        <button class="action-btn wishlist-btn ${this.isInWishlist(product.id) ? 'active' : ''}" data-id="${product.id}">
+                        <button class="action-btn wishlist-btn ${this.isInWishlist(product.id) ? 'active' : ''}" data-id="${product.id}" title="Add to Wishlist">
                             <i class="fas fa-heart"></i>
                         </button>
-                        <button class="action-btn add-cart-btn" data-id="${product.id}">
+                        <button class="action-btn add-cart-btn" data-id="${product.id}" title="Add to Cart">
                             <i class="fas fa-shopping-cart"></i>
                         </button>
                     </div>
                 </div>
                 <div class="product-info">
-                    <h3>${product.name}</h3>
+                    <h3 class="product-title">${product.name}</h3>
                     <div class="product-category">${product.category}</div>
                     <div class="product-price">
                         <span class="current-price">$${product.price}</span>
@@ -309,6 +325,7 @@ class ShopPage {
         `).join('');
 
         this.renderPagination();
+        this.attachProductCardListeners();
     }
 
     renderStars(rating) {
@@ -329,6 +346,27 @@ class ShopPage {
             this.currentPage = page;
             this.renderProducts();
         });
+    }
+
+    getProductImages(product) {
+        // Handle both formats: single image string or images array
+        if (product.images && Array.isArray(product.images)) {
+            return product.images;
+        } else if (product.image) {
+            // Convert single image to array format
+            return [{ url: product.image }];
+        }
+        return [{ url: '/assets/images/placeholder.jpg' }];
+    }
+
+    getImageUrl(image) {
+        // Handle both string URLs and object with url property
+        return typeof image === 'string' ? image : image.url || '/assets/images/placeholder.jpg';
+    }
+
+    getProductImage(product, index = 0) {
+        const images = this.getProductImages(product);
+        return this.getImageUrl(images[index] || images[0]);
     }
 
     updateResultsCount() {
@@ -401,116 +439,9 @@ class ShopPage {
         return dataService.isInWishlist(productId);
     }
 
-    async showQuickView(productId) {
-        try {
-            const product = this.allProducts.find(p => p.id == productId);
-            if (!product) return;
-
-            const modalContent = `
-                <div class="quick-view-modal">
-                    <div class="modal-product">
-                        <div class="modal-product-img">
-                            <img src="${product.images[0]}" alt="${product.name}">
-                        </div>
-                        <div class="modal-product-info">
-                            <h2>${product.name}</h2>
-                            <div class="product-price">
-                                <span class="current-price">$${product.price}</span>
-                                ${product.originalPrice ? `<span class="original-price">$${product.originalPrice}</span>` : ''}
-                            </div>
-                            <div class="product-rating">
-                                ${this.renderStars(product.rating)}
-                                <span>(${product.reviews} reviews)</span>
-                            </div>
-                            <p class="product-description">${product.description}</p>
-                            <div class="product-options">
-                                <div class="option-group">
-                                    <label>Color:</label>
-                                    <div class="color-options">
-                                        ${product.colors.map(color => `
-                                            <div class="color-option" style="background-color: ${color}" data-color="${color}"></div>
-                                        `).join('')}
-                                    </div>
-                                </div>
-                                <div class="option-group">
-                                    <label>Quantity:</label>
-                                    <div class="quantity-selector">
-                                        <button class="quantity-btn minus">-</button>
-                                        <input type="number" class="quantity-input" value="1" min="1" max="${product.stock}">
-                                        <button class="quantity-btn plus">+</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-actions">
-                                <button class="btn btn-primary add-to-cart-btn" data-id="${product.id}">
-                                    <i class="fas fa-shopping-cart"></i> Add to Cart
-                                </button>
-                                <button class="btn btn-secondary wishlist-btn ${this.isInWishlist(product.id) ? 'active' : ''}" data-id="${product.id}">
-                                    <i class="fas fa-heart"></i> ${this.isInWishlist(product.id) ? 'Remove from' : 'Add to'} Wishlist
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            showModal(modalContent, 'quick-view');
-
-            // Setup modal event listeners
-            this.setupQuickViewListeners(product);
-        } catch (error) {
-            console.error('Error showing quick view:', error);
-            showToast('Error loading product details. Please try again.', 'error');
-        }
-    }
-
-    setupQuickViewListeners(product) {
-        const modal = document.querySelector('.modal');
-        if (!modal) return;
-
-        // Quantity selector
-        const quantityInput = modal.querySelector('.quantity-input');
-        const minusBtn = modal.querySelector('.quantity-btn.minus');
-        const plusBtn = modal.querySelector('.quantity-btn.plus');
-
-        minusBtn.addEventListener('click', () => {
-            const currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
-        });
-
-        plusBtn.addEventListener('click', () => {
-            const currentValue = parseInt(quantityInput.value);
-            if (currentValue < product.stock) {
-                quantityInput.value = currentValue + 1;
-            }
-        });
-
-        // Add to cart from modal
-        modal.querySelector('.add-to-cart-btn').addEventListener('click', async () => {
-            const quantity = parseInt(quantityInput.value);
-            try {
-                await apiService.addToCart(product.id, quantity);
-                showToast(`${product.name} (${quantity}) added to cart!`, 'success');
-                this.updateCartCount();
-                modal.remove(); // Close modal
-            } catch (error) {
-                console.error('Error adding to cart:', error);
-                showToast('Error adding item to cart. Please try again.', 'error');
-            }
-        });
-
-        // Wishlist from modal
-        modal.querySelector('.wishlist-btn').addEventListener('click', async () => {
-            await this.toggleWishlist(product.id);
-            // Update button text
-            const isInWishlist = this.isInWishlist(product.id);
-            modal.querySelector('.wishlist-btn').innerHTML = `
-                <i class="fas fa-heart"></i> ${isInWishlist ? 'Remove from' : 'Add to'} Wishlist
-            `;
-            modal.querySelector('.wishlist-btn').classList.toggle('active', isInWishlist);
-        });
+    viewProductDetails(productId) {
+        // Navigate to product detail page
+        window.location.href = `/product.html?id=${productId}`;
     }
 
     updateCartCount() {
