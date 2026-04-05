@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RammaFurniture - Exclusive Offers</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;800&family=Lora:ital,wght@0,400;0,600;1,400&family=Raleway:wght@300;400;600;800&family=Inter:wght@300;400;600;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/✅Home/home.css">
+  <script src="/✅Home/home.js"></script>
+  <style>
+    :root {
+      --primary-black: #000000;
+      --primary-white: #FFFFFF;
+      --accent-gray: #222222;
+      --light-gray: #F5F5F5;
+      --medium-gray: #888888;
+      --dark-gray: #333333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--primary-white);
+      color: var(--primary-black);
+      overflow-x: hidden;
+      line-height: 1.6;
+
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      margin-left: 100px;
+    }
+
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1715355936284-d702fe27fbb1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--primary-white);
+      position: relative;
+      overflow: hidden;
+
+
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 900;
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards 0.5s;
+    }
+
+    .hero-content p {
+      font-family: 'Lora', serif;
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards 0.8s;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 18px 45px;
+      background-color: var(--primary-white);
+      color: var(--primary-black);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      border: 2px solid var(--primary-white);
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards 1.1s;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .cta-button:hover {
+      background-color: transparent;
+      color: var(--primary-white);
+      transform: translateY(-5px);
+    }
+
+    /* Section Styles */
+    section {
+      padding: 100px 0;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 80px;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .section-title p {
+      font-family: 'Lora', serif;
+      font-size: 1.2rem;
+      color: var(--medium-gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background-color: var(--primary-black);
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Offers Grid */
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .offer-card {
+      background-color: var(--primary-white);
+      border: 1px solid #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.5s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      position: relative;
+    }
+
+    .offer-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .offer-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .offer-image {
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      color: var(--primary-white);
+    }
+
+    .offer-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .offer-card:hover .offer-image img {
+      transform: scale(1.1);
+    }
+
+    .offer-badges {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .offer-badge {
+      padding: 5px 12px;
+      background-color: var(--primary-white);
+      color: var(--primary-black);
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .offer-content {
+      padding: 30px;
+    }
+
+    .offer-tag {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: var(--primary-black);
+      color: var(--primary-white);
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      border-radius: 30px;
+      letter-spacing: 1px;
+    }
+
+    .offer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .offer-description {
+      font-family: 'Lora', serif;
+      color: var(--medium-gray);
+      margin-bottom: 25px;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .offer-rating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      gap: 8px;
+    }
+
+    .stars {
+      color: #FFD700;
+    }
+
+    .review-count {
+      font-size: 0.9rem;
+      color: var(--medium-gray);
+    }
+
+    .offer-price {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .current-price {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-right: 15px;
+    }
+
+    .original-price {
+      font-size: 1.2rem;
+      text-decoration: line-through;
+      color: var(--medium-gray);
+    }
+
+    .discount {
+      margin-left: auto;
+      padding: 6px 14px;
+      background-color: var(--primary-black);
+      color: var(--primary-white);
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: 30px;
+    }
+
+    .offer-button {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background-color: var(--primary-black);
+      color: var(--primary-white);
+      border: none;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      border-radius: 8px;
+    }
+
+    .offer-button:hover {
+      background-color: var(--accent-gray);
+      transform: translateY(-3px);
+    }
+
+    /* Trending Offers */
+    .trending-offers {
+      background-color: var(--light-gray);
+    }
+
+    .trending-card {
+      display: flex;
+      background-color: var(--primary-white);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      margin-bottom: 50px;
+      border-radius: 15px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(-80px);
+      transition: all 0.8s ease;
+    }
+
+    .trending-card.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .trending-card:nth-child(even) {
+      flex-direction: row-reverse;
+      transform: translateX(80px);
+    }
+
+    .trending-card:nth-child(even).visible {
+      transform: translateX(0);
+    }
+
+    .trending-image {
+      flex: 1;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+      color: var(--primary-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .trending-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .trending-card:hover .trending-image img {
+      transform: scale(1.05);
+    }
+
+    .trending-content {
+      flex: 1;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .trending-tag {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: var(--primary-black);
+      color: var(--primary-white);
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      border-radius: 30px;
+      letter-spacing: 1px;
+    }
+
+    .trending-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .trending-description {
+      font-family: 'Lora', serif;
+      color: var(--medium-gray);
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* Expiring Soon */
+    .expiring-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .expiring-card {
+      background-color: var(--primary-white);
+      border: 1px solid #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.5s ease;
+      opacity: 0;
+      transform: scale(0.9);
+      position: relative;
+    }
+
+    .expiring-card.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .expiring-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .expiring-content {
+      padding: 25px;
+      position: relative;
+    }
+
+    .countdown {
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      background-color: var(--primary-black);
+      color: var(--primary-white);
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Flash Sale Section */
+    .flash-sale {
+      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      color: var(--primary-white);
+      text-align: center;
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sale-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      margin-bottom: 20px;
+      font-weight: 900;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards 0.5s;
+    }
+
+    .sale-subtitle {
+      font-family: 'Lora', serif;
+      font-size: 1.5rem;
+      margin-bottom: 50px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards 0.8s;
+    }
+
+    .sale-countdown {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards 1.1s;
+    }
+
+    .countdown-item {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 25px 20px;
+      min-width: 120px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .countdown-value {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .countdown-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .sale-button {
+      display: inline-block;
+      padding: 18px 45px;
+      background-color: var(--primary-white);
+      color: var(--primary-black);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      border: 2px solid var(--primary-white);
+      transition: all 0.4s ease;
+      border-radius: 8px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards 1.4s;
+    }
+
+    .sale-button:hover {
+      background-color: transparent;
+      color: var(--primary-white);
+      transform: translateY(-5px);
+    }
+
+    /* Recently Viewed */
+    .recently-viewed {
+      background-color: var(--light-gray);
+    }
+
+    /* Personal Recommendations */
+    .personal-recommendations {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary-black);
+      color: var(--primary-white);
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-10px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .hero-content h1 {
+        font-size: 3.5rem;
+      }
+
+      .trending-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .trending-card {
+        flex-direction: column;
+      }
+
+      .trending-card:nth-child(even) {
+        flex-direction: column;
+      }
+
+      .trending-image {
+        min-height: 300px;
+      }
+
+      .trending-content {
+        padding: 30px;
+      }
+
+      .sale-title {
+        font-size: 3rem;
+      }
+
+      .countdown-item {
+        min-width: 100px;
+        padding: 20px 15px;
+      }
+
+      .countdown-value {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+
+      .section-title h2 {
+        font-size: 2.2rem;
+      }
+
+      .offers-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sale-countdown {
+        flex-wrap: wrap;
+      }
+
+      .countdown-item {
+        min-width: 80px;
+        padding: 15px 10px;
+      }
+
+      .countdown-value {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+
+      .cta-button,
+      .sale-button {
+        padding: 15px 30px;
+      }
+
+      .section-title h2 {
+        font-size: 1.8rem;
+      }
+
+      .section-title:after {
+        width: 50px;
+      }
+
+      .trending-content {
+        padding: 20px;
+      }
+
+      .trending-title {
+        font-size: 1.8rem;
+      }
+
+      .sale-title {
+        font-size: 2.2rem;
+      }
+
+      .sale-subtitle {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="readingProgress" class="reading-progress" aria-hidden="true"></div>
+
+  <!-- Visual layers -->
+  <div id="springCells" aria-hidden="true"></div>
+  <div id="starLayer" aria-hidden="true"></div>
+  <div id="binaryLayer" aria-hidden="true"></div>
+
+  <!-- Cursor elements -->
+  <div id="cursorCore" class="cursor-core" aria-hidden="true"></div>
+  <div id="cursorOrb" class="cursor-orb" aria-hidden="true">
+    <!-- some orbiting mini particles (js will populate) -->
+  </div>
+
+  <!-- Confetti container -->
+  <div id="confettiContainer" class="confetti-container"></div>
+
+  <!-- Page Loader -->
+  <div class="loader" id="page-loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <i class="fas fa-couch"></i> Ramma<span>Furniture</span>
+      </div>
+      <div class="loader-spinner"></div>
+      <div class="loader-progress">
+        <div class="loader-progress-bar" id="loader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="/Home/home.html" class="logo">
+        <i class="fas fa-couch logo-icon"></i>
+        Ramma<span>Furniture</span>
+      </a>
+
+      <div class="nav-actions">
+        <div class="nav-action-btn search-wrapper">
+          <div class="search-icon-main" id="searchIcon">
+            <i class="fas fa-search icon-btn"></i>
+          </div>
+          <div class="search-container" id="searchContainer">
+            <div class="search-input-container">
+              <input type="text" class="search-input" placeholder="Search for furniture..." id="searchInput">
+              <i class="fas fa-search search-icon" id="searchButton"></i>
+            </div>
+            <div class="search-options">
+              <div class="search-option active" data-category="all">All</div>
+              <div class="search-option" data-category="chairs">Chairs</div>
+              <div class="search-option" data-category="tables">Tables</div>
+              <div class="search-option" data-category="sofas">Sofas</div>
+              <div class="search-option" data-category="storage">Storage</div>
+            </div>
+            <div class="search-results" id="searchResults">
+              <!-- Results will appear here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-action-btn wishlist-wrapper">
+          <a class="icon-btn" id="wishlistIcon" href="/✅nav-btn/✅favourite.html" aria-label="Wishlist">
+            <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            <span class="count-badge" id="wishlistCount">3</span>
+          </a>
+          <div class="wishlist-preview" id="wishlistPreview">
+            <h3>Your Wishlist</h3>
+            <div id="wishlistItemsPreview">
+              <!-- Wishlist items will appear here -->
+            </div>
+            <a href="/✅nav-btn/✅favourite.html" class="view-wishlist-btn" id="viewWishlistBtn">View Full Wishlist</a>
+          </div>
+        </div>
+
+        <div class="nav-action-btn">
+          <a href="/✅nav-btn/✅cart.html" id="cartIcon">
+            <i class="fas fa-shopping-cart icon-btn"></i>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+
+        <div class="nav-action-btn">
+          <a class="icon-btn" id="userIcon" href="/✅nav-btn/✅Account/account.html" aria-label="User Account"
+            aria-current="page">
+            <i class="fas fa-user"></i>
+          </a>
+        </div>
+
+        <button class="nav-action-btn menu-toggle" id="menuToggle" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar -->
+  <div class="mobile-sidebar" id="mobileSidebar">
+    <button class="close-sidebar" id="closeSidebar" aria-label="Close menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <ul class="sidebar-nav-items">
+      <li class="sidebar-nav-item">
+        <a href="/✅Home/home.html" class="sidebar-nav-link">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="/✅Shop/shop.html" class="sidebar-nav-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Shop</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="/✅Collections/collections.html" class="sidebar-nav-link">
+          <i class="fas fa-layer-group"></i>
+          <span>Collections</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="/✅About/about.html" class="sidebar-nav-link">
+          <i class="fas fa-info-circle"></i>
+          <span>About</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="/✅Contact/contact.html" class="sidebar-nav-link">
+          <i class="fas fa-phone"></i>
+          <span>Contact</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="/✅nav-btn/✅favourite.html" class="sidebar-nav-link">
+          <i class="fas fa-heart"></i>
+          <span>Wishlist</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="/✅Offers/offers.html" class="sidebar-nav-link">
+          <i class="fas fa-gift"></i>
+          <span>Offers</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Left Sidebar (Desktop) -->
+  <div class="left-sidebar" id="leftSidebar">
+    <ul class="sidebar-nav-items">
+      <li class="sidebar-nav-item">
+        <a href="/✅Home/home.html" class="sidebar-nav-link">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="/✅Shop/shop.html" class="sidebar-nav-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Shop</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="/✅Collections/collections.html" class="sidebar-nav-link">
+          <i class="fas fa-layer-group"></i>
+          <span>Collections</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="/✅About/about.html" class="sidebar-nav-link">
+          <i class="fas fa-info-circle"></i>
+          <span>About</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="/✅Contact/contact.html" class="sidebar-nav-link">
+          <i class="fas fa-phone"></i>
+          <span>Contact</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="/✅nav-btn/✅favourite.html" class="sidebar-nav-link">
+          <i class="fas fa-heart"></i>
+          <span>Wishlist</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="/✅Offers/offers.html" class="sidebar-nav-link">
+          <i class="fas fa-gift"></i>
+          <span>Offers</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Bottom Bar (Mobile) -->
+  <div class="bottom-bar">
+    <ul class="bottom-nav-items">
+      <li class="bottom-nav-item">
+        <a href="/✅Home/home.html" class="bottom-nav-link">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="bottom-nav-item">
+        <a href="/✅Shop/shop.html" class="bottom-nav-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Shop</span>
+        </a>
+      </li>
+      <li class="bottom-nav-item">
+        <a href="/✅Search/search.html" class="bottom-nav-link" id="mobileSearchIcon">
+          <i class="fas fa-search"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li class="bottom-nav-item">
+        <a href="/✅nav-btn/✅favourite.html" class="bottom-nav-link">
+          <i class="fas fa-heart"></i>
+          <span>Wishlist</span>
+        </a>
+      </li>
+      <li class="bottom-nav-item">
+        <a href="/✅nav-btn/✅Account/account.html" class="bottom-nav-link" id="mobileUserIcon">
+          <i class="fas fa-user"></i>
+          <span>Account</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Exclusive Offers</h1>
+      <p>Discover our limited-time deals on premium furniture collections. Elevate your space with style and savings.
+      </p>
+      <a href="#offers" class="cta-button">View All Offers</a>
+    </div>
+  </section>
+
+  <!-- Featured Offers Section -->
+  <section id="offers" class="featured-offers">
+    <div class="container">
+      <div class="section-title">
+        <h2>Featured Offers</h2>
+        <p>Curated selections for your home</p>
+      </div>
+      <div class="offers-grid" id="featuredOffersGrid">
+        <!-- Offers will be dynamically loaded here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Flash Sale Section -->
+  <section class="flash-sale">
+    <div class="container">
+      <h2 class="sale-title">FLASH SALE</h2>
+      <p class="sale-subtitle">Limited time only! Enjoy up to 60% off on our premium furniture collection. Upgrade
+        your
+        home with style and comfort.</p>
+
+      <div class="sale-countdown">
+        <div class="countdown-item">
+          <span class="countdown-value" id="hours">23</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="minutes">59</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="seconds">59</span>
+          <span class="countdown-label">Seconds</span>
+        </div>
+      </div>
+
+      <a href="#flash-products" class="sale-button">Shop Flash Sale</a>
+    </div>
+  </section>
+
+  <!-- Trending Offers Section -->
+  <section class="trending-offers">
+    <div class="container">
+      <div class="section-title">
+        <h2>Trending Now</h2>
+        <p>Most popular offers this season</p>
+      </div>
+      <div class="trending-list" id="trendingOffersList">
+        <!-- Trending offers will be dynamically loaded here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Expiring Offers Section -->
+  <section class="expiring-offers">
+    <div class="container">
+      <div class="section-title">
+        <h2>Expiring Soon</h2>
+        <p>Grab these deals before they're gone</p>
+      </div>
+      <div class="expiring-grid" id="expiringOffersGrid">
+        <!-- Expiring offers will be dynamically loaded here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Recently Viewed Section -->
+  <section class="recently-viewed">
+    <div class="container">
+      
+      <div class="offers-grid" id="recentlyViewedGrid">
+        <!-- Recently viewed items will be dynamically loaded here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Personal Recommendations Section -->
+  <section class="personal-recommendations">
+    <div class="container">
+      
+      <div class="offers-grid" id="personalRecommendationsGrid">
+        <!-- Personalized recommendations will be dynamically loaded here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Dark Mode Toggle Button -->
+  <div class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+    <i id="darkModeIcon" class="fas fa-moon"></i>
+  </div>
+
+  <!-- Music Player -->
+  <div class="music-player" id="musicPlayer" title="Background music">
+    <i class="fas fa-music"></i>
+  </div>
+
+  <!-- Sound Controls -->
+  <div class="sound-controls" id="soundControls">
+    <div class="sound-control" id="soundUp" title="Increase volume">
+      <i class="fas fa-volume-up"></i>
+    </div>
+    <div class="sound-control" id="soundDown" title="Decrease volume">
+      <i class="fas fa-volume-down"></i>
+    </div>
+    <div class="sound-control" id="soundMute" title="Mute sounds">
+      <i class="fas fa-volume-mute"></i>
+    </div>
+  </div>
+
+  <!-- Confetti container -->
+  <div id="confettiContainer" class="confetti-container"></div>
+
+  <script>
+    // Enhanced offers data with more items and image URLs
+    const offersData = {
+      featured: [
+        {
+          id: 1,
+          category: "Living Room",
+          title: "Modern Sofa Collection",
+          description: "Experience ultimate comfort with our premium sofa sets, now at special prices.",
+          currentPrice: 1299,
+          originalPrice: 1899,
+          discount: 32,
+          image: "https://images.unsplash.com/photo-1540574163026-643ea20ade25?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          rating: 4.8,
+          reviews: 142,
+          tags: ["Bestseller", "New Arrival"]
+        },
+        {
+          id: 2,
+          category: "Bedroom",
+          title: "Luxury Bed Frames",
+          description: "Transform your bedroom with our elegant and sturdy bed frames.",
+          currentPrice: 899,
+          originalPrice: 1299,
+          discount: 31,
+          image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          rating: 4.7,
+          reviews: 89,
+          tags: ["Premium", "Eco-Friendly"]
+        },
+        {
+          id: 3,
+          category: "Office",
+          title: "Ergonomic Office Chairs",
+          description: "Boost productivity with our comfortable and supportive office chairs.",
+          currentPrice: 349,
+          originalPrice: 499,
+          discount: 30,
+          image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          rating: 4.9,
+          reviews: 205,
+          tags: ["Ergonomic", "Best Value"]
+        },
+        {
+          id: 4,
+          category: "Dining",
+          title: "Scandinavian Dining Table",
+          description: "Minimalist design meets functionality in our premium dining table collection.",
+          currentPrice: 799,
+          originalPrice: 1199,
+          discount: 33,
+          image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          rating: 4.6,
+          reviews: 76,
+          tags: ["Minimalist", "Scandinavian"]
+        },
+        {
+          id: 5,
+          category: "Storage",
+          title: "Smart Storage Solutions",
+          description: "Maximize your space with our innovative storage units.",
+          currentPrice: 599,
+          originalPrice: 899,
+          discount: 33,
+          image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          rating: 4.5,
+          reviews: 63,
+          tags: ["Space Saving", "Modern"]
+        },
+        {
+          id: 6,
+          category: "Outdoor",
+          title: "Patio Furniture Set",
+          description: "Enjoy your outdoor space with our weather-resistant patio collection.",
+          currentPrice: 1199,
+          originalPrice: 1699,
+          discount: 29,
+          image: "https://images.unsplash.com/photo-1590126132035-7d32d2d2505a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          rating: 4.7,
+          reviews: 118,
+          tags: ["Weatherproof", "Comfortable"]
+        },
+        {
+          id: 7,
+          category: "Lighting",
+          title: "Designer Lamp Collection",
+          description: "Illuminate your space with our elegant and functional lighting solutions.",
+          currentPrice: 199,
+          originalPrice: 299,
+          discount: 33,
+          image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          rating: 4.4,
+          reviews: 52,
+          tags: ["Designer", "Energy Efficient"]
+        },
+        {
+          id: 8,
+          category: "Decor",
+          title: "Artisan Wall Decor",
+          description: "Add character to your walls with handcrafted art pieces from local artists.",
+          currentPrice: 149,
+          originalPrice: 249,
+          discount: 40,
+          image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          rating: 4.9,
+          reviews: 97,
+          tags: ["Handcrafted", "Limited Edition"]
+        }
+      ],
+      trending: [
+        {
+          id: 9,
+          category: "Bestseller",
+          title: "Minimalist Dining Set",
+          description: "Our Scandinavian-inspired dining set is taking homes by storm. Crafted with precision and designed for comfort, this collection brings elegance to any dining space. The clean lines and natural materials create a timeless aesthetic that complements various interior styles.",
+          currentPrice: 1599,
+          originalPrice: 2199,
+          discount: 27,
+          image: "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          rating: 4.9,
+          reviews: 187,
+          tags: ["Bestseller", "Scandinavian"]
+        },
+        {
+          id: 10,
+          category: "New Arrival",
+          title: "Smart Storage Solutions",
+          description: "Maximize your space with our innovative storage units that combine functionality with elegant design. These modular pieces can be configured to fit any space, offering versatile storage options while maintaining a sleek, modern appearance that enhances your room's aesthetic.",
+          currentPrice: 799,
+          originalPrice: 1149,
+          discount: 30,
+          image: "https://images.unsplash.com/photo-1593085260707-5377ba37f868?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          rating: 4.8,
+          reviews: 134,
+          tags: ["New Arrival", "Modular"]
+        }
+      ],
+      expiring: [
+        {
+          id: 11,
+          category: "Outdoor",
+          title: "Patio Furniture Set",
+          description: "Enjoy your outdoor space with our weather-resistant patio collection.",
+          currentPrice: 1199,
+          originalPrice: 1699,
+          discount: 29,
+          image: "https://images.unsplash.com/photo-1616137422495-1e9e46e2aa77?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          expiresIn: "48H",
+          rating: 4.7,
+          reviews: 118
+        },
+        {
+          id: 12,
+          category: "Accessories",
+          title: "Premium Lighting",
+          description: "Illuminate your space with our designer lighting fixtures.",
+          currentPrice: 199,
+          originalPrice: 299,
+          discount: 33,
+          image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          expiresIn: "24H",
+          rating: 4.4,
+          reviews: 52
+        },
+        {
+          id: 13,
+          category: "Decor",
+          title: "Wall Art Collection",
+          description: "Add character to your walls with our curated art pieces.",
+          currentPrice: 149,
+          originalPrice: 249,
+          discount: 40,
+          image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          expiresIn: "72H",
+          rating: 4.9,
+          reviews: 97
+        },
+        {
+          id: 14,
+          category: "Bedroom",
+          title: "Luxury Bedding Set",
+          description: "Experience ultimate comfort with our premium Egyptian cotton bedding.",
+          currentPrice: 129,
+          originalPrice: 199,
+          discount: 35,
+          image: "https://images.unsplash.com/photo-1544033527-b192daee1f5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          expiresIn: "36H",
+          rating: 4.8,
+          reviews: 204
+        }
+      ]
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize the page
+      function init() {
+        // Simulate loading progress
+        let progress = 0;
+        const progressBar = document.querySelector('.loader-progress-bar');
+        const loadingInterval = setInterval(() => {
+          progress += Math.random() * 15;
+          progressBar.style.width = `${Math.min(progress, 100)}%`;
+
+          if (progress >= 100) {
+            clearInterval(loadingInterval);
+
+            // Hide loader when page is loaded
+            setTimeout(() => {
+              document.getElementById('page-loader').style.opacity = '0';
+              document.getElementById('page-loader').style.visibility = 'hidden';
+
+              // Load offers data
+              renderOffers();
+              loadRecentlyViewed();
+              loadPersonalRecommendations();
+
+              // Initialize scroll animations
+              initScrollAnimations();
+            }, 500);
+          }
+        }, 200);
+      }
+
+      // Render offers from data
+      function renderOffers() {
+        // Render featured offers
+        const featuredGrid = document.getElementById('featuredOffersGrid');
+        featuredGrid.innerHTML = offersData.featured.map(offer => `
+          <div class="offer-card">
+            <div class="offer-image">
+              <img src="${offer.image}" alt="${offer.title}">
+              ${offer.tags && offer.tags.length > 0 ? `
+                <div class="offer-badges">
+                  ${offer.tags.map(tag => `<span class="offer-badge">${tag}</span>`).join('')}
+                </div>
+              ` : ''}
+            </div>
+            <div class="offer-content">
+              <span class="offer-tag">${offer.category}</span>
+              <h3 class="offer-title">${offer.title}</h3>
+              <p class="offer-description">${offer.description}</p>
+              <div class="offer-rating">
+                <div class="stars">
+                  ${generateStarRating(offer.rating)}
+                </div>
+                <span class="review-count">(${offer.reviews} reviews)</span>
+              </div>
+              <div class="offer-price">
+                <span class="current-price">$${offer.currentPrice}</span>
+                <span class="original-price">$${offer.originalPrice}</span>
+                <span class="discount">${offer.discount}% OFF</span>
+              </div>
+              <button class="offer-button" data-id="${offer.id}">Shop Now</button>
+            </div>
+          </div>
+        `).join('');
+
+        // Render trending offers
+        const trendingList = document.getElementById('trendingOffersList');
+        trendingList.innerHTML = offersData.trending.map((offer, index) => `
+          <div class="trending-card ${index % 2 !== 0 ? 'even' : ''}">
+            <div class="trending-image">
+              <img src="${offer.image}" alt="${offer.title}">
+              ${offer.tags && offer.tags.length > 0 ? `
+                <div class="offer-badges">
+                  ${offer.tags.map(tag => `<span class="offer-badge">${tag}</span>`).join('')}
+                </div>
+              ` : ''}
+            </div>
+            <div class="trending-content">
+              <span class="trending-tag">${offer.category}</span>
+              <h3 class="trending-title">${offer.title}</h3>
+              <p class="trending-description">${offer.description}</p>
+              <div class="offer-rating">
+                <div class="stars">
+                  ${generateStarRating(offer.rating)}
+                </div>
+                <span class="review-count">(${offer.reviews} reviews)</span>
+              </div>
+              <div class="offer-price">
+                <span class="current-price">$${offer.currentPrice}</span>
+                <span class="original-price">$${offer.originalPrice}</span>
+                <span class="discount">${offer.discount}% OFF</span>
+              </div>
+              <button class="offer-button" data-id="${offer.id}">Shop Now</button>
+            </div>
+          </div>
+        `).join('');
+
+        // Render expiring offers
+        const expiringGrid = document.getElementById('expiringOffersGrid');
+        expiringGrid.innerHTML = offersData.expiring.map(offer => `
+          <div class="expiring-card">
+            <div class="offer-image">
+              <img src="${offer.image}" alt="${offer.title}">
+            </div>
+            <div class="expiring-content">
+              <div class="countdown">${offer.expiresIn} LEFT</div>
+              <span class="offer-tag">${offer.category}</span>
+              <h3 class="offer-title">${offer.title}</h3>
+              <p class="offer-description">${offer.description}</p>
+              <div class="offer-rating">
+                <div class="stars">
+                  ${generateStarRating(offer.rating)}
+                </div>
+                <span class="review-count">(${offer.reviews} reviews)</span>
+              </div>
+              <div class="offer-price">
+                <span class="current-price">$${offer.currentPrice}</span>
+                <span class="original-price">$${offer.originalPrice}</span>
+                <span class="discount">${offer.discount}% OFF</span>
+              </div>
+              <button class="offer-button" data-id="${offer.id}">Shop Now</button>
+            </div>
+          </div>
+        `).join('');
+
+        // Add event listeners to buttons
+        initButtonEffects();
+      }
+
+      // Generate star rating HTML
+      function generateStarRating(rating) {
+        let stars = '';
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 >= 0.5;
+
+        for (let i = 0; i < 5; i++) {
+          if (i < fullStars) {
+            stars += '<i class="fas fa-star"></i>';
+          } else if (i === fullStars && hasHalfStar) {
+            stars += '<i class="fas fa-star-half-alt"></i>';
+          } else {
+            stars += '<i class="far fa-star"></i>';
+          }
+        }
+
+        return stars;
+      }
+
+      // Load recently viewed items
+      function loadRecentlyViewed() {
+        const recentlyViewedGrid = document.getElementById('recentlyViewedGrid');
+        const recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+
+        if (recentlyViewed.length === 0) {
+          // Show some featured items if no recently viewed
+          const featuredItems = [...offersData.featured].slice(0, 3);
+          recentlyViewedGrid.innerHTML = featuredItems.map(offer => `
+            <div class="offer-card">
+              <div class="offer-image">
+                <img src="${offer.image}" alt="${offer.title}">
+              </div>
+              <div class="offer-content">
+                <span class="offer-tag">${offer.category}</span>
+                <h3 class="offer-title">${offer.title}</h3>
+                <p class="offer-description">${offer.description}</p>
+                <div class="offer-price">
+                  <span class="current-price">$${offer.currentPrice}</span>
+                  <span class="original-price">$${offer.originalPrice}</span>
+                  <span class="discount">${offer.discount}% OFF</span>
+                </div>
+                <button class="offer-button" data-id="${offer.id}">Shop Now</button>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          // Show actual recently viewed items
+          recentlyViewedGrid.innerHTML = recentlyViewed.map(offer => `
+            <div class="offer-card">
+              <div class="offer-image">
+                <img src="${offer.image}" alt="${offer.title}">
+              </div>
+              <div class="offer-content">
+                <span class="offer-tag">${offer.category}</span>
+                <h3 class="offer-title">${offer.title}</h3>
+                <p class="offer-description">${offer.description}</p>
+                <div class="offer-price">
+                  <span class="current-price">$${offer.currentPrice}</span>
+                  <span class="original-price">$${offer.originalPrice}</span>
+                  <span class="discount">${offer.discount}% OFF</span>
+                </div>
+                <button class="offer-button" data-id="${offer.id}">Shop Now</button>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+
+      // Load personalized recommendations
+      function loadPersonalRecommendations() {
+        const personalGrid = document.getElementById('personalRecommendationsGrid');
+        // For demo purposes, we'll show a mix of featured and trending items
+        const recommendations = [
+          ...offersData.featured.slice(1, 4),
+          ...offersData.trending.slice(0, 1)
+        ];
+
+        personalGrid.innerHTML = recommendations.map(offer => `
+          <div class="offer-card">
+            <div class="offer-image">
+              <img src="${offer.image}" alt="${offer.title}">
+              ${offer.tags && offer.tags.length > 0 ? `
+                <div class="offer-badges">
+                  <span class="offer-badge">Recommended</span>
+                </div>
+              ` : ''}
+            </div>
+            <div class="offer-content">
+              <span class="offer-tag">${offer.category}</span>
+              <h3 class="offer-title">${offer.title}</h3>
+              <p class="offer-description">${offer.description}</p>
+              <div class="offer-rating">
+                <div class="stars">
+                  ${generateStarRating(offer.rating)}
+                </div>
+                <span class="review-count">(${offer.reviews} reviews)</span>
+              </div>
+              <div class="offer-price">
+                <span class="current-price">$${offer.currentPrice}</span>
+                <span class="original-price">$${offer.originalPrice}</span>
+                <span class="discount">${offer.discount}% OFF</span>
+              </div>
+              <button class="offer-button" data-id="${offer.id}">Shop Now</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Initialize scroll animations
+      function initScrollAnimations() {
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+          observer.observe(section);
+        });
+
+        // Observe all offer cards
+        document.querySelectorAll('.offer-card').forEach(card => {
+          observer.observe(card);
+        });
+
+        // Observe all trending cards
+        document.querySelectorAll('.trending-card').forEach(card => {
+          observer.observe(card);
+        });
+
+        // Observe all expiring cards
+        document.querySelectorAll('.expiring-card').forEach(card => {
+          observer.observe(card);
+        });
+      }
+
+      // Button click effects
+      function initButtonEffects() {
+        const buttons = document.querySelectorAll('button, .offer-button, .cta-button, .sale-button');
+        buttons.forEach(button => {
+          button.addEventListener('click', function (e) {
+            // If it's an offer button, add to cart
+            if (this.classList.contains('offer-button')) {
+              const productId = this.getAttribute('data-id');
+              addToCart(productId);
+            }
+          });
+        });
+      }
+
+      // Add to cart functionality
+      function addToCart(productId) {
+        const cartCount = document.querySelector('.cart-count');
+        let count = parseInt(cartCount ? cartCount.textContent : 0);
+        count++;
+        if (cartCount) cartCount.textContent = count;
+
+        // Show toast notification
+        showToast('Item added to cart!');
+
+        // Save to localStorage
+        const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+        const product = getAllOffers().find(p => p.id == productId);
+        if (product) {
+          cartItems.push(product);
+          localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        }
+
+        // Add to recently viewed
+        addToRecentlyViewed(product);
+      }
+
+      // Add product to recently viewed
+      function addToRecentlyViewed(product) {
+        const recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+
+        // Remove if already exists
+        const existingIndex = recentlyViewed.findIndex(item => item.id === product.id);
+        if (existingIndex !== -1) {
+          recentlyViewed.splice(existingIndex, 1);
+        }
+
+        // Add to beginning
+        recentlyViewed.unshift(product);
+
+        // Keep only last 6 items
+        if (recentlyViewed.length > 6) {
+          recentlyViewed.pop();
+        }
+
+        localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+      }
+
+      // Get all offers from all categories
+      function getAllOffers() {
+        return [
+          ...offersData.featured,
+          ...offersData.trending,
+          ...offersData.expiring
+        ];
+      }
+
+      // Toast notification function
+      function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast'; // Reset classes
+        toast.classList.add('show');
+
+        if (type === 'error') {
+          toast.style.backgroundColor = '#dc3545';
+        } else if (type === 'warning') {
+          toast.style.backgroundColor = '#ffc107';
+          toast.style.color = '#000';
+        } else {
+          toast.style.backgroundColor = '#28a745';
+        }
+
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3000);
+      }
+
+      // Countdown timer for expiring offers and flash sale
+      function updateCountdowns() {
+        const countdownElements = document.querySelectorAll('.countdown');
+        countdownElements.forEach(el => {
+          let text = el.textContent;
+          let hoursMatch = text.match(/(\d+)H/);
+          if (hoursMatch) {
+            let hours = parseInt(hoursMatch[1]);
+            if (hours > 1) {
+              hours--;
+              el.textContent = hours + 'H LEFT';
+            } else {
+              el.textContent = 'LAST CHANCE';
+              el.style.backgroundColor = '#c00';
+            }
+          }
+        });
+
+        // Flash sale countdown
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+
+        if (hoursElement && minutesElement && secondsElement) {
+          let seconds = parseInt(secondsElement.textContent);
+          let minutes = parseInt(minutesElement.textContent);
+          let hours = parseInt(hoursElement.textContent);
+
+          seconds--;
+
+          if (seconds < 0) {
+            seconds = 59;
+            minutes--;
+
+            if (minutes < 0) {
+              minutes = 59;
+              hours--;
+
+              if (hours < 0) {
+                // Sale has ended
+                document.querySelector('.sale-title').textContent = 'SALE ENDED';
+                document.querySelector('.sale-button').textContent = 'View Other Offers';
+                return;
+              }
+            }
+          }
+
+          // Update the display
+          hoursElement.textContent = hours.toString().padStart(2, '0');
+          minutesElement.textContent = minutes.toString().padStart(2, '0');
+          secondsElement.textContent = seconds.toString().padStart(2, '0');
+        }
+      }
+
+      // Simulate countdown every second
+      setInterval(updateCountdowns, 1000);
+
+      // Start the application
+      init();
+    });
+  </script>
+</body>
+
+</html>

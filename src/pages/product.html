@@ -3,51 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details | Mashallah Furniture</title>
-    <link rel="icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/src/css/main.css">
+    <title>Product Details - Mashallah Furniture</title>
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <!-- Open Graph Meta Tags (will be updated dynamically) -->
-    <meta property="og:title" content="Product Details | Mashallah Furniture">
-    <meta property="og:description" content="View detailed product information">
-    <meta property="og:image" content="/assets/images/placeholder.jpg">
-    <meta property="og:type" content="product">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <a href="/" class="logo">Mashallah Furniture</a>
-                <div class="nav-links">
-                    <a href="/">Home</a>
-                    <a href="/shop.html">Shop</a>
-                    <a href="/collections.html">Collections</a>
-                    <a href="/about.html">About</a>
-                    <a href="/contact.html">Contact</a>
-                </div>
-                <div class="nav-actions">
-                    <div class="nav-action-btn">
-                        <a href="/wishlist.html" id="wishlistIcon">
-                            <i class="fas fa-heart icon-btn"></i>
-                            <span class="count-badge" id="wishlistCount">0</span>
-                        </a>
-                    </div>
-                    <div class="nav-action-btn">
-                        <a href="/cart.html" id="cartIcon">
-                            <i class="fas fa-shopping-cart icon-btn"></i>
-                            <span class="cart-count" id="cartCount">0</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <div id="navbar-container"></div>
 
-    <!-- Breadcrumb -->
-    <nav class="breadcrumb" id="breadcrumb">
+    <main class="product-page">
         <div class="container">
+            <div class="breadcrumb">
+                <a href="/">Home</a> /
+                <a href="/shop.html">Shop</a> /
+                <span id="product-name">Product Details</span>
+            </div>
+
+            <div class="product-detail" id="product-detail">
+                <!-- Loading spinner -->
+                <div class="loading-spinner">Loading...</div>
+            </div>
+
+            <div class="related-products">
+                <h3>Related Products</h3>
+                <div class="products-grid" id="related-products"></div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+    <div id="cart-sidebar"></div>
+
+    <script type="module" src="/js/main.js"></script>
+</body>
+</html>
             <a href="/">Home</a> / <a href="/shop.html">Shop</a> / <span id="productName">Product Details</span>
         </div>
     </nav>

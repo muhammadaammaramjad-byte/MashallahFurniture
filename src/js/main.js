@@ -1,53 +1,100 @@
-// Main JavaScript Entry Point
-import './components/navbar.js';
-import './components/footer.js';
-import './components/cartSidebar.js';
-import './components/modal.js';
-import './components/toast.js';
-import { initializeApp } from './config.js';
 import dataService from './services/dataService.js';
+import Navbar from './components/navbar.js';
+import Footer from './components/footer.js';
+import CartSidebar from './components/cartSidebar.js';
+import { showToast } from './components/toast.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-    initializeApp();
-    initializeDataService();
-});
+// Initialize app
+class App {
+    constructor() {
+        this.init();
+    }
 
-// Initialize data service and set up global listeners
-async function initializeDataService() {
-    try {
-        // Load and cache products
-        const products = await dataService.getProducts();
-        console.log(`✅ DataService initialized with ${products.length} products`);
+    async init() {
+        console.log('🚀 Mashallah Furniture App Initialized');
 
-        // Set up cross-tab synchronization
-        setupCrossTabSync();
+        // Load components
+        this.loadNavbar();
+        this.loadFooter();
+        this.loadCartSidebar();
 
-        // Log current data status
-        logDataStatus();
+        // Initialize data service
+        await dataService.getProducts();
 
-    } catch (error) {
-        console.error('❌ Failed to initialize data service:', error);
+        // Setup global event listeners
+        this.setupEventListeners();
+
+        // Track page view
+        this.trackPageView();
+
+        console.log('✅ App ready');
+    }
+
+    loadNavbar() {
+        const navbarContainer = document.getElementById('navbar-container');
+        if (navbarContainer) {
+            new Navbar(navbarContainer);
+        }
+    }
+
+    loadFooter() {
+        const footerContainer = document.getElementById('footer-container');
+        if (footerContainer) {
+            new Footer(footerContainer);
+        }
+    }
+
+    loadCartSidebar() {
+        const cartContainer = document.getElementById('cart-sidebar');
+        if (cartContainer) {
+            new CartSidebar(cartContainer);
+        }
+    }
+
+    setupEventListeners() {
+        // Newsletter form
+        const newsletterForm = document.getElementById('newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = e.target.querySelector('input[type="email"]').value;
+                showToast(`Thanks for subscribing!`, 'success');
+                e.target.reset();
+            });
+        }
+
+        // Global error handling
+        window.addEventListener('error', (e) => {
+            console.error('Global error:', e.error);
+        });
+
+        // Handle page visibility
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                dataService.clearCache();
+            }
+        });
+    }
+
+    trackPageView() {
+        const page = window.location.pathname;
+        console.log(`📊 Page view: ${page}`);
+
+        // Google Analytics if available
+        if (typeof gtag !== 'undefined') {
+            gtag('config', 'G-4YF4T002P6', {
+                page_path: page
+            });
+        }
     }
 }
 
-// Set up synchronization between browser tabs
-function setupCrossTabSync() {
-    window.addEventListener('storage', (e) => {
-        if (e.key === 'cart') {
-            dataService.dispatchCartEvent();
-        } else if (e.key === 'wishlist') {
-            dataService.dispatchWishlistEvent();
-        }
-    });
-}
+// Initialize app when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    window.app = new App();
+});
 
-// Log current data status for debugging
-function logDataStatus() {
-    const cart = dataService.getCart();
-    const wishlist = dataService.getWishlist();
-    const user = dataService.getUser();
-
-    console.log('📊 Data Status:', {
+export default App;
         cartItems: cart.length,
         cartTotal: dataService.getCartTotals().subtotal,
         wishlistItems: wishlist.length,

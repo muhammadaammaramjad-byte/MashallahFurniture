@@ -1,124 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - Mashallah Furniture</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop | RammaFurniture</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/✅Home/home.css">
+  <link rel="stylesheet" href="/✅Shop/shop.css">
+
+
 </head>
+
 <body>
-    <div id="navbar-container"></div>
+  <div id="readingProgress" class="reading-progress" aria-hidden="true"></div>
 
-    <main class="shop-page">
-        <div class="container">
-            <div class="shop-header">
-                <h1>Our Collection</h1>
-                <div class="shop-controls">
-                    <div class="search-bar">
-                        <input type="text" id="search-input" placeholder="Search products...">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <select id="category-filter">
-                        <option value="all">All Categories</option>
-                        <option value="Living Room">Living Room</option>
-                        <option value="Bedroom">Bedroom</option>
-                        <option value="Dining">Dining</option>
-                        <option value="Office">Office</option>
-                    </select>
-                </div>
+  <!-- Visual layers -->
+  <div id="springCells" aria-hidden="true"></div>
+  <div id="starLayer" aria-hidden="true"></div>
+  <div id="binaryLayer" aria-hidden="true"></div>
+
+  <!-- Cursor elements -->
+  <div id="cursorCore" class="cursor-core" aria-hidden="true"></div>
+  <div id="cursorOrb" class="cursor-orb" aria-hidden="true">
+    <!-- some orbiting mini particles (js will populate) -->
+  </div>
+
+  <!-- Confetti container -->
+  <div id="confettiContainer" class="confetti-container"></div>
+
+  <!-- Page Loader -->
+  <div class="loader" id="page-loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <i class="fas fa-couch"></i> Mashallah<span>Furniture</span>
+      </div>
+      <div class="loader-spinner"></div>
+      <div class="loader-progress">
+        <div class="loader-progress-bar" id="loader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="/Home/home.html" class="logo">
+        <i class="fas fa-couch logo-icon"></i>
+       Mashallah<span>Furniture</span>
+      </a>
+
+      <div class="nav-actions">
+        <div class="nav-action-btn search-wrapper">
+          <div class="search-icon-main" id="searchIcon">
+            <i class="fas fa-search icon-btn"></i>
+          </div>
+          <div class="search-container" id="searchContainer">
+            <div class="search-input-container">
+              <input type="text" class="search-input" placeholder="Search for furniture..." id="searchInput">
+              <i class="fas fa-search search-icon" id="searchButton"></i>
             </div>
-
-            <div class="products-grid" id="products-grid">
-                <!-- Products loaded by shop.js -->
+            <div class="search-options">
+              <div class="search-option active" data-category="all">All</div>
+              <div class="search-option" data-category="chairs">Chairs</div>
+              <div class="search-option" data-category="tables">Tables</div>
+              <div class="search-option" data-category="sofas">Sofas</div>
+              <div class="search-option" data-category="storage">Storage</div>
             </div>
-
-            <div class="pagination" id="pagination"></div>
+            <div class="search-results" id="searchResults">
+              <!-- Results will appear here -->
+            </div>
+          </div>
         </div>
-    </main>
 
-    <div id="footer-container"></div>
-    <div id="cart-sidebar"></div>
-
-    <script type="module" src="/js/main.js"></script>
-</body>
-</html>
-                            <label><input type="checkbox" value="metal"> Metal</label>
-                            <label><input type="checkbox" value="fabric"> Fabric</label>
-                            <label><input type="checkbox" value="leather"> Leather</label>
-                        </div>
-                    </div>
-
-                    <div class="filter-section">
-                        <h3>Color</h3>
-                        <div class="filter-options" id="colorFilters">
-                            <label><input type="checkbox" value="brown"> Brown</label>
-                            <label><input type="checkbox" value="black"> Black</label>
-                            <label><input type="checkbox" value="white"> White</label>
-                            <label><input type="checkbox" value="gray"> Gray</label>
-                        </div>
-                    </div>
-                </aside>
-
-                <!-- Products Grid -->
-                <div class="shop-content">
-                    <!-- Sort and View Options -->
-                    <div class="shop-controls">
-                        <div class="results-count">
-                            <span id="resultsCount">0</span> products found
-                        </div>
-                        <div class="sort-options">
-                            <select id="sortSelect">
-                                <option value="name">Name A-Z</option>
-                                <option value="price-low">Price: Low to High</option>
-                                <option value="price-high">Price: High to Low</option>
-                                <option value="newest">Newest First</option>
-                                <option value="rating">Highest Rated</option>
-                            </select>
-                        </div>
-                        <div class="view-options">
-                            <button class="view-btn active" data-view="grid" id="gridView">
-                                <i class="fas fa-th"></i>
-                            </button>
-                            <button class="view-btn" data-view="list" id="listView">
-                                <i class="fas fa-list"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Products Container -->
-                    <div class="products-container" id="productsContainer">
-                        <!-- Products will be populated by JS -->
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="pagination" id="pagination">
-                        <!-- Pagination will be populated by JS -->
-                    </div>
-                </div>
+        <div class="nav-action-btn wishlist-wrapper">
+          <a class="icon-btn" id="wishlistIcon" href="/✅nav-btn/✅favourite.html" aria-label="Wishlist">
+            <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            <span class="count-badge" id="wishlistCount">3</span>
+          </a>
+          <div class="wishlist-preview" id="wishlistPreview">
+            <h3>Your Wishlist</h3>
+            <div id="wishlistItemsPreview">
+              <!-- Wishlist items will appear here -->
             </div>
+            <a href="/✅nav-btn/✅favourite.html" class="view-wishlist-btn" id="viewWishlistBtn">View Full Wishlist</a>
+          </div>
         </div>
-    </main>
 
-    <!-- Cart Sidebar -->
-    <div id="cartSidebar"></div>
+        <div class="nav-action-btn">
+          <a href="/✅nav-btn/✅cart.html" id="cartIcon">
+            <i class="fas fa-shopping-cart icon-btn"></i>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
 
-    <!-- Footer -->
-    <footer id="footer"></footer>
+        <div class="nav-action-btn">
+          <a class="icon-btn" id="userIcon" href="/✅nav-btn/✅Account/account.html" aria-label="User Account"
+            aria-current="page">
+            <i class="fas fa-user"></i>
+          </a>
+        </div>
 
-    <!-- Scripts -->
-    <script type="module" src="/src/js/main.js"></script>
-    <script type="module" src="/src/js/pages/shop.js"></script>
-</body>
-</html>
+        <button class="nav-action-btn menu-toggle" id="menuToggle" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+      <button class="close-sidebar" id="closeSidebar" aria-label="Close menu">
+        <i class="fas fa-times"></i>
+      </button>
+      <ul class="sidebar-nav-items">
         <li class="sidebar-nav-item">
-          <a href="/nav-btn/favourite.html" class="sidebar-nav-link">
+          <a href="/✅Home/home.html" class="sidebar-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅Shop/shop.html" class="sidebar-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅Collections/collections.html" class="sidebar-nav-link">
+            <i class="fas fa-layer-group"></i>
+            <span>Collections</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅About/about.html" class="sidebar-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅Contact/contact.html" class="sidebar-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅nav-btn/✅favourite.html" class="sidebar-nav-link">
             <i class="fas fa-heart"></i>
             <span>Wishlist</span>
           </a>
         </li>
         <li class="sidebar-nav-item">
-          <a href="/Offers/offers.html" class="sidebar-nav-link">
+          <a href="/✅Offers/offers.html" class="sidebar-nav-link">
             <i class="fas fa-gift"></i>
             <span>Offers</span>
           </a>
@@ -130,43 +167,43 @@
     <div class="left-sidebar" id="leftSidebar">
       <ul class="sidebar-nav-items">
         <li class="sidebar-nav-item">
-          <a href="/Home/home.html" class="sidebar-nav-link">
+          <a href="/✅Home/home.html" class="sidebar-nav-link">
             <i class="fas fa-home"></i>
             <span>Home</span>
           </a>
         </li>
         <li class="sidebar-nav-item">
-          <a href="/Shop/shop.html" class="sidebar-nav-link">
+          <a href="/✅Shop/shop.html" class="sidebar-nav-link">
             <i class="fas fa-shopping-cart"></i>
             <span>Shop</span>
           </a>
         </li>
         <li class="sidebar-nav-item">
-          <a href="/Collections/collections.html" class="sidebar-nav-link">
+          <a href="/✅Collections/collections.html" class="sidebar-nav-link">
             <i class="fas fa-layer-group"></i>
             <span>Collections</span>
           </a>
         </li>
         <li class="sidebar-nav-item">
-          <a href="/About/about.html" class="sidebar-nav-link">
+          <a href="/✅About/about.html" class="sidebar-nav-link">
             <i class="fas fa-info-circle"></i>
             <span>About</span>
           </a>
         </li>
         <li class="sidebar-nav-item">
-          <a href="/Contact/contact.html" class="sidebar-nav-link">
+          <a href="/✅Contact/contact.html" class="sidebar-nav-link">
             <i class="fas fa-phone"></i>
             <span>Contact</span>
           </a>
         </li>
         <li class="sidebar-nav-item">
-          <a href="/nav-btn/favourite.html" class="sidebar-nav-link">
+          <a href="/✅nav-btn/✅favourite.html" class="sidebar-nav-link">
             <i class="fas fa-heart"></i>
             <span>Wishlist</span>
           </a>
         </li>
         <li class="sidebar-nav-item">
-          <a href="/Offers/offers.html" class="sidebar-nav-link">
+          <a href="/✅Offers/offers.html" class="sidebar-nav-link">
             <i class="fas fa-gift"></i>
             <span>Offers</span>
           </a>
@@ -178,31 +215,31 @@
     <div class="bottom-bar">
       <ul class="bottom-nav-items">
         <li class="bottom-nav-item">
-          <a href="/Home/home.html" class="bottom-nav-link">
+          <a href="/✅Home/home.html" class="bottom-nav-link">
             <i class="fas fa-home"></i>
             <span>Home</span>
           </a>
         </li>
         <li class="bottom-nav-item">
-          <a href="/Shop/shop.html" class="bottom-nav-link">
+          <a href="/✅Shop/shop.html" class="bottom-nav-link">
             <i class="fas fa-shopping-cart"></i>
             <span>Shop</span>
           </a>
         </li>
         <li class="bottom-nav-item">
-          <a href="/Search/search.html" class="bottom-nav-link" id="mobileSearchIcon">
+          <a href="/✅Search/search.html" class="bottom-nav-link" id="mobileSearchIcon">
             <i class="fas fa-search"></i>
             <span>Search</span>
           </a>
         </li>
         <li class="bottom-nav-item">
-          <a href="/nav-btn/favourite.html" class="bottom-nav-link">
+          <a href="/✅nav-btn/✅favourite.html" class="bottom-nav-link">
             <i class="fas fa-heart"></i>
             <span>Wishlist</span>
           </a>
         </li>
         <li class="bottom-nav-item">
-          <a href="/nav-btn/Account/account.html" class="bottom-nav-link" id="mobileUserIcon">
+          <a href="/✅nav-btn/✅Account/account.html" class="bottom-nav-link" id="mobileUserIcon">
             <i class="fas fa-user"></i>
             <span>Account</span>
           </a>
@@ -504,6 +541,16 @@
             </div>
           </div>
         </div>
+
+        <button class="load-more">Load More Products</button>
+
+        <div class="pagination">
+          <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+          <button class="pagination-btn active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
       </div>
     </section>
 
@@ -639,10 +686,103 @@
     </div>
 
     <!-- Footer -->
-    <footer id="footer"></footer>
+    <footer style="margin-left: 0;">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>RammaFurniture</h3>
+            <p>Creating beautiful spaces with thoughtfully designed furniture that combines form, function, and
+              durability.</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-pinterest"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
 
-    <!-- Scripts -->
-    <script type="module" src="/src/js/main.js"></script>
-    <script type="module" src="/src/js/pages/shop.js"></script>
+          <div class="footer-column">
+            <h3>Shop</h3>
+            <ul class="footer-links">
+              <li><a href="#">Living Room</a></li>
+              <li><a href="#">Dining Room</a></li>
+              <li><a href="#">Bedroom</a></li>
+              <li><a href="#">Office</a></li>
+              <li><a href="#">Outdoor</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Company</h3>
+            <ul class="footer-links">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press</a></li>
+              <li><a href="#">Sustainability</a></li>
+              <li><a href="#">Affiliate Program</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Support</h3>
+            <ul class="footer-links">
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Shipping & Returns</a></li>
+              <li><a href="#">Warranty</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Store Locator</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Newsletter</h3>
+            <p>Subscribe to get special offers, free giveaways, and new product alerts. </p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address">
+              <button type="submit">Subscribe <i class="fas fa-paper-plane" id="rotate"></i></button>
+            </form>
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p>&copy; 2023 RammaFurniture. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Dark Mode Toggle Button -->
+    <div class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+      <i id="darkModeIcon" class="fas fa-moon"></i>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer" title="Background music">
+      <i class="fas fa-music"></i>
+    </div>
+
+    <!-- Sound Controls -->
+    <div class="sound-controls" id="soundControls">
+      <div class="sound-control" id="soundUp" title="Increase volume">
+        <i class="fas fa-volume-up"></i>
+      </div>
+      <div class="sound-control" id="soundDown" title="Decrease volume">
+        <i class="fas fa-volume-down"></i>
+      </div>
+      <div class="sound-control" id="soundMute" title="Mute sounds">
+        <i class="fas fa-volume-mute"></i>
+      </div>
+    </div>
+
+    <!-- Confetti container -->
+    <div id="confettiContainer" class="confetti-container"></div>
+
 </body>
+<script src="/✅Home/home.js"></script>
+<script src="/✅Shop/shop.js"></script>
+
 </html>

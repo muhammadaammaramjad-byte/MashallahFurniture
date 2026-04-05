@@ -3,51 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashallah Furniture - Premium Home Furnishings</title>
-    <link rel="icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/src/css/main.css">
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4YF4T002P6"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-4YF4T002P6');
-    </script>
-
-    <!-- reCAPTCHA v3 -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-        gtag('config', 'G-4YF4T002P6');
-    </script>
-
-    <!-- reCAPTCHA v3 -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <title>Mashallah Furniture - Modern Furniture Store</title>
+    <meta name="description" content="Discover premium quality furniture at Mashallah Furniture. Modern designs for your home and office.">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <a href="/" class="logo">Mashallah Furniture</a>
+    <!-- Header will be loaded by navbar component -->
+    <div id="navbar-container"></div>
 
-                <div class="nav-links">
-                    <a href="/" class="active">Home</a>
-                    <a href="/shop">Shop</a>
-                    <a href="/collections">Collections</a>
-                    <a href="/about">About</a>
-                    <a href="/contact">Contact</a>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Mashallah Furniture</h1>
+            <p>Discover premium quality furniture for your home</p>
+            <a href="/shop.html" class="btn-primary">Shop Now</a>
+        </div>
+    </section>
 
-                <div class="nav-actions">
-                    <form class="search-form">
-                        <input type="search" placeholder="Search products..." aria-label="Search">
-                        <button type="submit" aria-label="Search">
-                            <i class="icon-search"></i>
-                        </button>
-                    </form>
+    <!-- Featured Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2>Shop by Category</h2>
+            <div class="categories-grid" id="categories-grid">
+                <!-- Categories loaded dynamically -->
+            </div>
+        </div>
+    </section>
 
-                    <button class="nav-btn" data-action="wishlist" aria-label="Wishlist">
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <h2>Featured Products</h2>
+            <div class="products-grid" id="featured-products">
+                <!-- Products loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h3>Subscribe to Our Newsletter</h3>
+            <p>Get updates on new products and special offers</p>
+            <form id="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer will be loaded by footer component -->
+    <div id="footer-container"></div>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar"></div>
+
+    <script type="module" src="/js/main.js"></script>
+</body>
+</html>
                         <i class="icon-heart"></i>
                         <span class="wishlist-count">0</span>
                     </button>

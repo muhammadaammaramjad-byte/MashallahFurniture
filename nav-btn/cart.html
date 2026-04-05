@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart | RammaFurniture</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Source+Code+Pro:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/✅Home/home.css">
+  <script src="/✅Home/home.js"></script>
+  <style>
+    :root {
+      --primary-black: #121212;
+      --secondary-black: #1e1e1e;
+      --primary-white: #ffffff;
+      --secondary-white: #f5f5f5;
+      --accent-gray: #e0e0e0;
+      --text-gray: #757575;
+      --animation-timing: 0.3s;
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      --success-green: #4caf50;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--secondary-white);
+      color: var(--primary-black);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 85px auto;
+      padding: 20px;
+    }
+
+    /* Page Title */
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .page-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary-black);
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: scaleIn 0.5s 0.3s ease forwards;
+    }
+
+    /* Cart Layout */
+    .cart-container {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .cart-items {
+      flex: 7;
+      background: var(--primary-white);
+      border-radius: 8px;
+      box-shadow: var(--card-shadow);
+      padding: 20px;
+      animation: slideUp 0.5s 0.2s ease-out forwards;
+      opacity: 0;
+    }
+
+    .cart-summary {
+      flex: 3;
+      background: var(--primary-white);
+      border-radius: 8px;
+      box-shadow: var(--card-shadow);
+      padding: 20px;
+      height: fit-content;
+      animation: slideUp 0.7s 0.4s ease-out forwards;
+      opacity: 0;
+    }
+
+    /* Cart Items */
+    .cart-item {
+      display: flex;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--accent-gray);
+      animation: fadeIn var(--animation-timing) ease-out;
+      transition: all 0.4s ease;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .cart-item:hover .item-image {
+      transform: scale(1.05);
+    }
+
+    .item-details {
+      flex-grow: 1;
+    }
+
+    .item-name {
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .item-price {
+      color: var(--text-gray);
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .item-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--accent-gray);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .quantity-btn {
+      background: none;
+      border: none;
+      width: 36px;
+      height: 36px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color var(--animation-timing);
+    }
+
+    .quantity-btn:hover {
+      background-color: var(--accent-gray);
+    }
+
+    .quantity-input {
+      width: 40px;
+      height: 36px;
+      text-align: center;
+      border: none;
+      border-left: 1px solid var(--accent-gray);
+      border-right: 1px solid var(--accent-gray);
+      font-family: 'Source Code Pro', monospace;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: var(--text-gray);
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color var(--animation-timing);
+    }
+
+    .remove-btn:hover {
+      color: #e53935;
+    }
+
+    /* Cart Summary */
+    .summary-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--accent-gray);
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      opacity: 0;
+      transform: translateX(-10px);
+      animation: fadeInRight 0.5s ease forwards;
+    }
+
+    .summary-item:nth-child(1) {
+      animation-delay: 0.5s;
+    }
+
+    .summary-item:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    .summary-item:nth-child(3) {
+      animation-delay: 0.7s;
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 18px;
+      margin: 25px 0;
+      padding-top: 15px;
+      border-top: 1px solid var(--accent-gray);
+      opacity: 0;
+      animation: fadeIn 0.5s 0.8s ease forwards;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: var(--primary-black);
+      color: var(--primary-white);
+      border: none;
+      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform var(--animation-timing), background-color var(--animation-timing);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeIn 0.5s 0.9s ease forwards;
+    }
+
+    .checkout-btn:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
+    }
+
+    .checkout-btn:focus:not(:active)::after {
+      animation: ripple 1s ease-out;
+    }
+
+    .checkout-btn:hover {
+      transform: translateY(-2px);
+      background-color: #000;
+    }
+
+    .continue-shopping {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      color: var(--primary-black);
+      text-decoration: none;
+      font-weight: 500;
+      transition: gap var(--animation-timing);
+      opacity: 0;
+      animation: fadeIn 0.5s 1s ease forwards;
+    }
+
+    .continue-shopping:hover {
+      gap: 12px;
+    }
+
+    .promo-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--accent-gray);
+      opacity: 0;
+      animation: fadeIn 0.5s 1.1s ease forwards;
+    }
+
+    .promo-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--accent-gray);
+      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 10px;
+      transition: border-color 0.3s ease;
+    }
+
+    .promo-input:focus {
+      border-color: var(--primary-black);
+      outline: none;
+    }
+
+    .apply-btn {
+      width: 100%;
+      padding: 10px;
+      background: none;
+      border: 1px solid var(--primary-black);
+      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color var(--animation-timing);
+    }
+
+    .apply-btn:hover {
+      background-color: var(--accent-gray);
+    }
+
+    /* Empty Cart */
+    .empty-cart {
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .empty-cart i {
+      font-size: 64px;
+      margin-bottom: 20px;
+      color: var(--accent-gray);
+    }
+
+    .empty-cart p {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: var(--text-gray);
+    }
+
+    /* Recently Viewed */
+    .recently-viewed {
+      margin-top: 50px;
+      opacity: 0;
+      animation: fadeIn 0.8s 1.2s ease forwards;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--primary-black);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--primary-white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: transform var(--animation-timing);
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--hover-shadow);
+    }
+
+    .product-image {
+      height: 180px;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .product-info {
+      padding: 15px;
+    }
+
+    .product-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .product-price {
+      color: var(--text-gray);
+      font-weight: 500;
+    }
+
+    /* New Sections */
+    .savings-notification {
+      background-color: var(--success-green);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: slideInRight 0.5s 0.5s ease both;
+      opacity: 0;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background-color: var(--accent-gray);
+      border-radius: 3px;
+      margin: 20px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background-color: var(--primary-black);
+      border-radius: 3px;
+      width: 0;
+      transition: width 1s ease;
+    }
+
+    .free-shipping-text {
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-gray);
+      margin-bottom: 20px;
+    }
+
+    .recommended-section {
+      margin-top: 50px;
+      opacity: 0;
+      animation: fadeIn 0.8s 1.4s ease forwards;
+    }
+
+    .recommended-products {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding: 10px 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-gray) transparent;
+    }
+
+    .recommended-products::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .recommended-products::-webkit-scrollbar-thumb {
+      background-color: var(--accent-gray);
+      border-radius: 3px;
+    }
+
+    .recommended-product {
+      min-width: 200px;
+      background: var(--primary-white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: transform var(--animation-timing);
+    }
+
+    .recommended-product:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--hover-shadow);
+    }
+
+    .wishlist-compare {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .wishlist-btn,
+    .compare-btn {
+      background: none;
+      border: none;
+      color: var(--text-gray);
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color var(--animation-timing);
+    }
+
+    .wishlist-btn:hover {
+      color: #e53935;
+    }
+
+    .compare-btn:hover {
+      color: var(--primary-black);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--primary-black);
+      color: var(--primary-white);
+      padding: 15px 20px;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(100px);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast.success {
+      background-color: var(--success-green);
+    }
+
+    .toast.error {
+      background-color: #f44336;
+    }
+
+    /* Confetti canvas */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Audio controls */
+    .audio-controls {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 100;
+    }
+
+    .audio-toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--primary-black);
+      color: var(--primary-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .audio-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scaleX(0);
+      }
+
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(0, 0);
+        opacity: 1;
+      }
+
+      20% {
+        transform: scale(25, 25);
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(40, 40);
+      }
+    }
+
+    @keyframes itemRemoved {
+      to {
+        opacity: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        transform: translateX(100%);
+      }
+    }
+
+    .removing {
+      animation: itemRemoved 0.5s forwards;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      53%,
+      80%,
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      40%,
+      43% {
+        transform: translate3d(0, -8px, 0);
+      }
+
+      70% {
+        transform: translate3d(0, -4px, 0);
+      }
+
+      90% {
+        transform: translate3d(0, -2px, 0);
+      }
+    }
+
+    .bounce {
+      animation: bounce 1s;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 900px) {
+      .cart-container {
+        flex-direction: column;
+      }
+
+      .cart-items,
+      .cart-summary {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .container {
+        margin: 85px auto;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .cart-item {
+        flex-direction: column;
+      }
+
+      .item-image {
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+
+      .header-container {
+        padding: 12px 15px;
+      }
+
+      .page-title {
+        font-size: 28px;
+      }
+
+      .recommended-product {
+        min-width: 160px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="readingProgress" class="reading-progress" aria-hidden="true"></div>
+
+  <!-- Visual layers -->
+  <div id="springCells" aria-hidden="true"></div>
+  <div id="starLayer" aria-hidden="true"></div>
+  <div id="binaryLayer" aria-hidden="true"></div>
+
+  <!-- Cursor elements -->
+  <div id="cursorCore" class="cursor-core" aria-hidden="true"></div>
+  <div id="cursorOrb" class="cursor-orb" aria-hidden="true">
+    <!-- some orbiting mini particles (js will populate) -->
+  </div>
+
+  <!-- Confetti container -->
+  <div id="confettiContainer" class="confetti-container"></div>
+
+  <!-- Page Loader -->
+  <div class="loader" id="page-loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <i class="fas fa-couch"></i> Ramma<span>Furniture</span>
+      </div>
+      <div class="loader-spinner"></div>
+      <div class="loader-progress">
+        <div class="loader-progress-bar" id="loader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="/Home/home.html" class="logo">
+        <i class="fas fa-couch logo-icon"></i>
+        Ramma<span>Furniture</span>
+      </a>
+
+      <div class="nav-actions">
+        <div class="nav-action-btn search-wrapper">
+          <div class="search-icon-main" id="searchIcon">
+            <i class="fas fa-search icon-btn"></i>
+          </div>
+          <div class="search-container" id="searchContainer">
+            <div class="search-input-container">
+              <input type="text" class="search-input" placeholder="Search for furniture..." id="searchInput">
+              <i class="fas fa-search search-icon" id="searchButton"></i>
+            </div>
+            <div class="search-options">
+              <div class="search-option active" data-category="all">All</div>
+              <div class="search-option" data-category="chairs">Chairs</div>
+              <div class="search-option" data-category="tables">Tables</div>
+              <div class="search-option" data-category="sofas">Sofas</div>
+              <div class="search-option" data-category="storage">Storage</div>
+            </div>
+            <div class="search-results" id="searchResults">
+              <!-- Results will appear here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-action-btn wishlist-wrapper">
+          <a class="icon-btn" id="wishlistIcon" href="/✅nav-btn/✅favourite.html" aria-label="Wishlist">
+            <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            <span class="count-badge" id="wishlistCount">3</span>
+          </a>
+          <div class="wishlist-preview" id="wishlistPreview">
+            <h3>Your Wishlist</h3>
+            <div id="wishlistItemsPreview">
+              <!-- Wishlist items will appear here -->
+            </div>
+            <a href="/✅nav-btn/✅favourite.html" class="view-wishlist-btn" id="viewWishlistBtn">View Full Wishlist</a>
+          </div>
+        </div>
+
+        <div class="nav-action-btn">
+          <a href="/✅nav-btn/✅cart.html" id="cartIcon">
+            <i class="fas fa-shopping-cart icon-btn"></i>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+
+        <div class="nav-action-btn">
+          <a class="icon-btn" id="userIcon" href="/✅nav-btn/✅Account/account.html" aria-label="User Account"
+            aria-current="page">
+            <i class="fas fa-user"></i>
+          </a>
+        </div>
+
+        <button class="nav-action-btn menu-toggle" id="menuToggle" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+      <button class="close-sidebar" id="closeSidebar" aria-label="Close menu">
+        <i class="fas fa-times"></i>
+      </button>
+      <ul class="sidebar-nav-items">
+        <li class="sidebar-nav-item">
+          <a href="/✅Home/home.html" class="sidebar-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅Shop/shop.html" class="sidebar-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅Collections/collections.html" class="sidebar-nav-link">
+            <i class="fas fa-layer-group"></i>
+            <span>Collections</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅About/about.html" class="sidebar-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅Contact/contact.html" class="sidebar-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅nav-btn/✅favourite.html" class="sidebar-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅Offers/offers.html" class="sidebar-nav-link">
+            <i class="fas fa-gift"></i>
+            <span>Offers</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Left Sidebar (Desktop) -->
+    <div class="left-sidebar" id="leftSidebar">
+      <ul class="sidebar-nav-items">
+        <li class="sidebar-nav-item">
+          <a href="/✅Home/home.html" class="sidebar-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅Shop/shop.html" class="sidebar-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅Collections/collections.html" class="sidebar-nav-link">
+            <i class="fas fa-layer-group"></i>
+            <span>Collections</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅About/about.html" class="sidebar-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅Contact/contact.html" class="sidebar-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅nav-btn/✅favourite.html" class="sidebar-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/✅Offers/offers.html" class="sidebar-nav-link">
+            <i class="fas fa-gift"></i>
+            <span>Offers</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bottom Bar (Mobile) -->
+    <div class="bottom-bar">
+      <ul class="bottom-nav-items">
+        <li class="bottom-nav-item">
+          <a href="/✅Home/home.html" class="bottom-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/✅Shop/shop.html" class="bottom-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/✅Search/search.html" class="bottom-nav-link" id="mobileSearchIcon">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/✅nav-btn/✅favourite.html" class="bottom-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/✅nav-btn/✅Account/account.html" class="bottom-nav-link" id="mobileUserIcon">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <div class="container">
+      <h1 class="page-title">Your Shopping Cart</h1>
+
+      <!-- Savings Notification -->
+      <div class="savings-notification">
+        <i class="fas fa-tag"></i>
+        <span>You're $80.01 away from <strong>FREE shipping!</strong></span>
+      </div>
+
+      <!-- Free Shipping Progress Bar -->
+      <div class="progress-bar">
+        <div class="progress-fill" id="shippingProgress"></div>
+      </div>
+      <div class="free-shipping-text">Add $80.01 more to get free shipping!</div>
+
+      <div class="cart-container">
+        <div class="cart-items">
+          <div class="cart-item">
+            <img
+              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              alt="Modern Elegance Sofa" class="item-image">
+            <div class="item-details">
+              <div class="item-name">Modern Elegance Sofa</div>
+              <div class="item-price">$1,299.99</div>
+              <div class="item-actions">
+                <div class="quantity-control">
+                  <button class="quantity-btn" onclick="updateQuantity(this, -1)">-</button>
+                  <input type="text" class="quantity-input" value="1" readonly>
+                  <button class="quantity-btn" onclick="updateQuantity(this, 1)">+</button>
+                </div>
+                <button class="remove-btn" onclick="removeItem(this)">
+                  <i class="fas fa-trash"></i> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cart-item">
+            <img
+              src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+              alt="Minimalist Dining Table" class="item-image">
+            <div class="item-details">
+              <div class="item-name">Minimalist Dining Table</div>
+              <div class="item-price">$899.99</div>
+              <div class="item-actions">
+                <div class="quantity-control">
+                  <button class="quantity-btn" onclick="updateQuantity(this, -1)">-</button>
+                  <input type="text" class="quantity-input" value="1" readonly>
+                  <button class="quantity-btn" onclick="updateQuantity(this, 1)">+</button>
+                </div>
+                <button class="remove-btn" onclick="removeItem(this)">
+                  <i class="fas fa-trash"></i> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cart-item">
+            <img
+              src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80"
+              alt="Velvet Accent Chair" class="item-image">
+            <div class="item-details">
+              <div class="item-name">Velvet Accent Chair</div>
+              <div class="item-price">$459.99</div>
+              <div class="item-actions">
+                <div class="quantity-control">
+                  <button class="quantity-btn" onclick="updateQuantity(this, -1)">-</button>
+                  <input type="text" class="quantity-input" value="2" readonly>
+                  <button class="quantity-btn" onclick="updateQuantity(this, 1)">+</button>
+                </div>
+                <button class="remove-btn" onclick="removeItem(this)">
+                  <i class="fas fa-trash"></i> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-summary">
+          <div class="summary-title">Order Summary</div>
+
+          <div class="summary-item">
+            <span>Subtotal</span>
+            <span id="summary-subtotal">$3,119.96</span>
+          </div>
+
+          <div class="summary-item">
+            <span>Shipping</span>
+            <span>$49.99</span>
+          </div>
+
+          <div class="summary-item">
+            <span>Discount</span>
+            <span id="summary-tax">$249.60</span>
+          </div>
+
+          <div class="summary-total">
+            <span>Total</span>
+            <span id="summary-total">$3,419.55</span>
+          </div>
+
+          <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+
+          <a href="/Products/products.html" class="continue-shopping">
+            <i class="fas fa-arrow-left"></i> Continue Shopping
+          </a>
+
+          <div class="promo-section">
+            <input type="text" class="promo-input" placeholder="Reference" id="promoInput">
+            <button class="apply-btn" onclick="applyPromoCode()">Apply Reference</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommended Products Section -->
+      <div class="recommended-section">
+        <h2 class="section-title">Frequently Bought Together</h2>
+        <div class="recommended-products">
+          <div class="recommended-product">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=658&q=80"
+                alt="Decorative Pillow Set">
+            </div>
+            <div class="product-info">
+              <div class="product-title">Decorative Pillow Set</div>
+              <div class="product-price">$89.99</div>
+              <div class="wishlist-compare">
+                <button class="wishlist-btn" onclick="addToWishlist(this)">
+                  <i class="far fa-heart"></i> Wishlist
+                </button>
+                <button class="compare-btn">
+                  <i class="fas fa-exchange-alt"></i> Compare
+                </button>
+              </div>
+              <button class="checkout-btn" style="margin-top: 10px;" onclick="addToCart(this)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="recommended-product">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                alt="Modern Floor Lamp">
+            </div>
+            <div class="product-info">
+              <div class="product-title">Modern Floor Lamp</div>
+              <div class="product-price">$129.99</div>
+              <div class="wishlist-compare">
+                <button class="wishlist-btn" onclick="addToWishlist(this)">
+                  <i class="far fa-heart"></i> Wishlist
+                </button>
+                <button class="compare-btn">
+                  <i class="fas fa-exchange-alt"></i> Compare
+                </button>
+              </div>
+              <button class="checkout-btn" style="margin-top: 10px;" onclick="addToCart(this)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="recommended-product">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1532581140115-3e355d1ed1de?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                alt="Area Rug">
+            </div>
+            <div class="product-info">
+              <div class="product-title">Area Rug</div>
+              <div class="product-price">$249.99</div>
+              <div class="wishlist-compare">
+                <button class="wishlist-btn" onclick="addToWishlist(this)">
+                  <i class="far fa-heart"></i> Wishlist
+                </button>
+                <button class="compare-btn">
+                  <i class="fas fa-exchange-alt"></i> Compare
+                </button>
+              </div>
+              <button class="checkout-btn" style="margin-top: 10px;" onclick="addToCart(this)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="recommended-product">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+                alt="Side Table">
+            </div>
+            <div class="product-info">
+              <div class="product-title">Side Table</div>
+              <div class="product-price">$149.99</div>
+              <div class="wishlist-compare">
+                <button class="wishlist-btn" onclick="addToWishlist(this)">
+                  <i class="far fa-heart"></i> Wishlist
+                </button>
+                <button class="compare-btn">
+                  <i class="fas fa-exchange-alt"></i> Compare
+                </button>
+              </div>
+              <button class="checkout-btn" style="margin-top: 10px;" onclick="addToCart(this)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="recently-viewed">
+        <h2 class="section-title">Recently Viewed</h2>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+                alt="Modular Bookshelf">
+            </div>
+            <div class="product-info">
+              <div class="product-title">Modular Bookshelf</div>
+              <div class="product-price">$649.99</div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+                alt="Modern Lounge Chair">
+            </div>
+            <div class="product-info">
+              <div class="product-title">Modern Lounge Chair</div>
+              <div class="product-price">$299.00</div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1533090368676-1fd25485db88?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+                alt="Glass Coffee Table">
+            </div>
+            <div class="product-info">
+              <div class="product-title">Glass Coffee Table</div>
+              <div class="product-price">$199.00</div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                alt="Leather Office Chair">
+            </div>
+            <div class="product-info">
+              <div class="product-title">Leather Office Chair</div>
+              <div class="product-price">$349.99</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Dark Mode Toggle Button -->
+    <div class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+      <i id="darkModeIcon" class="fas fa-moon"></i>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer" title="Background music">
+      <i class="fas fa-music"></i>
+    </div>
+
+    <!-- Sound Controls -->
+    <div class="sound-controls" id="soundControls">
+      <div class="sound-control" id="soundUp" title="Increase volume">
+        <i class="fas fa-volume-up"></i>
+      </div>
+      <div class="sound-control" id="soundDown" title="Decrease volume">
+        <i class="fas fa-volume-down"></i>
+      </div>
+      <div class="sound-control" id="soundMute" title="Mute sounds">
+        <i class="fas fa-volume-mute"></i>
+      </div>
+    </div>
+
+    <!-- Confetti container -->
+    <div id="confettiContainer" class="confetti-container"></div>
+
+    <script>
+      // Cart data
+      const cartData = [
+        { id: 1, name: "Modern Elegance Sofa", price: 1299.99, quantity: 1, image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" },
+        { id: 2, name: "Minimalist Dining Table", price: 899.99, quantity: 1, image: "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" },
+        { id: 3, name: "Velvet Accent Chair", price: 459.99, quantity: 2, image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80" }
+      ];
+
+      // Audio elements
+      const addSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3');
+      const removeSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-click-error-1110.mp3');
+      const checkoutSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-cash-register-purchase-876.mp3');
+      const successSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3');
+
+      // Set audio volume
+      [addSound, removeSound, checkoutSound, successSound].forEach(sound => {
+        sound.volume = 0.3;
+      });
+
+      // Audio control
+      let audioEnabled = true;
+      const audioToggle = document.getElementById('audioToggle');
+
+      audioToggle.addEventListener('click', () => {
+        audioEnabled = !audioEnabled;
+        audioToggle.innerHTML = audioEnabled ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+      });
+
+      // Play sound function
+      function playSound(sound) {
+        if (audioEnabled) {
+          sound.currentTime = 0;
+          sound.play().catch(e => console.log("Audio play failed:", e));
+        }
+      }
+
+      // Confetti function
+      function launchConfetti() {
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const confetti = [];
+        const confettiCount = 200;
+        const gravity = 0.5;
+        const terminalVelocity = 5;
+        const drag = 0.075;
+        const colors = [
+          { front: '#000000', back: '#333333' }, // Black and dark gray
+          { front: '#ffffff', back: '#cccccc' }, // White and light gray
+          { front: '#666666', back: '#999999' }  // Medium gray
+        ];
+
+        // Initialize confetti particles
+        for (let i = 0; i < confettiCount; i++) {
+          confetti.push({
+            color: colors[Math.floor(Math.random() * colors.length)],
+            dimensions: {
+              x: Math.random() * 10 + 5,
+              y: Math.random() * 10 + 5
+            },
+            position: {
+              x: Math.random() * canvas.width,
+              y: -Math.random() * canvas.height
+            },
+            rotation: Math.random() * 2 * Math.PI,
+            scale: {
+              x: 1,
+              y: 1
+            },
+            velocity: {
+              x: Math.random() * 10 - 5,
+              y: Math.random() * 10 + 5
+            }
+          });
+        }
+
+        // Animation function
+        function update() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          confetti.forEach((confetto, index) => {
+            let width = confetto.dimensions.x * confetto.scale.x;
+            let height = confetto.dimensions.y * confetto.scale.y;
+
+            // Apply forces to velocity
+            confetto.velocity.x -= confetto.velocity.x * drag;
+            confetto.velocity.y = Math.min(confetto.velocity.y + gravity, terminalVelocity);
+            confetto.velocity.y -= confetto.velocity.y * drag;
+
+            // Update position
+            confetto.position.x += confetto.velocity.x;
+            confetto.position.y += confetto.velocity.y;
+
+            // Spin confetto
+            confetto.rotation += confetto.velocity.x / 20;
+
+            // Delete confetto when out of view
+            if (confetto.position.y >= canvas.height) {
+              confetti.splice(index, 1);
+              return;
+            }
+
+            // Draw confetto
+            ctx.save();
+            ctx.translate(confetto.position.x, confetto.position.y);
+            ctx.rotate(confetto.rotation);
+
+            ctx.fillStyle = confetto.color.front;
+            ctx.fillRect(-width / 2, -height / 2, width, height);
+
+            ctx.restore();
+          });
+
+          // Continue animation if there are still confetti
+          if (confetti.length > 0) {
+            requestAnimationFrame(update);
+          }
+        }
+
+        // Start the animation
+        update();
+
+        // Clean up after animation completes
+        setTimeout(() => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }, 3000);
+      }
+
+      // Update quantity function
+      function updateQuantity(btn, change) {
+        const input = btn.parentNode.querySelector('.quantity-input');
+        let newValue = parseInt(input.value) + change;
+
+        if (newValue < 1) newValue = 1;
+
+        input.value = newValue;
+
+        // Update cart data
+        const itemElement = btn.closest('.cart-item');
+        const itemIndex = Array.from(itemElement.parentNode.children).indexOf(itemElement);
+        cartData[itemIndex].quantity = newValue;
+
+        updateCartSummary();
+        playSound(addSound);
+        showToast('Quantity updated', 'success');
+      }
+
+      // Remove item from cart
+      function removeItem(btn) {
+        const itemElement = btn.closest('.cart-item');
+        const itemIndex = Array.from(itemElement.parentNode.children).indexOf(itemElement);
+
+        // Add removal animation
+        itemElement.classList.add('removing');
+
+        // Remove from data after animation
+        setTimeout(() => {
+          cartData.splice(itemIndex, 1);
+          itemElement.remove();
+          updateCartCount();
+          updateCartSummary();
+
+          // Show empty cart message if needed
+          if (cartData.length === 0) {
+            showEmptyCart();
+          }
+
+          playSound(removeSound);
+          showToast('Item removed from cart', 'error');
+        }, 500);
+      }
+
+      // Update cart count badge
+      function updateCartCount() {
+        const totalItems = cartData.reduce((total, item) => total + item.quantity, 0);
+        document.querySelector('.cart-count').textContent = totalItems;
+        document.querySelector('.cart-count').classList.add('bounce');
+        setTimeout(() => document.querySelector('.cart-count').classList.remove('bounce'), 1000);
+      }
+
+      // Update cart summary
+      function updateCartSummary() {
+        const subtotal = cartData.reduce((total, item) => total + (item.price * item.quantity), 0);
+        const shipping = subtotal >= 3200 ? 0 : 49.99;
+        const tax = subtotal * 0.08;
+        const total = subtotal + shipping + tax;
+
+        document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('summary-tax').textContent = `$${tax.toFixed(2)}`;
+        document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+
+        // Update shipping info
+        const shippingElement = document.querySelector('.summary-item:nth-child(2) span:last-child');
+        shippingElement.textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
+
+        if (shipping === 0) {
+          shippingElement.style.color = 'var(--success-green)';
+          shippingElement.style.fontWeight = '600';
+        } else {
+          shippingElement.style.color = '';
+          shippingElement.style.fontWeight = '';
+        }
+
+        // Update progress bar
+        const progressBar = document.getElementById('shippingProgress');
+        const progressPercentage = Math.min((subtotal / 3200) * 100, 100);
+        progressBar.style.width = `${progressPercentage}%`;
+
+        // Update free shipping text
+        const freeShippingText = document.querySelector('.free-shipping-text');
+        if (subtotal >= 3200) {
+          freeShippingText.innerHTML = '<strong>Congratulations! You\'ve unlocked FREE shipping!</strong>';
+          freeShippingText.style.color = 'var(--success-green)';
+        } else {
+          const amountNeeded = (3200 - subtotal).toFixed(2);
+          freeShippingText.textContent = `Add $${amountNeeded} more to get free shipping!`;
+          freeShippingText.style.color = 'var(--text-gray)';
+        }
+
+        updateCartCount();
+      }
+
+      // Show empty cart message
+      function showEmptyCart() {
+        const cartItems = document.querySelector('.cart-items');
+        cartItems.innerHTML = `
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                    <a href="/Products/products.html" class="continue-shopping">
+                        <i class="fas fa-arrow-left"></i> Continue Shopping
+                    </a>
+                </div>
+            `;
+      }
+
+      // Toast notification
+      function showToast(message, type = '') {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast';
+
+        if (type) {
+          toast.classList.add(type);
+        }
+
+        const icon = type === 'success' ? 'fa-check-circle' :
+          type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+
+        toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+        toast.classList.add('show');
+
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3000);
+      }
+
+      // Apply promo code
+      function applyPromoCode() {
+        const promoInput = document.getElementById('promoInput');
+        const code = promoInput.value.trim().toUpperCase();
+
+        if (code === 'SAVE10') {
+          // Apply 10% discount
+          const subtotal = cartData.reduce((total, item) => total + (item.price * item.quantity), 0);
+          const discount = subtotal * 0.1;
+          const newSubtotal = subtotal - discount;
+
+          // Add discount line to summary
+          if (!document.getElementById('discount-line')) {
+            const summaryItems = document.querySelector('.cart-summary').querySelectorAll('.summary-item');
+            const discountLine = document.createElement('div');
+            discountLine.className = 'summary-item';
+            discountLine.id = 'discount-line';
+            discountLine.innerHTML = `<span>Discount (SAVE10)</span><span style="color:var(--success-green)">-$${discount.toFixed(2)}</span>`;
+
+            // Insert before the total
+            document.querySelector('.summary-total').before(discountLine);
+          } else {
+            // Update existing discount line
+            document.querySelector('#discount-line span:last-child').textContent = `-$${discount.toFixed(2)}`;
+          }
+
+          // Update totals
+          const shipping = newSubtotal >= 3200 ? 0 : 49.99;
+          const tax = newSubtotal * 0.08;
+          const total = newSubtotal + shipping + tax;
+
+          document.getElementById('summary-subtotal').textContent = `$${newSubtotal.toFixed(2)}`;
+          document.getElementById('summary-tax').textContent = `$${tax.toFixed(2)}`;
+          document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+
+          // Update shipping if needed
+          const shippingElement = document.querySelector('.summary-item:nth-child(3) span:last-child');
+          shippingElement.textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
+
+          playSound(successSound);
+          showToast('Promo code applied successfully!', 'success');
+          promoInput.value = '';
+        } else if (code) {
+          showToast('Invalid promo code', 'error');
+          promoInput.value = '';
+        } else {
+          showToast('Please enter a promo code');
+        }
+      }
+
+      // Add to cart from recommended products
+      function addToCart(btn) {
+        const productCard = btn.closest('.recommended-product');
+        const productName = productCard.querySelector('.product-title').textContent;
+        const productPrice = parseFloat(productCard.querySelector('.product-price').textContent.replace('$', ''));
+        const productImage = productCard.querySelector('img').src;
+
+        // Check if product is already in cart
+        const existingItemIndex = cartData.findIndex(item => item.name === productName);
+
+        if (existingItemIndex !== -1) {
+          // Increase quantity if already in cart
+          cartData[existingItemIndex].quantity += 1;
+
+          // Update the quantity input in the UI
+          const cartItems = document.querySelectorAll('.cart-item');
+          const quantityInput = cartItems[existingItemIndex].querySelector('.quantity-input');
+          quantityInput.value = cartData[existingItemIndex].quantity;
+        } else {
+          // Add new item to cart
+          const newItem = {
+            id: cartData.length + 1,
+            name: productName,
+            price: productPrice,
+            quantity: 1,
+            image: productImage
+          };
+
+          cartData.push(newItem);
+
+          // Create new cart item element
+          const cartItemsContainer = document.querySelector('.cart-items');
+          const emptyCart = cartItemsContainer.querySelector('.empty-cart');
+
+          if (emptyCart) {
+            cartItemsContainer.innerHTML = '';
+          }
+
+          const newCartItem = document.createElement('div');
+          newCartItem.className = 'cart-item';
+          newCartItem.innerHTML = `
+          <img src="${productImage}" alt="${productName}" class="item-image">
+          <div class="item-details">
+            <div class="item-name">${productName}</div>
+            <div class="item-price">$${productPrice.toFixed(2)}</div>
+            <div class="item-actions">
+              <div class="quantity-control">
+                <button class="quantity-btn" onclick="updateQuantity(this, -1)">-</button>
+                <input type="text" class="quantity-input" value="1" readonly>
+                <button class="quantity-btn" onclick="updateQuantity(this, 1)">+</button>
+              </div>
+              <button class="remove-btn" onclick="removeItem(this)">
+                <i class="fas fa-trash"></i> Remove
+              </button>
+            </div>
+          </div>
+        `;
+
+          cartItemsContainer.appendChild(newCartItem);
+
+          // Animate the new item
+          newCartItem.style.opacity = '0';
+          newCartItem.style.transform = 'translateX(50px)';
+
+          setTimeout(() => {
+            newCartItem.style.transition = 'all 0.5s ease';
+            newCartItem.style.opacity = '1';
+            newCartItem.style.transform = 'translateX(0)';
+          }, 10);
+        }
+
+        updateCartSummary();
+        playSound(addSound);
+        showToast(`${productName} added to cart`, 'success');
+      }
+
+      // Add to wishlist
+      function addToWishlist(btn) {
+        const productCard = btn.closest('.recommended-product');
+        const productName = productCard.querySelector('.product-title').textContent;
+
+        btn.innerHTML = '<i class="fas fa-heart" style="color:#e53935"></i> In Wishlist';
+
+        playSound(addSound);
+        showToast(`${productName} added to wishlist`, 'success');
+      }
+
+      // Checkout function
+      function checkout() {
+        playSound(checkoutSound);
+        launchConfetti();
+        showToast('Order placed successfully! Thank you for your purchase.', 'success');
+
+        // Simulate order processing
+        setTimeout(() => {
+          // Clear cart
+          cartData.length = 0;
+          document.querySelector('.cart-items').innerHTML = '';
+          showEmptyCart();
+          updateCartSummary();
+        }, 2000);
+      }
+
+      // Initialize cart summary on load
+      document.addEventListener('DOMContentLoaded', function () {
+        updateCartSummary();
+
+        // Add animation to cart items
+        const cartItems = document.querySelectorAll('.cart-item');
+        cartItems.forEach((item, index) => {
+          item.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Add checkout event listener
+        document.getElementById('checkoutBtn').addEventListener('click', checkout);
+
+        // Initialize progress bar
+        const progressBar = document.getElementById('shippingProgress');
+        progressBar.style.width = '0';
+
+        // Animate progress bar after a short delay
+        setTimeout(() => {
+          const subtotal = cartData.reduce((total, item) => total + (item.price * item.quantity), 0);
+          const progressPercentage = Math.min((subtotal / 3200) * 100, 100);
+          progressBar.style.width = `${progressPercentage}%`;
+        }, 500);
+
+        // Initialize confetti canvas size
+        window.addEventListener('resize', () => {
+          const canvas = document.getElementById('confetti-canvas');
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        });
+      });
+    </script>
+</body>
+
+</html>
