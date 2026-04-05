@@ -1,6 +1,6 @@
 
 // Shop Page JavaScript
-import { apiService } from '../services/api.js';
+import dataService from '../services/dataService.js';
 import { storage } from '../utils/storage.js';
 import { showToast } from '../components/toast.js';
 import { showModal } from '../components/modal.js';
@@ -43,7 +43,11 @@ class ShopPage {
 
     async loadCategories() {
         try {
-            this.categories = await apiService.getCategories();
+            // For now, extract unique categories from products
+            // Later this can be loaded from a separate categories.json or API
+            const products = await dataService.getProducts();
+            const categorySet = new Set(products.map(p => p.category).filter(Boolean));
+            this.categories = Array.from(categorySet).map(cat => ({ id: cat, name: cat }));
             this.renderCategoryFilters();
         } catch (error) {
             console.error('Error loading categories:', error);
@@ -52,7 +56,7 @@ class ShopPage {
 
     async loadProducts() {
         try {
-            this.allProducts = await apiService.getProducts();
+            this.allProducts = await dataService.getProducts();
             this.filteredProducts = [...this.allProducts];
         } catch (error) {
             console.error('Error loading products:', error);
@@ -299,11 +303,10 @@ class ShopPage {
             const product = this.allProducts.find(p => p.id == productId);
             if (!product) return;
 
-            await apiService.addToCart(productId, 1);
+            dataService.addToCart(product, 1);
             showToast(`${product.name} added to cart!`, 'success');
 
-            // Update cart count in navbar
-            this.updateCartCount();
+            // Update cart count in navbar (handled by event listener)
         } catch (error) {
             console.error('Error adding to cart:', error);
             showToast('Error adding item to cart. Please try again.', 'error');
@@ -315,13 +318,13 @@ class ShopPage {
             const product = this.allProducts.find(p => p.id == productId);
             if (!product) return;
 
-            const isInWishlist = this.isInWishlist(productId);
+            const isInWishlist = dataService.isInWishlist(productId);
 
             if (isInWishlist) {
-                await apiService.removeFromWishlist(productId);
+                dataService.removeFromWishlist(productId);
                 showToast(`${product.name} removed from wishlist!`, 'info');
             } else {
-                await apiService.addToWishlist(productId);
+                dataService.addToWishlist(product);
                 showToast(`${product.name} added to wishlist!`, 'success');
             }
 
@@ -331,8 +334,7 @@ class ShopPage {
                 wishlistBtn.classList.toggle('active', !isInWishlist);
             }
 
-            // Update wishlist count in navbar
-            this.updateWishlistCount();
+            // Update wishlist count in navbar (handled by event listener)
         } catch (error) {
             console.error('Error toggling wishlist:', error);
             showToast('Error updating wishlist. Please try again.', 'error');
@@ -340,8 +342,7 @@ class ShopPage {
     }
 
     isInWishlist(productId) {
-        const wishlist = storage.get('wishlist') || [];
-        return wishlist.includes(productId);
+        return dataService.isInWishlist(productId);
     }
 
     async showQuickView(productId) {

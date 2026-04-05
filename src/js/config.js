@@ -1,4 +1,6 @@
 // App Configuration
+import dataService from './services/dataService.js';
+
 export const config = {
     API_BASE_URL: import.meta.env.VITE_API_URL || '/api',
     SITE_NAME: 'Mashallah Furniture',
@@ -14,11 +16,8 @@ export function initializeApp() {
     // Initialize theme
     initializeTheme();
 
-    // Initialize cart from localStorage
-    initializeCart();
-
-    // Initialize wishlist from localStorage
-    initializeWishlist();
+    // Initialize cart and wishlist using data service
+    initializeData();
 
     // Set up global event listeners
     setupGlobalListeners();
@@ -31,15 +30,10 @@ function initializeTheme() {
     document.documentElement.setAttribute('data-theme', savedTheme);
 }
 
-function initializeCart() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    window.cart = cart;
+function initializeData() {
+    // Data is now handled by dataService in main.js
+    // Just update the UI counts
     updateCartCount();
-}
-
-function initializeWishlist() {
-    const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-    window.wishlist = wishlist;
     updateWishlistCount();
 }
 
@@ -57,8 +51,10 @@ function setupGlobalListeners() {
 }
 
 export function updateCartCount() {
-    const count = window.cart?.length || 0;
+    const cart = dataService.getCart();
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
     const cartCountElements = document.querySelectorAll('.cart-count');
+
     cartCountElements.forEach(el => {
         el.textContent = count;
         el.style.display = count > 0 ? 'flex' : 'none';
@@ -66,8 +62,10 @@ export function updateCartCount() {
 }
 
 export function updateWishlistCount() {
-    const count = window.wishlist?.length || 0;
+    const wishlist = dataService.getWishlist();
+    const count = wishlist.length;
     const wishlistCountElements = document.querySelectorAll('.wishlist-count');
+
     wishlistCountElements.forEach(el => {
         el.textContent = count;
         el.style.display = count > 0 ? 'flex' : 'none';
