@@ -25,101 +25,104 @@
 [[redirects]]
   from = "/Home"
   to = "/Home/home.html"
-  status = 301
+  status = 200
   force = true
 
 [[redirects]]
   from = "/Shop"
   to = "/Shop/shop.html"
-  status = 301
+  status = 200
   force = true
 
 [[redirects]]
   from = "/Collections"
   to = "/Collections/collections.html"
-  status = 301
+  status = 200
   force = true
 
 [[redirects]]
   from = "/Contact"
   to = "/Contact/contact.html"
-  status = 301
+  status = 200
   force = true
 
 [[redirects]]
   from = "/Offers"
   to = "/Offers/offers.html"
-  status = 301
+  status = 200
   force = true
 
 [[redirects]]
   from = "/Search"
   to = "/Search/search.html"
-  status = 301
+  status = 200
   force = true
 
 [[redirects]]
   from = "/About"
   to = "/About/about.html"
-  status = 301
+  status = 200
   force = true
 
 # Trailing slash handling
 [[redirects]]
   from = "/Home/"
   to = "/Home/home.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/Shop/"
   to = "/Shop/shop.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/Collections/"
   to = "/Collections/collections.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/Contact/"
   to = "/Contact/contact.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/Offers/"
   to = "/Offers/offers.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/Search/"
   to = "/Search/search.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/About/"
   to = "/About/about.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/nav-btn/"
   to = "/nav-btn/cart.html"
-  status = 301
+  status = 200
 
 # Cart shortcuts
 [[redirects]]
   from = "/cart"
   to = "/nav-btn/cart.html"
-  status = 301
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/wishlist"
   to = "/nav-btn/favourite.html"
-  status = 301
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/account"
   to = "/nav-btn/Account/account.html"
-  status = 301
+  status = 200
+  force = true
 
 # ============================================
 # SECURITY HEADERS
