@@ -435,17 +435,27 @@ class ImageUploader {
     }
 
     async uploadToCloud(file) {
-        // Placeholder - implement based on your cloud storage service
-        // Examples: Cloudinary, Uploadcare, AWS S3, etc.
+        // Import cloud storage service dynamically
+        const { default: cloudStorage } = await import('../services/cloudStorage.js');
 
-        // For now, return a placeholder URL
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                // Simulate upload success
-                const mockUrl = `https://example.com/uploads/${Date.now()}-${file.name}`;
-                resolve(mockUrl);
-            }, 2000);
-        });
+        try {
+            // Upload to cloud storage
+            const result = await cloudStorage.uploadImage(file, {
+                folder: 'mashallah/products',
+                quality: 0.8
+            });
+
+            console.log('✅ Cloud upload successful:', result.url);
+            return result.url;
+
+        } catch (error) {
+            console.error('❌ Cloud upload failed:', error);
+
+            // Fallback: return local preview URL for demo purposes
+            // In production, you should handle this error properly
+            console.warn('⚠️ Using fallback preview URL - configure cloud storage for production');
+            return URL.createObjectURL(file);
+        }
     }
 
     async uploadAll() {
