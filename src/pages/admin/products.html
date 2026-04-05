@@ -220,6 +220,11 @@
 
                     showToast(`Product "${name}" saved successfully!`, 'success');
 
+                    // Dispatch event to refresh shop page
+                    window.dispatchEvent(new CustomEvent('adminProductSaved', {
+                        detail: { product }
+                    }));
+
                     // Reset form
                     this.clearForm();
 

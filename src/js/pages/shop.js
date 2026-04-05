@@ -25,6 +25,23 @@ class ShopPage {
         this.init();
     }
 
+    // Method to refresh products (called when admin adds new products)
+    async refreshProducts() {
+        try {
+            showLoader();
+            await this.loadCategories();
+            await this.loadProducts();
+            this.renderProducts();
+            this.updateResultsCount();
+            console.log('🔄 Shop products refreshed');
+        } catch (error) {
+            console.error('Error refreshing products:', error);
+            showToast('Error refreshing products. Please refresh the page.', 'error');
+        } finally {
+            hideLoader();
+        }
+    }
+
     async init() {
         try {
             showLoader();
@@ -43,12 +60,21 @@ class ShopPage {
 
     async loadCategories() {
         try {
-            // For now, extract unique categories from products
-            // Later this can be loaded from a separate categories.json or API
-            const products = await dataService.getProducts();
-            const categorySet = new Set(products.map(p => p.category).filter(Boolean));
+            // Load static products for categories
+            const staticProducts = await dataService.getProducts();
+
+            // Load admin products
+            const adminProducts = JSON.parse(localStorage.getItem('admin_products') || '[]');
+
+            // Combine all products for category extraction
+            const allProducts = [...staticProducts, ...adminProducts];
+
+            // Extract unique categories
+            const categorySet = new Set(allProducts.map(p => p.category).filter(Boolean));
             this.categories = Array.from(categorySet).map(cat => ({ id: cat, name: cat }));
-            this.renderCategoryFilters();
+
+            console.log(`✅ Loaded ${this.categories.length} categories from ${allProducts.length} products`);
+
         } catch (error) {
             console.error('Error loading categories:', error);
         }
@@ -56,8 +82,32 @@ class ShopPage {
 
     async loadProducts() {
         try {
-            this.allProducts = await dataService.getProducts();
+            // Load products from JSON file (static products)
+            const staticProducts = await dataService.getProducts();
+
+            // Load admin products from localStorage (dynamically added)
+            const adminProducts = JSON.parse(localStorage.getItem('admin_products') || '[]');
+
+            // Combine and deduplicate products
+            const allProducts = [...staticProducts];
+
+            // Add admin products, avoiding duplicates by ID
+            adminProducts.forEach(adminProduct => {
+                const existingIndex = allProducts.findIndex(p => p.id === adminProduct.id);
+                if (existingIndex === -1) {
+                    // New admin product
+                    allProducts.push(adminProduct);
+                } else {
+                    // Update existing product with admin data
+                    allProducts[existingIndex] = { ...allProducts[existingIndex], ...adminProduct };
+                }
+            });
+
+            this.allProducts = allProducts;
             this.filteredProducts = [...this.allProducts];
+
+            console.log(`✅ Loaded ${staticProducts.length} static + ${adminProducts.length} admin products = ${allProducts.length} total`);
+
         } catch (error) {
             console.error('Error loading products:', error);
             throw error;
@@ -65,6 +115,12 @@ class ShopPage {
     }
 
     setupEventListeners() {
+        // Listen for admin product saves
+        window.addEventListener('adminProductSaved', () => {
+            console.log('📦 Admin product saved, refreshing shop...');
+            this.refreshProducts();
+        });
+
         // Category filters
         document.querySelectorAll('#categoryFilters input').forEach(checkbox => {
             checkbox.addEventListener('change', () => this.handleCategoryFilter());
