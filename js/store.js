@@ -46,7 +46,7 @@ class Store {
 export const store = new Store();
 
 // Store helper functions
-const cart = store.state.cart;
+export const cart = store.state.cart;
 const wishlist = store.state.wishlist;
 const wallet = store.state.wallet || 0;
 
@@ -135,7 +135,6 @@ window.MashallahStore = {
 };
 
 export {
-  cart,
   wishlist,
   wallet,
   addToCart,
