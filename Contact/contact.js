@@ -203,16 +203,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // In a real application, you would send this data to a server
       // Here we'll just show a confirmation message
-      alert(`Thank you, $ {
-          name
-        }
-
-        ! Your message has been sent. We'll get back to you soon at ${email}.`);
+      showSuccessToast(`Thank you, ${name}! Your message has been sent. We'll get back to you soon.`);
       contactForm.reset();
     }
 
     else {
-      alert('Please fill in all required fields.');
+      showErrorToast('Please fill in all required fields.');
     }
   });
 

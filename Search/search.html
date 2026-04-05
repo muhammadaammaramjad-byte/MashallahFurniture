@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Products - Mashallah Furniture</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../Shop/shop.css">
+  <link rel="stylesheet" href="search.css">
+</head>
+<body>
+  <div data-include="../components/navbar.html"></div>
+  <main class="search-page">
+    <div class="container">
+      <h1>Search Furniture</h1>
+      <p class="search-intro">Search the Mashallah Furniture collection by name, brand, category, or description.</p>
+
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input id="searchInput" type="search" placeholder="Search products, brands, or categories..." aria-label="Search products">
+        <button id="clearSearchBtn" type="button" aria-label="Clear search" style="display:none;">&times;</button>
+      </div>
+
+      <div class="search-filters">
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+          <option value="Sofas">Sofas</option>
+          <option value="Tables">Tables</option>
+          <option value="Chairs">Chairs</option>
+          <option value="Storage">Storage</option>
+          <option value="Beds">Beds</option>
+          <option value="Lighting">Lighting</option>
+          <option value="Accent">Accent</option>
+        </select>
+        <select id="sortSelect">
+          <option value="relevance">Relevance</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="rating">Rating</option>
+        </select>
+        <div class="search-stats"><span id="resultCount">0</span> products found</div>
+      </div>
+
+      <div class="search-results" id="searchResultsGrid"></div>
+    </div>
+  </main>
+
+  <div data-include="../components/footer.html"></div>
+  <div data-include="../components/cart-mini.html"></div>
+  <div data-include="../components/toast.html"></div>
+
+  <script src="../js/components.js"></script>
+  <script src="../js/toast.js"></script>
+  <script type="module" src="search.js"></script>
+</body>
+</html>

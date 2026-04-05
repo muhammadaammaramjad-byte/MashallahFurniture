@@ -226,16 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
     oscillator.stop(audioContext.currentTime + duration);
   };
 
-  // Show toast notification
-  const showToast = (message, duration = 3000) => {
-    toast.textContent = message;
-    toast.classList.add('show');
-
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, duration);
-  };
-
   // Create confetti animation
   const createConfetti = () => {
     const colors = ['#ffffff', '#000000', '#333333', '#cccccc', '#666666'];

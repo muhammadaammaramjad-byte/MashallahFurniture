@@ -14,8 +14,9 @@
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/✅Home/home.css">
-  <script src="/✅Home/home.js"></script>
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../Home/home.css">
+  <script src="../../Home/home.js"></script>
   <style>
     :root {
       --primary-black: #0a0a0a;
@@ -1183,6 +1184,9 @@
 </head>
 
 <body>
+  <div data-include="../../components/navbar.html"></div>
+  <div data-include="../../components/cart-mini.html"></div>
+  <div data-include="../../components/toast.html"></div>
   <div id="readingProgress" class="reading-progress" aria-hidden="true"></div>
 
   <!-- Visual layers -->
@@ -2036,7 +2040,7 @@
                         <i class="fas fa-heart" style="font-size: 3rem; color: var(--medium-gray); margin-bottom: 15px;"></i>
                         <h3 style="font-family: 'Montserrat', sans-serif; margin-bottom: 10px;">Your wishlist is empty</h3>
                         <p style="color: var(--accent-gray);">Start adding items you love!</p>
-                        <a href="/Shop/shop.html" class="btn-primary" style="display: inline-block; margin-top: 20px;">Browse Products</a>
+                        <a href="../../Shop/shop.html" class="btn-primary" style="display: inline-block; margin-top: 20px;">Browse Products</a>
                     </div>
                 `;
         return;
@@ -2428,6 +2432,9 @@
     // Start the application
     window.addEventListener('load', init);
   </script>
+  <div data-include="../../components/footer.html"></div>
 </body>
+<script src="../../js/components.js"></script>
+<script src="../../js/toast.js"></script>
 
 </html>

@@ -9,14 +9,18 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="/✅Collections/collections.css">
-  <link rel="stylesheet" href="/✅Home/home.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="collections.css">
+  <link rel="stylesheet" href="../Home/home.css">
 
 </head>
 
 <body>
 
 
+  <div data-include="../components/navbar.html"></div>
+  <div data-include="../components/cart-mini.html"></div>
+  <div data-include="../components/toast.html"></div>
   <div id="readingProgress" class="reading-progress" aria-hidden="true"></div>
 
   <!-- Visual layers -->
@@ -49,7 +53,7 @@
   <!-- Header & Navigation -->
   <header>
     <div class="header-container">
-      <a href="/Home/home.html" class="logo">
+      <a href="../Home/home.html" class="logo">
         <i class="fas fa-couch logo-icon"></i>
         Ramma<span>Furniture</span>
       </a>
@@ -78,7 +82,7 @@
         </div>
 
         <div class="nav-action-btn wishlist-wrapper">
-          <a class="icon-btn" id="wishlistIcon" href="/✅nav-btn/✅favourite.html" aria-label="Wishlist">
+          <a class="icon-btn" id="wishlistIcon" href="../nav-btn/favourite.html" aria-label="Wishlist">
             <i class="fa-solid fa-heart" aria-hidden="true"></i>
             <span class="count-badge" id="wishlistCount">3</span>
           </a>
@@ -87,19 +91,19 @@
             <div id="wishlistItemsPreview">
               <!-- Wishlist items will appear here -->
             </div>
-            <a href="/✅nav-btn/✅favourite.html" class="view-wishlist-btn" id="viewWishlistBtn">View Full Wishlist</a>
+            <a href="../nav-btn/favourite.html" class="view-wishlist-btn" id="viewWishlistBtn">View Full Wishlist</a>
           </div>
         </div>
 
         <div class="nav-action-btn">
-          <a href="/✅nav-btn/✅cart.html" id="cartIcon">
+          <a href="../nav-btn/cart.html" id="cartIcon">
             <i class="fas fa-shopping-cart icon-btn"></i>
             <span class="cart-count">0</span>
           </a>
         </div>
 
         <div class="nav-action-btn">
-          <a class="icon-btn" id="userIcon" href="/✅nav-btn/✅Account/account.html" aria-label="User Account"
+          <a class="icon-btn" id="userIcon" href="../nav-btn/Account/account.html" aria-label="User Account"
             aria-current="page">
             <i class="fas fa-user"></i>
           </a>
@@ -120,43 +124,43 @@
     </button>
     <ul class="sidebar-nav-items">
       <li class="sidebar-nav-item">
-        <a href="/✅Home/home.html" class="sidebar-nav-link">
+        <a href="../Home/home.html" class="sidebar-nav-link">
           <i class="fas fa-home"></i>
           <span>Home</span>
         </a>
       </li>
       <li class="sidebar-nav-item">
-        <a href="/✅Shop/shop.html" class="sidebar-nav-link">
+        <a href="../Shop/shop.html" class="sidebar-nav-link">
           <i class="fas fa-shopping-cart"></i>
           <span>Shop</span>
         </a>
       </li>
       <li class="sidebar-nav-item">
-        <a href="/✅Collections/collections.html" class="sidebar-nav-link">
+        <a href="collections.html" class="sidebar-nav-link">
           <i class="fas fa-layer-group"></i>
           <span>Collections</span>
         </a>
       </li>
       <li class="sidebar-nav-item">
-        <a href="/✅About/about.html" class="sidebar-nav-link">
+        <a href="../About/about.html" class="sidebar-nav-link">
           <i class="fas fa-info-circle"></i>
           <span>About</span>
         </a>
       </li>
       <li class="sidebar-nav-item">
-        <a href="/✅Contact/contact.html" class="sidebar-nav-link">
+        <a href="../Contact/contact.html" class="sidebar-nav-link">
           <i class="fas fa-phone"></i>
           <span>Contact</span>
         </a>
       </li>
       <li class="sidebar-nav-item">
-        <a href="/✅nav-btn/✅favourite.html" class="sidebar-nav-link">
+        <a href="../nav-btn/favourite.html" class="sidebar-nav-link">
           <i class="fas fa-heart"></i>
           <span>Wishlist</span>
         </a>
       </li>
       <li class="sidebar-nav-item">
-        <a href="/✅Offers/offers.html" class="sidebar-nav-link">
+        <a href="../Offers/offers.html" class="sidebar-nav-link">
           <i class="fas fa-gift"></i>
           <span>Offers</span>
         </a>
@@ -168,43 +172,43 @@
   <div class="left-sidebar" id="leftSidebar">
     <ul class="sidebar-nav-items">
       <li class="sidebar-nav-item">
-        <a href="/✅Home/home.html" class="sidebar-nav-link">
+        <a href="../Home/home.html" class="sidebar-nav-link">
           <i class="fas fa-home"></i>
           <span>Home</span>
         </a>
       </li>
       <li class="sidebar-nav-item">
-        <a href="/✅Shop/shop.html" class="sidebar-nav-link">
+        <a href="../Shop/shop.html" class="sidebar-nav-link">
           <i class="fas fa-shopping-cart"></i>
           <span>Shop</span>
         </a>
       </li>
       <li class="sidebar-nav-item">
-        <a href="/✅Collections/collections.html" class="sidebar-nav-link">
+        <a href="collections.html" class="sidebar-nav-link">
           <i class="fas fa-layer-group"></i>
           <span>Collections</span>
         </a>
       </li>
       <li class="sidebar-nav-item">
-        <a href="/✅About/about.html" class="sidebar-nav-link">
+        <a href="../About/about.html" class="sidebar-nav-link">
           <i class="fas fa-info-circle"></i>
           <span>About</span>
         </a>
       </li>
       <li class="sidebar-nav-item">
-        <a href="/✅Contact/contact.html" class="sidebar-nav-link">
+        <a href="../Contact/contact.html" class="sidebar-nav-link">
           <i class="fas fa-phone"></i>
           <span>Contact</span>
         </a>
       </li>
       <li class="sidebar-nav-item">
-        <a href="/✅nav-btn/✅favourite.html" class="sidebar-nav-link">
+        <a href="../nav-btn/favourite.html" class="sidebar-nav-link">
           <i class="fas fa-heart"></i>
           <span>Wishlist</span>
         </a>
       </li>
       <li class="sidebar-nav-item">
-        <a href="/✅Offers/offers.html" class="sidebar-nav-link">
+        <a href="../Offers/offers.html" class="sidebar-nav-link">
           <i class="fas fa-gift"></i>
           <span>Offers</span>
         </a>
@@ -216,31 +220,31 @@
   <div class="bottom-bar">
     <ul class="bottom-nav-items">
       <li class="bottom-nav-item">
-        <a href="/✅Home/home.html" class="bottom-nav-link">
+        <a href="../Home/home.html" class="bottom-nav-link">
           <i class="fas fa-home"></i>
           <span>Home</span>
         </a>
       </li>
       <li class="bottom-nav-item">
-        <a href="/✅Shop/shop.html" class="bottom-nav-link">
+        <a href="../Shop/shop.html" class="bottom-nav-link">
           <i class="fas fa-shopping-cart"></i>
           <span>Shop</span>
         </a>
       </li>
       <li class="bottom-nav-item">
-        <a href="/✅Search/search.html" class="bottom-nav-link" id="mobileSearchIcon">
+        <a href="../Search/search.html" class="bottom-nav-link" id="mobileSearchIcon">
           <i class="fas fa-search"></i>
           <span>Search</span>
         </a>
       </li>
       <li class="bottom-nav-item">
-        <a href="/✅nav-btn/✅favourite.html" class="bottom-nav-link">
+        <a href="../nav-btn/favourite.html" class="bottom-nav-link">
           <i class="fas fa-heart"></i>
           <span>Wishlist</span>
         </a>
       </li>
       <li class="bottom-nav-item">
-        <a href="/✅nav-btn/✅Account/account.html" class="bottom-nav-link" id="mobileUserIcon">
+        <a href="../nav-btn/Account/account.html" class="bottom-nav-link" id="mobileUserIcon">
           <i class="fas fa-user"></i>
           <span>Account</span>
         </a>
@@ -923,8 +927,11 @@
 
     <!-- Confetti container -->
     <div id="confettiContainer" class="confetti-container"></div>
+    <div data-include="../components/footer.html"></div>
 </body>
-<script src="/✅Collections/collections.js"></script>
-<script src="/✅Home/home.js"></script>
+<script src="../js/components.js"></script>
+<script src="../js/toast.js"></script>
+<script src="collections.js"></script>
+<script src="../Home/home.js"></script>
 
 </html>
