@@ -92,7 +92,7 @@ MashallahFurniture/
 │   ├── 📁 services/         # API & business logic
 │   ├── 📁 utils/            # Helper functions
 │   └── 📁 styles/           # CSS architecture
-├── 📁 data/                  # Single source of truth
+├── 📁 public/data/           # Static JSON data
 │   ├── 📄 products.json     # Product catalog
 │   ├── 📄 categories.json   # Product categories
 │   ├── 📄 collections.json  # Curated collections

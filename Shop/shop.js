@@ -254,7 +254,7 @@ const DEFAULT_PRODUCTS = [
 
 async function loadProducts() {
   try {
-    const response = await fetch('../assets/data/products.json');
+    const response = await fetch('/data/products.json');
     if (!response.ok) throw new Error('Failed to fetch products');
     const data = await response.json();
     return Array.isArray(data) ? data : DEFAULT_PRODUCTS;

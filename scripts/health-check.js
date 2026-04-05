@@ -3,7 +3,12 @@ const fs = require('fs');
 const path = require('path');
 
 const checks = {
-  dataFiles: ['data/products.json', 'data/categories.json'],
+  dataFiles: [
+    'public/data/products.json',
+    'public/data/categories.json',
+    'public/data/collections.json',
+    'public/data/testimonials.json'
+  ],
   criticalPages: ['index.html', 'Shop/shop.html', 'Collections/collections.html'],
   assets: ['css/global.css', 'js/store.js'],
   configs: ['.env.example', 'vite.config.js']
