@@ -1,102 +1,240 @@
-// Centralized Data Management Service
-// Handles all frontend data operations: products, cart, wishlist, user data
+/**
+ * Centralized Data Service for Mashallah Furniture
+ * Handles products, cart, wishlist with caching and real-time updates
+ */
 
 class DataService {
     constructor() {
-        this.baseUrl = window.location.origin;
         this.cache = new Map();
-        this.cacheExpiry = new Map();
-        this.defaultCacheTime = 3600000; // 1 hour in milliseconds
+        this.cacheTimeout = 3600000; // 1 hour
+        this.baseUrl = window.location.origin;
+        this.setupEventListeners();
     }
 
-    // ==========================================
-    // PRODUCT DATA MANAGEMENT
-    // ==========================================
+    setupEventListeners() {
+        // Listen for admin product saves
+        window.addEventListener('adminProductSaved', () => {
+            console.log('🔄 Admin product saved, clearing cache...');
+            this.clearCache();
+            this.dispatchProductsUpdated();
+        });
 
-    /**
-     * Fetch products from JSON file and localStorage with caching
-     * @returns {Promise<Array>} Array of products
-     */
+        // Cross-tab synchronization
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'mashallah_products' || e.key === 'cart' || e.key === 'wishlist') {
+                console.log(`🔄 ${e.key} updated in another tab, syncing...`);
+                this.clearCache();
+                this.dispatchProductsUpdated();
+                if (e.key === 'cart') this.dispatchCartEvent();
+                if (e.key === 'wishlist') this.dispatchWishlistEvent();
+            }
+        });
+    }
+
     async getProducts() {
-        const cacheKey = 'products';
-
-        // Check cache first
-        if (this.isCacheValid(cacheKey)) {
-            return this.cache.get(cacheKey);
+        const cached = this.cache.get('products');
+        if (cached && Date.now() - cached.timestamp < this.cacheTimeout) {
+            console.log('📦 Returning cached products');
+            return cached.data;
         }
 
         try {
-            // Load static products from JSON
-            const response = await fetch(`${this.baseUrl}/data/products.json`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const staticProducts = await response.json();
-
             // Load admin products from localStorage
             const adminProducts = JSON.parse(localStorage.getItem('mashallah_products') || '[]');
 
-            // Combine products: admin products take priority, then add static products that don't conflict
-            let allProducts = [...adminProducts]; // Start with admin products
+            // Load static products from JSON
+            let staticProducts = [];
+            try {
+                const response = await fetch(`${this.baseUrl}/data/products.json`);
+                if (response.ok) {
+                    staticProducts = await response.json();
+                }
+            } catch (e) {
+                console.warn('Could not load static products:', e);
+            }
 
-            // Add static products that don't have IDs conflicting with admin products
-            const adminIds = new Set(adminProducts.map(p => p.id));
-            const additionalStaticProducts = staticProducts
-                .filter(product => this.validateProduct(product) && !adminIds.has(product.id));
+            // Combine products (admin products take priority)
+            let allProducts = [...staticProducts];
 
-            allProducts = allProducts.concat(additionalStaticProducts);
+            // Add or override with admin products
+            adminProducts.forEach(adminProduct => {
+                const index = allProducts.findIndex(p => p.id === adminProduct.id);
+                if (index !== -1) {
+                    allProducts[index] = adminProduct;
+                } else {
+                    allProducts.push(adminProduct);
+                }
+            });
 
-            // Cache the results
-            this.setCache(cacheKey, allProducts);
+            // Ensure each product has required fields
+            allProducts = allProducts.map(product => ({
+                ...product,
+                id: product.id || Date.now() + Math.random(),
+                images: product.images && product.images[0] ? product.images[0] : (product.image || '/assets/images/placeholder.jpg'),
+                inStock: product.inStock !== false
+            }));
 
-            console.log(`✅ Loaded ${allProducts.length} products (${adminProducts.length} admin, ${additionalStaticProducts.length} static)`);
+            // Cache the result
+            this.cache.set('products', {
+                data: allProducts,
+                timestamp: Date.now()
+            });
+
+            console.log(`✅ Loaded ${allProducts.length} products (${adminProducts.length} from admin, ${staticProducts.length} from static)`);
             return allProducts;
-
         } catch (error) {
-            console.error('❌ Failed to load products:', error);
+            console.error('Failed to load products:', error);
             return [];
         }
     }
 
-    /**
-     * Get single product by ID
-     * @param {number|string} id - Product ID
-     * @returns {Promise<Object|null>} Product object or null
-     */
     async getProductById(id) {
         const products = await this.getProducts();
-        return products.find(p => p.id === parseInt(id)) || null;
+        const productId = parseInt(id);
+        return products.find(p => parseInt(p.id) === productId);
     }
 
-    /**
-     * Filter products based on criteria
-     * @param {Object} filters - Filter options
-     * @returns {Promise<Array>} Filtered products
-     */
-    async filterProducts(filters = {}) {
-        let products = await this.getProducts();
+    // Cart Operations
+    getCart() {
+        return JSON.parse(localStorage.getItem('cart') || '[]');
+    }
 
-        if (filters.category && filters.category !== 'all') {
-            products = products.filter(p => p.category?.toLowerCase() === filters.category.toLowerCase());
+    addToCart(product, quantity = 1) {
+        const cart = this.getCart();
+        const existingItem = cart.find(item => item.id === product.id);
+
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            cart.push({ ...product, quantity });
         }
 
-        if (filters.minPrice !== undefined) {
-            products = products.filter(p => p.price >= parseFloat(filters.minPrice));
-        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        this.dispatchCartEvent();
+        return cart;
+    }
 
-        if (filters.maxPrice !== undefined) {
-            products = products.filter(p => p.price <= parseFloat(filters.maxPrice));
-        }
+    removeFromCart(productId) {
+        let cart = this.getCart();
+        cart = cart.filter(item => item.id !== productId);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        this.dispatchCartEvent();
+        return cart;
+    }
 
-        if (filters.search) {
-            const searchTerm = filters.search.toLowerCase().trim();
-            products = products.filter(p =>
-                p.name?.toLowerCase().includes(searchTerm) ||
-                p.description?.toLowerCase().includes(searchTerm) ||
-                p.category?.toLowerCase().includes(searchTerm)
-            );
+    updateQuantity(productId, quantity) {
+        const cart = this.getCart();
+        const item = cart.find(item => item.id === productId);
+        if (item) {
+            if (quantity <= 0) {
+                return this.removeFromCart(productId);
+            }
+            item.quantity = quantity;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            this.dispatchCartEvent();
         }
+        return cart;
+    }
+
+    getCartTotal() {
+        const cart = this.getCart();
+        return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    }
+
+    getCartCount() {
+        const cart = this.getCart();
+        return cart.reduce((count, item) => count + item.quantity, 0);
+    }
+
+    clearCart() {
+        localStorage.setItem('cart', JSON.stringify([]));
+        this.dispatchCartEvent();
+    }
+
+    // Wishlist Operations
+    getWishlist() {
+        return JSON.parse(localStorage.getItem('wishlist') || '[]');
+    }
+
+    addToWishlist(product) {
+        const wishlist = this.getWishlist();
+        if (!wishlist.find(item => item.id === product.id)) {
+            wishlist.push(product);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            this.dispatchWishlistEvent();
+        }
+        return wishlist;
+    }
+
+    removeFromWishlist(productId) {
+        let wishlist = this.getWishlist();
+        wishlist = wishlist.filter(item => item.id !== productId);
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        this.dispatchWishlistEvent();
+        return wishlist;
+    }
+
+    isInWishlist(productId) {
+        return this.getWishlist().some(item => item.id === productId);
+    }
+
+    clearWishlist() {
+        localStorage.setItem('wishlist', JSON.stringify([]));
+        this.dispatchWishlistEvent();
+    }
+
+    // Event Dispatchers
+    dispatchCartEvent() {
+        window.dispatchEvent(new CustomEvent('cartUpdated', {
+            detail: { cart: this.getCart(), count: this.getCartCount(), total: this.getCartTotal() }
+        }));
+    }
+
+    dispatchWishlistEvent() {
+        window.dispatchEvent(new CustomEvent('wishlistUpdated', {
+            detail: { wishlist: this.getWishlist() }
+        }));
+    }
+
+    dispatchProductsUpdated() {
+        window.dispatchEvent(new CustomEvent('productsUpdated'));
+    }
+
+    // Utility Methods
+    clearCache() {
+        this.cache.clear();
+        console.log('🗑️ Cache cleared');
+    }
+
+    getCacheStats() {
+        return {
+            size: this.cache.size,
+            keys: Array.from(this.cache.keys()),
+            productsCached: this.cache.has('products')
+        };
+    }
+
+    exportData() {
+        return {
+            products: localStorage.getItem('mashallah_products'),
+            cart: this.getCart(),
+            wishlist: this.getWishlist(),
+            timestamp: new Date().toISOString()
+        };
+    }
+
+    importData(data) {
+        if (data.products) localStorage.setItem('mashallah_products', data.products);
+        if (data.cart) localStorage.setItem('cart', JSON.stringify(data.cart));
+        if (data.wishlist) localStorage.setItem('wishlist', JSON.stringify(data.wishlist));
+        this.clearCache();
+        this.dispatchCartEvent();
+        this.dispatchWishlistEvent();
+        this.dispatchProductsUpdated();
+    }
+}
+
+export default new DataService();
 
         if (filters.inStock !== undefined) {
             products = products.filter(p => p.inStock === filters.inStock);

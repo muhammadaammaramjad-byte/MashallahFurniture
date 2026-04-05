@@ -1,53 +1,326 @@
 
-// Shop Page JavaScript
 import dataService from '../services/dataService.js';
-import { storage } from '../utils/storage.js';
 import { showToast } from '../components/toast.js';
-import { showModal } from '../components/modal.js';
-import { showLoader, hideLoader } from '../components/loader.js';
-import { renderPagination } from '../components/pagination.js';
 
 class ShopPage {
     constructor() {
-        this.currentPage = 1;
-        this.itemsPerPage = 12;
-        this.currentFilters = {
-            category: 'all',
-            priceRange: { min: 0, max: 5000 },
-            material: [],
-            color: []
-        };
-        this.currentSort = 'name';
         this.allProducts = [];
         this.filteredProducts = [];
-        this.categories = [];
-
+        this.currentPage = 1;
+        this.itemsPerPage = 12;
+        this.currentCategory = 'all';
+        this.searchQuery = '';
         this.init();
     }
 
-    // Method to refresh products (called when admin adds new products)
-    async refreshProducts() {
+    async init() {
+        await this.loadProducts();
+        this.setupEventListeners();
+        this.setupCategoryFilter();
+        this.setupSearch();
+    }
+
+    async loadProducts() {
         try {
-            showLoader();
-            // Clear dataService cache to ensure fresh data
-            dataService.clearCache();
-            await this.loadCategories();
-            await this.loadProducts();
+            // Show loading state
+            this.showLoading();
+
+            // Get products from data service (combines admin + static)
+            this.allProducts = await dataService.getProducts();
+            this.filteredProducts = [...this.allProducts];
+
+            console.log(`✅ Shop loaded ${this.filteredProducts.length} products`);
+
             this.renderProducts();
-            this.updateResultsCount();
-            console.log('🔄 Shop products refreshed');
+            this.setupPagination();
         } catch (error) {
-            console.error('Error refreshing products:', error);
-            showToast('Error refreshing products. Please refresh the page.', 'error');
-        } finally {
-            hideLoader();
+            console.error('Failed to load products:', error);
+            this.showError('Unable to load products. Please refresh the page.');
         }
     }
 
-    async init() {
-        try {
-            showLoader();
-            await this.loadCategories();
+    refreshProducts() {
+        this.loadProducts();
+    }
+
+    showLoading() {
+        const container = document.querySelector('.products-grid');
+        if (container) {
+            container.innerHTML = `
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading products...</p>
+                </div>
+            `;
+        }
+    }
+
+    showError(message) {
+        const container = document.querySelector('.products-grid');
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="error-message">
+                <p>${message}</p>
+                <button onclick="location.reload()">Retry</button>
+            </div>
+        `;
+    }
+
+    renderProducts() {
+        const container = document.querySelector('.products-grid');
+        if (!container) return;
+
+        const start = (this.currentPage - 1) * this.itemsPerPage;
+        const end = start + this.itemsPerPage;
+        const productsToShow = this.filteredProducts.slice(start, end);
+
+        if (productsToShow.length === 0) {
+            container.innerHTML = `
+                <div class="no-products">
+                    <p>No products found.</p>
+                    ${this.filterProducts.length === 0 ? '<button onclick="location.reload()">Reset Filters</button>' : ''}
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = productsToShow.map(product => this.createProductCard(product)).join('');
+        this.attachProductCardEvents();
+    }
+
+    createProductCard(product) {
+        const imageUrl = product.images && product.images[0] ? product.images[0] : (product.image || '/assets/images/placeholder.jpg');
+        const price = product.price || 0;
+        const name = product.name || 'Unnamed Product';
+
+        return `
+            <div class="product-card" data-product-id="${product.id}">
+                <div class="product-image">
+                    <img src="${imageUrl}" alt="${name}" loading="lazy">
+                    <div class="product-actions">
+                        <button class="quick-view-btn" data-id="${product.id}">
+                            <i class="fas fa-eye"></i> Quick View
+                        </button>
+                        <button class="wishlist-btn" data-id="${product.id}">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">${name}</h3>
+                    <p class="product-price">$${price.toFixed(2)}</p>
+                    <button class="add-to-cart-btn" data-id="${product.id}">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    attachProductCardEvents() {
+        // Product card click (navigate to detail)
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (!e.target.closest('.add-to-cart-btn') && !e.target.closest('.wishlist-btn') && !e.target.closest('.quick-view-btn')) {
+                    const productId = card.dataset.productId;
+                    window.location.href = `/product.html?id=${productId}`;
+                }
+            });
+        });
+
+        // Add to cart buttons
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const productId = parseInt(btn.dataset.id);
+                const product = this.allProducts.find(p => parseInt(p.id) === productId);
+                if (product) {
+                    dataService.addToCart(product, 1);
+                    showToast(`${product.name} added to cart!`, 'success');
+                }
+            });
+        });
+
+        // Wishlist buttons
+        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const productId = parseInt(btn.dataset.id);
+                const product = this.allProducts.find(p => parseInt(p.id) === productId);
+                if (product) {
+                    if (dataService.isInWishlist(productId)) {
+                        dataService.removeFromWishlist(productId);
+                        showToast(`${product.name} removed from wishlist`, 'info');
+                    } else {
+                        dataService.addToWishlist(product);
+                        showToast(`${product.name} added to wishlist!`, 'success');
+                    }
+                    this.updateWishlistIcons();
+                }
+            });
+        });
+
+        // Quick view buttons
+        document.querySelectorAll('.quick-view-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const productId = btn.dataset.id;
+                window.location.href = `/product.html?id=${productId}`;
+            });
+        });
+    }
+
+    updateWishlistIcons() {
+        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+            const productId = parseInt(btn.dataset.id);
+            if (dataService.isInWishlist(productId)) {
+                btn.innerHTML = '<i class="fas fa-heart"></i>';
+                btn.classList.add('active');
+            } else {
+                btn.innerHTML = '<i class="far fa-heart"></i>';
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    setupCategoryFilter() {
+        const categoryFilter = document.querySelector('#category-filter');
+        if (categoryFilter) {
+            categoryFilter.addEventListener('change', (e) => {
+                this.currentCategory = e.target.value;
+                this.applyFilters();
+            });
+        }
+    }
+
+    setupSearch() {
+        const searchInput = document.querySelector('#search-input');
+        if (searchInput) {
+            let debounceTimer;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    this.searchQuery = e.target.value.toLowerCase();
+                    this.applyFilters();
+                }, 300);
+            });
+        }
+    }
+
+    applyFilters() {
+        let filtered = [...this.allProducts];
+
+        // Apply category filter
+        if (this.currentCategory !== 'all') {
+            filtered = filtered.filter(p => p.category === this.currentCategory);
+        }
+
+        // Apply search filter
+        if (this.searchQuery) {
+            filtered = filtered.filter(p =>
+                p.name.toLowerCase().includes(this.searchQuery) ||
+                (p.description && p.description.toLowerCase().includes(this.searchQuery))
+            );
+        }
+
+        this.filteredProducts = filtered;
+        this.currentPage = 1;
+        this.renderProducts();
+        this.setupPagination();
+    }
+
+    setupPagination() {
+        const totalPages = Math.ceil(this.filteredProducts.length / this.itemsPerPage);
+        const paginationContainer = document.querySelector('.pagination');
+
+        if (!paginationContainer || totalPages <= 1) {
+            if (paginationContainer) paginationContainer.innerHTML = '';
+            return;
+        }
+
+        let paginationHtml = '<button class="prev-btn" ' + (this.currentPage === 1 ? 'disabled' : '') + '>Previous</button>';
+
+        for (let i = 1; i <= Math.min(totalPages, 5); i++) {
+            paginationHtml += `<button class="page-btn ${i === this.currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+        }
+
+        if (totalPages > 5) {
+            paginationHtml += '<span>...</span>';
+            paginationHtml += `<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
+        }
+
+        paginationHtml += '<button class="next-btn" ' + (this.currentPage === totalPages ? 'disabled' : '') + '>Next</button>';
+
+        paginationContainer.innerHTML = paginationHtml;
+
+        // Attach pagination events
+        paginationContainer.querySelectorAll('.page-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.currentPage = parseInt(btn.dataset.page);
+                this.renderProducts();
+                this.setupPagination();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        const prevBtn = paginationContainer.querySelector('.prev-btn');
+        const nextBtn = paginationContainer.querySelector('.next-btn');
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (this.currentPage > 1) {
+                    this.currentPage--;
+                    this.renderProducts();
+                    this.setupPagination();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (this.currentPage < totalPages) {
+                    this.currentPage++;
+                    this.renderProducts();
+                    this.setupPagination();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        }
+    }
+
+    setupEventListeners() {
+        // Listen for product updates from admin
+        window.addEventListener('productsUpdated', () => {
+            console.log('🔄 Products updated, refreshing shop...');
+            this.refreshProducts();
+        });
+
+        // Listen for cart updates to update any cart-related UI
+        window.addEventListener('cartUpdated', () => {
+            // Update any cart-related UI elements
+            this.updateCartUI();
+        });
+    }
+
+    updateCartUI() {
+        // Update cart count display if needed
+        const cartCount = dataService.getCartCount();
+        const cartBadges = document.querySelectorAll('.cart-count');
+        cartBadges.forEach(badge => {
+            badge.textContent = cartCount;
+            badge.style.display = cartCount > 0 ? 'flex' : 'none';
+        });
+    }
+}
+
+// Initialize shop when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    window.shop = new ShopPage();
+});
+
+export default ShopPage;
             await this.loadProducts();
             this.setupEventListeners();
             this.renderProducts();

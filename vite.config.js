@@ -1,33 +1,33 @@
 import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 export default defineConfig({
-    build: {
-        outDir: 'dist',
-        emptyOutDir: true,
-        rollupOptions: {
-            input: {
-                main: 'src/pages/index.html',
-                shop: 'src/pages/shop.html',
-                product: 'src/pages/product.html',
-                about: 'src/pages/about.html',
-                collections: 'src/pages/collections.html',
-                contact: 'src/pages/contact.html',
-                offers: 'src/pages/offers.html',
-                cart: 'src/pages/cart.html',
-                wishlist: 'src/pages/wishlist.html',
-                checkout: 'src/pages/checkout.html',
-                account: 'src/pages/account/profile.html',
-                'image-uploader-demo': 'src/pages/image-uploader-demo.html',
-                'admin-products': 'src/pages/admin/products.html'
-            }
-        }
-    },
-    server: {
-        port: 3000,
-        open: true
-    },
-    publicDir: 'public'
-    },
+  root: 'src',
+  build: {
+    outDir: '../dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'src/index.html'),
+        shop: resolve(__dirname, 'src/shop.html'),
+        product: resolve(__dirname, 'src/product.html'),
+        cart: resolve(__dirname, 'src/cart.html'),
+        wishlist: resolve(__dirname, 'src/wishlist.html'),
+        about: resolve(__dirname, 'src/about.html'),
+        contact: resolve(__dirname, 'src/contact.html'),
+        collections: resolve(__dirname, 'src/collections.html'),
+        offers: resolve(__dirname, 'src/offers.html'),
+        checkout: resolve(__dirname, 'src/checkout.html'),
+        adminProducts: resolve(__dirname, 'src/admin/products.html'),
+        imageUploaderDemo: resolve(__dirname, 'src/image-uploader-demo.html')
+      }
+    }
+  },
+  server: {
+    port: 5173,
+    open: true
+  }
+});
     resolve: {
         alias: {
             '@': '/src',
