@@ -5,14 +5,7 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     target: 'es2020',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: process.env.NODE_ENV === 'production',
-        drop_debugger: true
-      }
-    },
-    chunkSizeWarningLimit: 500,
+    minify: 'esbuild', // Use built-in esbuild instead of terser
     reportCompressedSize: true
   },
   publicDir: 'public',
