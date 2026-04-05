@@ -1,0 +1,28 @@
+/* CSS Variables for Theme */
+:root {
+    --primary-color: #8B5A2B;
+    --secondary-color: #D4A373;
+    --accent-color: #F4E4BC;
+    --text-dark: #2C1810;
+    --text-light: #F8F4F0;
+    --background: #FFFFFF;
+    --background-alt: #F9F6F2;
+    --border-color: #E8DCC0;
+    --shadow: rgba(139, 90, 43, 0.1);
+    --spacing-unit: 8px;
+    --font-family: 'Inter', sans-serif;
+    --font-size-base: 16px;
+    --border-radius: 8px;
+}
+
+/* Dark Theme (Optional) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #2C1810;
+        --background-alt: #3D2518;
+        --text-dark: #F8F4F0;
+        --text-light: #2C1810;
+        --border-color: #5D4037;
+        --shadow: rgba(0, 0, 0, 0.3);
+    }
+}

@@ -1,0 +1,37 @@
+[
+    {
+        "id": "living-room",
+        "name": "Living Room",
+        "description": "Comfortable seating and entertainment furniture",
+        "image": "/assets/images/categories/living-room.jpg",
+        "productCount": 25
+    },
+    {
+        "id": "bedroom",
+        "name": "Bedroom",
+        "description": "Restful and stylish bedroom furniture",
+        "image": "/assets/images/categories/bedroom.jpg",
+        "productCount": 18
+    },
+    {
+        "id": "dining",
+        "name": "Dining",
+        "description": "Elegant dining sets and furniture",
+        "image": "/assets/images/categories/dining.jpg",
+        "productCount": 12
+    },
+    {
+        "id": "office",
+        "name": "Office",
+        "description": "Functional and comfortable office furniture",
+        "image": "/assets/images/categories/office.jpg",
+        "productCount": 15
+    },
+    {
+        "id": "outdoor",
+        "name": "Outdoor",
+        "description": "Weather-resistant outdoor furniture",
+        "image": "/assets/images/categories/outdoor.jpg",
+        "productCount": 8
+    }
+]

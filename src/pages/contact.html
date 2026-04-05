@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | MashallahFurniture</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/Home/home.css">
+  <link rel="stylesheet" href="/Contact/contact.css">
+
+</head>
+
+<body>
+  <div id="readingProgress" class="reading-progress" aria-hidden="true"></div>
+
+  <!-- Visual layers -->
+  <div id="springCells" aria-hidden="true"></div>
+  <div id="starLayer" aria-hidden="true"></div>
+  <div id="binaryLayer" aria-hidden="true"></div>
+
+  <!-- Cursor elements -->
+  <div id="cursorCore" class="cursor-core" aria-hidden="true"></div>
+  <div id="cursorOrb" class="cursor-orb" aria-hidden="true">
+    <!-- some orbiting mini particles (js will populate) -->
+  </div>
+
+  <!-- Confetti container -->
+  <div id="confettiContainer" class="confetti-container"></div>
+
+  <!-- Page Loader -->
+  <div class="loader" id="page-loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <i class="fas fa-couch"></i> Mashallah<span>Furniture</span>
+      </div>
+      <div class="loader-spinner"></div>
+      <div class="loader-progress">
+        <div class="loader-progress-bar" id="loader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="/Home/home.html" class="logo">
+        <i class="fas fa-couch logo-icon"></i>
+        Mashallah<span>Furniture</span>
+      </a>
+
+      <div class="nav-actions">
+        <div class="nav-action-btn search-wrapper">
+          <div class="search-icon-main" id="searchIcon">
+            <i class="fas fa-search icon-btn"></i>
+          </div>
+          <div class="search-container" id="searchContainer">
+            <div class="search-input-container">
+              <input type="text" class="search-input" placeholder="Search for furniture..." id="searchInput">
+              <i class="fas fa-search search-icon" id="searchButton"></i>
+            </div>
+            <div class="search-options">
+              <div class="search-option active" data-category="all">All</div>
+              <div class="search-option" data-category="chairs">Chairs</div>
+              <div class="search-option" data-category="tables">Tables</div>
+              <div class="search-option" data-category="sofas">Sofas</div>
+              <div class="search-option" data-category="storage">Storage</div>
+            </div>
+            <div class="search-results" id="searchResults">
+              <!-- Results will appear here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-action-btn wishlist-wrapper">
+          <a class="icon-btn" id="wishlistIcon" href="/nav-btn/favourite.html" aria-label="Wishlist">
+            <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            <span class="count-badge" id="wishlistCount">3</span>
+          </a>
+          <div class="wishlist-preview" id="wishlistPreview">
+            <h3>Your Wishlist</h3>
+            <div id="wishlistItemsPreview">
+              <!-- Wishlist items will appear here -->
+            </div>
+            <a href="/nav-btn/favourite.html" class="view-wishlist-btn" id="viewWishlistBtn">View Full Wishlist</a>
+          </div>
+        </div>
+
+        <div class="nav-action-btn">
+          <a href="/nav-btn/cart.html" id="cartIcon">
+            <i class="fas fa-shopping-cart icon-btn"></i>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+
+        <div class="nav-action-btn">
+          <a class="icon-btn" id="userIcon" href="/nav-btn/Account/account.html" aria-label="User Account"
+            aria-current="page">
+            <i class="fas fa-user"></i>
+          </a>
+        </div>
+
+        <button class="nav-action-btn menu-toggle" id="menuToggle" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+      <button class="close-sidebar" id="closeSidebar" aria-label="Close menu">
+        <i class="fas fa-times"></i>
+      </button>
+      <ul class="sidebar-nav-items">
+        <li class="sidebar-nav-item">
+          <a href="/Home/home.html" class="sidebar-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Shop/shop.html" class="sidebar-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Collections/collections.html" class="sidebar-nav-link">
+            <i class="fas fa-layer-group"></i>
+            <span>Collections</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/About/about.html" class="sidebar-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Contact/contact.html" class="sidebar-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/nav-btn/favourite.html" class="sidebar-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Offers/offers.html" class="sidebar-nav-link">
+            <i class="fas fa-gift"></i>
+            <span>Offers</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Left Sidebar (Desktop) -->
+    <div class="left-sidebar" id="leftSidebar">
+      <ul class="sidebar-nav-items">
+        <li class="sidebar-nav-item">
+          <a href="/Home/home.html" class="sidebar-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Shop/shop.html" class="sidebar-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Collections/collections.html" class="sidebar-nav-link">
+            <i class="fas fa-layer-group"></i>
+            <span>Collections</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/About/about.html" class="sidebar-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Contact/contact.html" class="sidebar-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/nav-btn/favourite.html" class="sidebar-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Offers/offers.html" class="sidebar-nav-link">
+            <i class="fas fa-gift"></i>
+            <span>Offers</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bottom Bar (Mobile) -->
+    <div class="bottom-bar">
+      <ul class="bottom-nav-items">
+        <li class="bottom-nav-item">
+          <a href="/Home/home.html" class="bottom-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/Shop/shop.html" class="bottom-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/Search/search.html" class="bottom-nav-link" id="mobileSearchIcon">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/nav-btn/favourite.html" class="bottom-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/nav-btn/Account/account.html" class="bottom-nav-link" id="mobileUserIcon">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+
+
+    <section class="contact-header">
+      <h1>Connect With Us</h1>
+      <p>We'd love to hear from you. Whether you have a question about products, pricing, or anything else, our team is
+        ready to answer all your questions.</p>
+      <div class="scroll-indicator" id="scrollIndicator">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </section>
+
+    <div class="contact-content">
+      <div class="contact-info">
+        <h2>Contact Information</h2>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="info-content">
+            <h3>Our Location</h3>
+            <p>123 Furniture Street, Design District<br>New York, NY 10001</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="info-content">
+            <h3>Phone Number</h3>
+            <p>+1 (555) 123-4567<br>+1 (555) 987-6543</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="info-content">
+            <h3>Email Address</h3>
+            <p>info@Mashallahfurniture.com<br>support@Mashallahfurniture.com</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="info-content">
+            <h3>Working Hours</h3>
+            <p>Monday-Friday: 9am - 6pm<br>Saturday: 10am - 4pm<br>Sunday: Closed</p>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h2>Send Us a Message</h2>
+
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" id="name" class="form-input" placeholder="Enter your name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone Number (Optional)</label>
+            <input type="tel" id="phone" class="form-input" placeholder="Enter your phone number">
+          </div>
+
+          <div class="form-group">
+            <label for="subject" class="form-label">Subject</label>
+            <input type="text" id="subject" class="form-input" placeholder="What is this regarding?" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Your Message</label>
+            <textarea id="message" class="form-textarea" placeholder="Type your message here..." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    <section class="map-section">
+      <h2>Find Us Here</h2>
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.11976397304613!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1663038074293!5m2!1sen!2s"
+          allowfullscreen="" loading="lazy"></iframe>
+        <div class="map-overlay"></div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What is your return policy?</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We offer a 30-day return policy on all unused items in their original packaging. Custom orders and
+            clearance
+            items are final sale and cannot be returned. Returns are subject to a restocking fee of 15%.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Do you offer custom furniture design?</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Yes, we have an in-house design team that can create custom furniture pieces tailored to your specific
+            needs
+            and space. Custom orders require a 50% deposit and have a lead time of 6-8 weeks.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What are your delivery options?</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We offer standard delivery (5-7 business days) for $49, express delivery (2-3 business days) for $99, and
+            white-glove delivery service for large items which includes assembly and placement in your home for $199.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Do you provide assembly services?</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Yes, we offer professional assembly services for an additional fee. Our team will assemble your furniture
+            at
+            your home and ensure everything is properly set up. Assembly services start at $79 depending on the
+            complexity
+            of the item.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What materials do you use for your furniture?</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We use only premium materials including solid hardwoods (oak, walnut, and maple), high-quality veneers,
+            tempered glass, and premium upholstery fabrics from leading manufacturers. All our finishes are non-toxic
+            and
+            environmentally friendly.</p>
+        </div>
+      </div>
+    </section>
+
+    
+    
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Dark Mode Toggle Button -->
+    <div class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+      <i id="darkModeIcon" class="fas fa-moon"></i>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer" title="Background music">
+      <i class="fas fa-music"></i>
+    </div>
+
+    <!-- Sound Controls -->
+    <div class="sound-controls" id="soundControls">
+      <div class="sound-control" id="soundUp" title="Increase volume">
+        <i class="fas fa-volume-up"></i>
+      </div>
+      <div class="sound-control" id="soundDown" title="Decrease volume">
+        <i class="fas fa-volume-down"></i>
+      </div>
+      <div class="sound-control" id="soundMute" title="Mute sounds">
+        <i class="fas fa-volume-mute"></i>
+      </div>
+    </div>
+
+    <!-- Confetti container -->
+    <div id="confettiContainer" class="confetti-container"></div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+</body>
+<script src="/Contact/contact.js"></script>
+<script src="/Home/home.js"></script>
+
+</html>

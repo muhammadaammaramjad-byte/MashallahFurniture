@@ -1,0 +1,2667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Favourites | MashallahFurniture</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700;800&family=Source+Code+Pro:wght@400;500&family=Roboto:wght@300;400;500&family=Poppins:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;600&family=Josefin+Sans:wght@300;400;600&family=Raleway:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/Home/home.css">
+  <script src="/Home/home.js"></script>
+  <style>
+    /*---------------------------------------------------
+      GLOBAL STYLES & THEME
+    ---------------------------------------------------*/
+    :root {
+      /* Color Palette - Black & White Theme */
+      --color-dark-1: #0a0a0a;
+      --color-dark-2: #1a1a1a;
+      --color-dark-3: #2a2a2a;
+      --color-light-1: #ffffff;
+      --color-light-2: #f8f8f8;
+      --color-light-3: #f0f0f0;
+      --color-gray-1: #7a7a7a;
+      --color-gray-2: #cccccc;
+      --color-gray-3: #e5e5e5;
+      --color-accent: #0a0a0a;
+      --color-wishlist: #0b0b0b;
+      --color-wishlist-bg: #0b0b0b;
+      --color-wishlist-border: #0c0b0b;
+      --color-success: #0a0a0a;
+
+      /* Theme-independent variables */
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+      --section-spacing: 80px;
+
+      /* Default (Light) Theme Semantic Variables */
+      --bg-primary: var(--color-light-1);
+      --bg-secondary: var(--color-light-2);
+      --text-primary: var(--color-dark-1);
+      --text-secondary: var(--color-gray-1);
+      --border-color: var(--color-gray-3);
+      --header-bg: rgba(255, 255, 255, 0.98);
+    }
+
+    .dark-mode {
+      /* Dark Theme Semantic Variables */
+      --bg-primary: var(--color-dark-2);
+      --bg-secondary: var(--color-dark-1);
+      --text-primary: var(--color-light-1);
+      --text-secondary: var(--color-gray-2);
+      --border-color: var(--color-dark-3);
+      --header-bg: rgba(26, 26, 26, 0.98);
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    }
+
+
+    /*---------------------------------------------------
+      MAIN CONTENT
+    ---------------------------------------------------*/
+    .favourites-container {
+      max-width: 1400px;
+      margin: 120px auto 60px;
+      padding: 0 25px;
+      /* margin-left: 80px; */
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--section-spacing);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .page-title {
+      font-size: 3.5rem;
+      margin-bottom: 16px;
+      font-family: 'Playfair Display', serif;
+      position: relative;
+      display: inline-block;
+    }
+
+    .page-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--text-primary);
+    }
+
+    .page-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .favourites-content {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 40px;
+    }
+
+    /*---------------------------------------------------
+      FILTERS SIDEBAR
+    ---------------------------------------------------*/
+    .filters-sidebar {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 25px;
+      height: fit-content;
+      position: sticky;
+      top: 120px;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: slideInLeft 0.8s ease 0.2s forwards;
+    }
+
+    .filter-section {
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 20px;
+    }
+
+    .filter-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .filter-title {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .filter-options {
+      list-style: none;
+    }
+
+    .filter-option {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .filter-option input {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .filter-option label {
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-option label:hover {
+      color: var(--color-accent);
+    }
+
+    .price-range {
+      margin-top: 15px;
+      width: 100%;
+      -webkit-appearance: none;
+      height: 5px;
+      background: var(--border-color);
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .price-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--text-primary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .price-range::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .range-values {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .color-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .color-option {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid transparent;
+    }
+
+    .color-option:hover,
+    .color-option.active {
+      transform: scale(1.2);
+      border-color: var(--text-primary);
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .filter-btn {
+      flex: 1;
+      padding: 10px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .filter-btn.apply {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+    }
+
+    .filter-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow);
+    }
+
+    /*---------------------------------------------------
+      PRODUCTS GRID
+    ---------------------------------------------------*/
+    .products-section2 {
+      opacity: 0;
+      transform: translateX(20px);
+      animation: slideInRight 0.8s ease 0.4s forwards;
+    }
+
+    .products-header2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .results-count {
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .sort-select {
+      padding: 10px 15px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .sort-select:focus {
+      outline: none;
+      border-color: var(--text-primary);
+    }
+
+    .products-grid2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background: var(--bg-primary);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .product-card.animate-in {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .product-card:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .product-card:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .product-card:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+
+    .product-card:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+
+    .product-card:nth-child(6) {
+      animation-delay: 0.5s;
+    }
+
+    .product-card:nth-child(7) {
+      animation-delay: 0.6s;
+    }
+
+    .product-card:nth-child(8) {
+      animation-delay: 0.7s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--hover-shadow);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      padding: 5px 10px;
+      background: var(--color-wishlist);
+      color: white;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      z-index: 2;
+    }
+
+    .product-image-container {
+      position: relative;
+      overflow: hidden;
+      height: 200px;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+
+    .product-actions {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: var(--transition);
+    }
+
+    .product-card:hover .product-actions {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .product-action-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .product-action-btn:hover {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      transform: scale(1.1);
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 18px;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .product-category {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .product-price {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .current-price {
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .discount-badge {
+      background: var(--color-success);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .product-description {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .product-card-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .add-to-cart {
+      flex: 1;
+      padding: 12px;
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .add-to-cart:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .add-to-cart.success {
+      background-color: var(--color-success);
+    }
+
+    .wishlist-btn {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .wishlist-btn:hover {
+      background: var(--color-wishlist-bg);
+      border-color: var(--color-wishlist-border);
+    }
+
+    .wishlist-btn.active {
+      background: var(--color-wishlist-bg);
+      color: var(--color-wishlist);
+      border-color: var(--color-wishlist-border);
+      animation: pulse 1s;
+    }
+
+    /*---------------------------------------------------
+      EMPTY STATE
+    ---------------------------------------------------*/
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .empty-state-icon {
+      font-size: 5rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    .empty-state-title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .empty-state-text {
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto 30px;
+    }
+
+    .browse-btn {
+      padding: 12px 24px;
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .browse-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--hover-shadow);
+    }
+
+    /*---------------------------------------------------
+      RECOMMENDATIONS SECTION
+    ---------------------------------------------------*/
+    .recommendations-section {
+      margin-top: var(--section-spacing);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease 0.6s forwards;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--text-primary);
+    }
+
+    .recommendations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    /*---------------------------------------------------
+      PAGINATION
+    ---------------------------------------------------*/
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease 0.8s forwards;
+    }
+
+    .pagination-item {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 5px;
+      border-radius: 8px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .pagination-item:hover,
+    .pagination-item.active {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-color: var(--text-primary);
+    }
+
+    .pagination-item.dots {
+      border: none;
+      background: transparent;
+    }
+
+    .pagination-item.dots:hover {
+      background: transparent;
+      color: var(--text-primary);
+    }
+
+    /*---------------------------------------------------
+      SPECIAL OFFERS BANNER
+    ---------------------------------------------------*/
+    .special-offers {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: var(--section-spacing);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease 1s forwards;
+    }
+
+    .offers-content {
+      max-width: 60%;
+    }
+
+    .offers-title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .offers-text {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .offers-cta {
+      padding: 12px 24px;
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .offers-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--hover-shadow);
+    }
+
+    .offers-image {
+      max-width: 35%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+    }
+
+    .offers-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /*---------------------------------------------------
+      NEW FEATURES
+    ---------------------------------------------------*/
+    /* Price Drop Alerts */
+    .price-alert-banner {
+      background: linear-gradient(90deg, var(--color-dark-1), var(--color-dark-3));
+      color: white;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease 0.5s forwards;
+    }
+
+    .price-alert-content {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .price-alert-icon {
+      font-size: 1.5rem;
+    }
+
+    .price-alert-text {
+      font-size: 0.9rem;
+    }
+
+    .price-alert-cta {
+      background: white;
+      color: var(--color-dark-1);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .price-alert-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Collection Spotlight */
+    .collection-spotlight {
+      margin-top: var(--section-spacing);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease 0.7s forwards;
+    }
+
+    .collection-card {
+      position: relative;
+      height: 300px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+    }
+
+    .collection-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--hover-shadow);
+    }
+
+    .collection-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .collection-card:hover .collection-image {
+      transform: scale(1.05);
+    }
+
+    .collection-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 25px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      color: white;
+    }
+
+    .collection-title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .collection-description {
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      opacity: 0.9;
+    }
+
+    .collection-cta {
+      display: inline-block;
+      padding: 8px 16px;
+      background: white;
+      color: var(--color-dark-1);
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .collection-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Recently Viewed */
+    /* Section Styling */
+    .recently-viewed-section {
+      margin: 60px 0;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e9ecef;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .view-all-btn {
+      font-size: 14px;
+      color: #6c757d;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      transition: color 0.3s;
+    }
+
+    .view-all-btn:hover {
+      color: #3c4144;
+    }
+
+    .view-all-btn i {
+      margin-left: 5px;
+      transition: transform 0.3s;
+    }
+
+    .view-all-btn:hover i {
+      transform: translateX(3px);
+    }
+
+    /* Products Container */
+    .viewed-products {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 15px 5px;
+      scrollbar-width: thin;
+      scrollbar-color: #ced4da transparent;
+    }
+
+    .viewed-products::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .viewed-products::-webkit-scrollbar-thumb {
+      background: #ced4da;
+      border-radius: 3px;
+    }
+
+    /* Product Cards */
+    .viewed-product {
+      flex: 0 0 220px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      background: white;
+      position: relative;
+    }
+
+    .viewed-product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .product-image-container {
+      position: relative;
+      height: 160px;
+      overflow: hidden;
+    }
+
+    .viewed-product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .viewed-product:hover .viewed-product-image {
+      transform: scale(1.05);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #201c1c;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .wishlist-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: white;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .wishlist-btn:hover {
+      background: #000000;
+      color: white;
+    }
+
+    .viewed-product-info {
+      padding: 15px;
+    }
+
+    .viewed-product-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 48px;
+    }
+
+    .viewed-product-price {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .current-price {
+      font-weight: 700;
+      font-size: 18px;
+      color: #2c3e50;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: #6c757d;
+      font-size: 14px;
+    }
+
+    .discount {
+      color: #000000;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .add-to-cart {
+      flex: 1;
+      padding: 8px 12px;
+      background: #000000;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .add-to-cart:hover {
+      background: #8d9296;
+    }
+
+    .view-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: white;
+    }
+
+    .view-btn:hover {
+      border-color: #242527;
+      color: #34393c;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #6c757d;
+    }
+
+    .empty-state i {
+      font-size: 48px;
+      margin-bottom: 15px;
+      color: #ced4da;
+    }
+
+    .empty-state p {
+      margin-bottom: 20px;
+    }
+
+    .browse-btn {
+      padding: 10px 20px;
+      background: #424649;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .browse-btn:hover {
+      background: #454a4e;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .viewed-product {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .viewed-product {
+        flex: 0 0 200px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .recently-viewed-section {
+        padding: 20px 15px;
+      }
+
+      .viewed-product {
+        flex: 0 0 180px;
+      }
+
+      .viewed-product-title {
+        font-size: 15px;
+      }
+
+      .current-price {
+        font-size: 16px;
+      }
+    }
+
+
+    /* Inspiration Gallery */
+    .inspiration-gallery {
+      margin-top: var(--section-spacing);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease 1.1s forwards;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 250px;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--hover-shadow);
+    }
+
+    .gallery-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover .gallery-image {
+      transform: scale(1.05);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      color: white;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-title {
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .gallery-description {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    /*---------------------------------------------------
+      ANIMATIONS
+    ---------------------------------------------------*/
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      70% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /*---------------------------------------------------
+      RESPONSIVE STYLES
+    ---------------------------------------------------*/
+    @media (max-width: 1200px) {
+      .favourites-content {
+        grid-template-columns: 250px 1fr;
+        gap: 30px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 992px) {
+      .favourites-content {
+        grid-template-columns: 1fr;
+      }
+
+      .favourites-container {
+        margin-left: 0%;
+      }
+
+      .filters-sidebar {
+        position: static;
+        margin-bottom: 30px;
+      }
+
+      .special-offers {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .offers-content {
+        max-width: 100%;
+        margin-bottom: 30px;
+      }
+
+      .offers-image {
+        max-width: 100%;
+      }
+
+      .price-alert-banner {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-title {
+        font-size: 2.5rem;
+      }
+
+      .products-grid2,
+      .recommendations-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+
+      .collection-spotlight .row {
+        flex-direction: column;
+      }
+
+      .collection-card {
+        height: 250px;
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .header-container {
+        padding: 15px;
+      }
+
+      .favourites-container {
+        padding: 0 15px;
+      }
+
+      .page-title {
+        font-size: 2rem;
+      }
+
+      .products-header2 {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .products-grid2,
+      .recommendations-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pagination-item {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+      }
+
+      .gallery-item {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="readingProgress" class="reading-progress" aria-hidden="true"></div>
+
+  <!-- Visual layers -->
+  <div id="springCells" aria-hidden="true"></div>
+  <div id="starLayer" aria-hidden="true"></div>
+  <div id="binaryLayer" aria-hidden="true"></div>
+
+  <!-- Cursor elements -->
+  <div id="cursorCore" class="cursor-core" aria-hidden="true"></div>
+  <div id="cursorOrb" class="cursor-orb" aria-hidden="true">
+    <!-- some orbiting mini particles (js will populate) -->
+  </div>
+
+  <!-- Confetti container -->
+  <div id="confettiContainer" class="confetti-container"></div>
+
+  <!-- Page Loader -->
+  <div class="loader" id="page-loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <i class="fas fa-couch"></i> Mashallah<span>Furniture</span>
+      </div>
+      <div class="loader-spinner"></div>
+      <div class="loader-progress">
+        <div class="loader-progress-bar" id="loader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="/Home/home.html" class="logo">
+        <i class="fas fa-couch logo-icon"></i>
+        Mashallah<span>Furniture</span>
+      </a>
+
+      <div class="nav-actions">
+        <div class="nav-action-btn search-wrapper">
+          <div class="search-icon-main" id="searchIcon">
+            <i class="fas fa-search icon-btn"></i>
+          </div>
+          <div class="search-container" id="searchContainer">
+            <div class="search-input-container">
+              <input type="text" class="search-input" placeholder="Search for furniture..." id="searchInput">
+              <i class="fas fa-search search-icon" id="searchButton"></i>
+            </div>
+            <div class="search-options">
+              <div class="search-option active" data-category="all">All</div>
+              <div class="search-option" data-category="chairs">Chairs</div>
+              <div class="search-option" data-category="tables">Tables</div>
+              <div class="search-option" data-category="sofas">Sofas</div>
+              <div class="search-option" data-category="storage">Storage</div>
+            </div>
+            <div class="search-results" id="searchResults">
+              <!-- Results will appear here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-action-btn wishlist-wrapper">
+          <a class="icon-btn" id="wishlistIcon" href="/nav-btn/favourite.html" aria-label="Wishlist">
+            <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            <span class="count-badge" id="wishlistCount">3</span>
+          </a>
+          <div class="wishlist-preview" id="wishlistPreview">
+            <h3>Your Wishlist</h3>
+            <div id="wishlistItemsPreview">
+              <!-- Wishlist items will appear here -->
+            </div>
+            <a href="/nav-btn/favourite.html" class="view-wishlist-btn" id="viewWishlistBtn">View Full Wishlist</a>
+          </div>
+        </div>
+
+        <div class="nav-action-btn">
+          <a href="/nav-btn/cart.html" id="cartIcon">
+            <i class="fas fa-shopping-cart icon-btn"></i>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+
+        <div class="nav-action-btn">
+          <a class="icon-btn" id="userIcon" href="/nav-btn/Account/account.html" aria-label="User Account"
+            aria-current="page">
+            <i class="fas fa-user"></i>
+          </a>
+        </div>
+
+        <button class="nav-action-btn menu-toggle" id="menuToggle" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+      <button class="close-sidebar" id="closeSidebar" aria-label="Close menu">
+        <i class="fas fa-times"></i>
+      </button>
+      <ul class="sidebar-nav-items">
+        <li class="sidebar-nav-item">
+          <a href="/Home/home.html" class="sidebar-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Shop/shop.html" class="sidebar-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Collections/collections.html" class="sidebar-nav-link">
+            <i class="fas fa-layer-group"></i>
+            <span>Collections</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/About/about.html" class="sidebar-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Contact/contact.html" class="sidebar-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/nav-btn/favourite.html" class="sidebar-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Offers/offers.html" class="sidebar-nav-link">
+            <i class="fas fa-gift"></i>
+            <span>Offers</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Left Sidebar (Desktop) -->
+    <div class="left-sidebar" id="leftSidebar">
+      <ul class="sidebar-nav-items">
+        <li class="sidebar-nav-item">
+          <a href="/Home/home.html" class="sidebar-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Shop/shop.html" class="sidebar-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Collections/collections.html" class="sidebar-nav-link">
+            <i class="fas fa-layer-group"></i>
+            <span>Collections</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/About/about.html" class="sidebar-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Contact/contact.html" class="sidebar-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/nav-btn/favourite.html" class="sidebar-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Offers/offers.html" class="sidebar-nav-link">
+            <i class="fas fa-gift"></i>
+            <span>Offers</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bottom Bar (Mobile) -->
+    <div class="bottom-bar">
+      <ul class="bottom-nav-items">
+        <li class="bottom-nav-item">
+          <a href="/Home/home.html" class="bottom-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/Shop/shop.html" class="bottom-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/Search/search.html" class="bottom-nav-link" id="mobileSearchIcon">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/nav-btn/favourite.html" class="bottom-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/nav-btn/Account/account.html" class="bottom-nav-link" id="mobileUserIcon">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <!-- Main Content -->
+    <main class="favourites-container">
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Your Favourites</h1>
+        <p class="page-subtitle">Curate your dream home with pieces you love. Items saved to your wishlist appear here.
+        </p>
+      </div>
+
+      <!-- Price Drop Alert Banner -->
+      <div class="price-alert-banner">
+        <div class="price-alert-content">
+          <div class="price-alert-icon">
+            <i class="fas fa-bell"></i>
+          </div>
+          <div class="price-alert-text">
+            <strong>Price Drop Alert!</strong> 3 items in your wishlist have reduced in price.
+          </div>
+        </div>
+        <div class="price-alert-cta">View Items</div>
+      </div>
+
+      <!-- Favourites Content -->
+      <div class="favourites-content">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar">
+          <div class="filter-section">
+            <h3 class="filter-title">Categories</h3>
+            <ul class="filter-options">
+              <li class="filter-option">
+                <input type="checkbox" id="chairs" checked>
+                <label for="chairs">Chairs</label>
+              </li>
+              <li class="filter-option">
+                <input type="checkbox" id="tables" checked>
+                <label for="tables">Tables</label>
+              </li>
+              <li class="filter-option">
+                <input type="checkbox" id="sofas" checked>
+                <label for="sofas">Sofas</label>
+              </li>
+              <li class="filter-option">
+                <input type="checkbox" id="storage" checked>
+                <label for="storage">Storage</label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="filter-section">
+            <h3 class="filter-title">Price Range</h3>
+            <input type="range" min="0" max="2000" value="2000" class="price-range" id="priceRange">
+            <div class="range-values">
+              <span>$0</span>
+              <span>$2000</span>
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <h3 class="filter-title">Color</h3>
+            <div class="color-options">
+              <div class="color-option active" style="background-color: #0a0a0a;" data-color="black"></div>
+              <div class="color-option" style="background-color: #7a7a7a;" data-color="gray"></div>
+              <div class="color-option" style="background-color: #f8f8f8;" data-color="white"></div>
+              <div class="color-option" style="background-color: #966f33;" data-color="brown"></div>
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <h3 class="filter-title">Availability</h3>
+            <ul class="filter-options">
+              <li class="filter-option">
+                <input type="checkbox" id="in-stock" checked>
+                <label for="in-stock">In Stock</label>
+              </li>
+              <li class="filter-option">
+                <input type="checkbox" id="pre-order">
+                <label for="pre-order">Pre-Order</label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="filter-buttons">
+            <button class="filter-btn apply">Apply Filters</button>
+            <button class="filter-btn">Reset</button>
+          </div>
+        </aside>
+
+        <!-- Products Section -->
+        <section class="products-section2">
+          <div class="products-header2">
+            <p class="results-count">Showing 8 items</p>
+            <select class="sort-select" id="sortSelect">
+              <option value="default">Sort by: Newest</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="name-asc">Name: A to Z</option>
+              <option value="name-desc">Name: Z to A</option>
+            </select>
+          </div>
+
+          <div class="products-grid2" id="productsGrid2">
+            <!-- Product cards will be dynamically generated -->
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination">
+            <a href="#" class="pagination-item active">1</a>
+            <a href="#" class="pagination-item">2</a>
+            <a href="#" class="pagination-item">3</a>
+            <a href="#" class="pagination-item dots">...</a>
+            <a href="#" class="pagination-item">8</a>
+          </div>
+        </section>
+      </div>
+
+      <!-- Special Offers Banner -->
+      <div class="special-offers">
+        <div class="offers-content">
+          <h2 class="offers-title">Special Offer for Favourites</h2>
+          <p class="offers-text">Get 15% off on all items in your favourites when you purchase 3 or more items. Limited
+            time offer!</p>
+          <button class="offers-cta">Shop the Deal</button>
+        </div>
+        <div class="offers-image">
+          <img
+            src="https://interwood.pk/cdn/shop/files/WhatsApp_Image_2025-02-26_at_3.23.11_PM_596x_crop_center.jpg?v=1756814412"
+            alt="Special Offer">
+        </div>
+      </div>
+
+      <!-- Collection Spotlight -->
+      <section class="collection-spotlight">
+        <h2 class="section-title">Collection Spotlight</h2>
+        <div class="row" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;">
+          <div class="collection-card">
+            <img
+              src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80"
+              alt="Minimalist Collection" class="collection-image">
+            <div class="collection-overlay">
+              <h3 class="collection-title">Minimalist Collection</h3>
+              <p class="collection-description">Clean lines and functional design for modern living spaces</p>
+              <a href="#" class="collection-cta">Explore</a>
+            </div>
+          </div>
+          <div class="collection-card">
+            <img
+              src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80"
+              alt="Premium Leather" class="collection-image">
+            <div class="collection-overlay">
+              <h3 class="collection-title">Premium Leather</h3>
+              <p class="collection-description">Luxurious leather furniture with timeless appeal</p>
+              <a href="#" class="collection-cta">Explore</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recently Viewed Section -->
+      <section class="recently-viewed-section">
+        <h2 class="section-title">
+          Recently Viewed
+          <a href="#" class="view-all-btn">View All <i class="fas fa-chevron-right"></i></a>
+        </h2>
+        <div class="viewed-products" id="viewedProducts">
+          <!-- Products will be dynamically inserted here -->
+        </div>
+      </section>
+
+      <!-- Recommendations Section -->
+      <section class="recommendations-section">
+        <h2 class="section-title">You Might Also Like</h2>
+        <div class="recommendations-grid" id="recommendationsGrid">
+          <!-- Recommendation cards will be dynamically generated -->
+        </div>
+      </section>
+
+      <!-- Inspiration Gallery -->
+      <section class="inspiration-gallery">
+        <h2 class="section-title">Get Inspired</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="https://interwood.pk/cdn/shop/files/Oliver_Single_Bed_596x_crop_center.jpg?v=1756814660"
+              alt="Living Room Inspiration" class="gallery-image">
+            <div class="gallery-overlay">
+              <h3 class="gallery-title">Modern Living Rooms</h3>
+              <p class="gallery-description">See how our customers style their spaces</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80"
+              alt="Home Office Ideas" class="gallery-image">
+            <div class="gallery-overlay">
+              <h3 class="gallery-title">Productive Home Offices</h3>
+              <p class="gallery-description">Create the perfect work-from-home setup</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80"
+              alt="Dining Room Ideas" class="gallery-image">
+            <div class="gallery-overlay">
+              <h3 class="gallery-title">Elegant Dining Spaces</h3>
+              <p class="gallery-description">Transform your dining experience</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="margin-left: 0;">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>MashallahFurniture</h3>
+            <p>Creating beautiful spaces with thoughtfully designed furniture that combines form, function, and
+              durability.</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-pinterest"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Shop</h3>
+            <ul class="footer-links">
+              <li><a href="#">Living Room</a></li>
+              <li><a href="#">Dining Room</a></li>
+              <li><a href="#">Bedroom</a></li>
+              <li><a href="#">Office</a></li>
+              <li><a href="#">Outdoor</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Company</h3>
+            <ul class="footer-links">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press</a></li>
+              <li><a href="#">Sustainability</a></li>
+              <li><a href="#">Affiliate Program</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Support</h3>
+            <ul class="footer-links">
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Shipping & Returns</a></li>
+              <li><a href="#">Warranty</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Store Locator</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Newsletter</h3>
+            <p>Subscribe to get special offers, free giveaways, and new product alerts. </p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address">
+              <button type="submit">Subscribe <i class="fas fa-paper-plane" id="rotate"></i></button>
+            </form>
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p>&copy; 2023 MashallahFurniture. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Dark Mode Toggle Button -->
+    <div class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+      <i id="darkModeIcon" class="fas fa-moon"></i>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer" title="Background music">
+      <i class="fas fa-music"></i>
+    </div>
+
+    <!-- Sound Controls -->
+    <div class="sound-controls" id="soundControls">
+      <div class="sound-control" id="soundUp" title="Increase volume">
+        <i class="fas fa-volume-up"></i>
+      </div>
+      <div class="sound-control" id="soundDown" title="Decrease volume">
+        <i class="fas fa-volume-down"></i>
+      </div>
+      <div class="sound-control" id="soundMute" title="Mute sounds">
+        <i class="fas fa-volume-mute"></i>
+      </div>
+    </div>
+
+    <!-- Confetti container -->
+    <div id="confettiContainer" class="confetti-container"></div>
+    <script>
+      // Enhanced product data with categories and more details
+      const products = [
+        {
+          id: 1,
+          name: "Modern Lounge Chair",
+          code: "#CH-1001",
+          price: 299.00,
+          originalPrice: 349.00,
+          image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+          thumbnail: "https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80",
+          category: "chairs",
+          description: "Elegant modern lounge chair with premium upholstery and comfortable cushioning. Perfect for your living room or reading nook.",
+          features: ["Premium upholstery", "Ergonomic design", "Solid wood frame"],
+          dimensions: "H 32\" x W 28\" x D 30\"",
+          materials: "Fabric, Wood, Foam",
+          colors: ["black", "gray"],
+          dateAdded: "2023-10-15",
+          stock: 12,
+          onSale: true
+        },
+        {
+          id: 2,
+          name: "Wooden Dining Table",
+          code: "#TA-2005",
+          price: 599.00,
+          originalPrice: 699.00,
+          image: "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+          thumbnail: "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80",
+          category: "tables",
+          description: "Solid wood dining table with elegant finish, perfect for family gatherings. This table seats up to 6 people comfortably.",
+          features: ["Solid wood construction", "Scratch-resistant finish", "Easy to clean"],
+          dimensions: "H 30\" x W 72\" x D 36\"",
+          materials: "Solid Oak, Protective Finish",
+          colors: ["brown"],
+          dateAdded: "2023-10-10",
+          stock: 5,
+          onSale: true
+        },
+        {
+          id: 3,
+          name: "Leather Sofa",
+          code: "#SO-3002",
+          price: 1299.00,
+          image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+          thumbnail: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80",
+          category: "sofas",
+          description: "Premium quality leather sofa with comfortable seating and modern design. Features deep seating and tufted backrest for added comfort.",
+          features: ["Genuine leather", "Deep seating", "Tufted backrest", "Solid wood frame"],
+          dimensions: "H 32\" x W 84\" x D 38\"",
+          materials: "Genuine Leather, Hardwood, High-density Foam",
+          colors: ["black", "brown"],
+          dateAdded: "2023-10-05",
+          stock: 3,
+          onSale: false
+        },
+        {
+          id: 4,
+          name: "Bookshelf Unit",
+          code: "#ST-4008",
+          price: 249.00,
+          originalPrice: 299.00,
+          image: "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=c crop&w=400&q=80",
+          thumbnail: "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80",
+          category: "storage",
+          description: "Modern bookshelf with multiple compartments for organized storage. Adjustable shelves accommodate books of all sizes.",
+          features: ["Adjustable shelves", "Sturdy construction", "Modern design"],
+          dimensions: "H 72\" x W 36\" x D 12\"",
+          materials: "Engineered Wood, Metal Hardware",
+          colors: ["white", "brown"],
+          dateAdded: "2023-10-01",
+          stock: 15,
+          onSale: true
+        },
+        {
+          id: 5,
+          name: "Coffee Table",
+          code: "#TA-2012",
+          price: 199.00,
+          image: "https://images.unsplash.com/photo-1533090368676-1fd25485db88?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+          thumbnail: "https://images.unsplash.com/photo-1533090368676-1fd25485db88?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80",
+          category: "tables",
+          description: "Elegant coffee table with tempered glass top and sturdy metal legs. Perfect for modern living spaces.",
+          features: ["Tempered glass top", "Metal legs", "Scratch-resistant"],
+          dimensions: "H 18\" x W 48\" x D 24\"",
+          materials: "Tempered Glass, Powder-coated Steel",
+          colors: ["black", "gray"],
+          dateAdded: "2023-09-28",
+          stock: 8,
+          onSale: false
+        },
+        {
+          id: 6,
+          name: "Accent Chair",
+          code: "#CH-1015",
+          price: 179.00,
+          originalPrice: 219.00,
+          image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+          thumbnail: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80",
+          category: "chairs",
+          description: "Stylish accent chair with unique design, perfect for living spaces. Adds a touch of elegance to any room.",
+          features: ["Unique design", "Comfortable seating", "Sturdy construction"],
+          dimensions: "H 32\" x W 26\" x D 28\"",
+          materials: "Fabric, Solid Wood, Foam",
+          colors: ["gray", "white"],
+          dateAdded: "2023-09-25",
+          stock: 0,
+          onSale: true
+        },
+        {
+          id: 7,
+          name: "Minimalist Desk",
+          code: "#TA-2020",
+          price: 399.00,
+          image: "https://images.unsplash.com/photo-1518458028785-8fbcd101ebb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+          thumbnail: "https://images.unsplash.com/photo-1518458028785-8fbcd101ebb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80",
+          category: "tables",
+          description: "Sleek minimalist desk with clean lines and durable construction. Perfect for home offices.",
+          features: ["Minimalist design", "Cable management", "Durable construction"],
+          dimensions: "H 30\" x W 60\" x D 24\"",
+          materials: "Engineered Wood, Metal Frame",
+          colors: ["white", "black"],
+          dateAdded: "2023-09-20",
+          stock: 7,
+          onSale: false
+        },
+        {
+          id: 8,
+          name: "Sectional Sofa",
+          code: "#SO-3015",
+          price: 1899.00,
+          originalPrice: 2199.00,
+          image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+          thumbnail: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80",
+          category: "sofas",
+          description: "Spacious sectional sofa with modular design for flexible arrangement. Perfect for large living rooms.",
+          features: ["Modular design", "Reversible chaise", "Premium fabric", "Storage compartment"],
+          dimensions: "H 34\" x W 120\" x D 40\"",
+          materials: "Performance Fabric, Hardwood, High-resiliency Foam",
+          colors: ["gray", "brown"],
+          dateAdded: "2023-09-15",
+          stock: 2,
+          onSale: true
+        }
+      ];
+
+      // Recommendations data
+      const recommendations = [
+        {
+          id: 9,
+          name: "Side Table",
+          price: 129.00,
+          image: "https://images.unsplash.com/photo-1533090368676-1fd25485db88?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80",
+          category: "tables"
+        },
+        {
+          id: 10,
+          name: "Office Chair",
+          price: 229.00,
+          image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=c crop&w=300&q=80",
+          category: "chairs"
+        },
+        {
+          id: 11,
+          name: "Cabinet",
+          price: 349.00,
+          image: "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80",
+          category: "storage"
+        },
+        {
+          id: 12,
+          name: "Loveseat",
+          price: 799.00,
+          image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80",
+          category: "sofas"
+        }
+      ];
+
+      // Recently viewed data
+      const recentlyViewed = [
+        {
+          id: 13,
+          name: "Console Table",
+          price: 279.00,
+          image: "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80",
+        },
+        {
+          id: 14,
+          name: "Armchair",
+          price: 349.00,
+          image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80",
+        },
+        {
+          id: 15,
+          name: "Bookshelf",
+          price: 199.00,
+          image: "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80",
+        },
+        {
+          id: 16,
+          name: "Dining Chair",
+          price: 159.00,
+          image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80",
+        },
+        {
+          id: 17,
+          name: "Sideboard",
+          price: 599.00,
+          image: "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80",
+        }
+      ];
+
+      let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [
+        { id: 1 },
+        { id: 3 },
+        { id: 4 },
+        { id: 5 },
+        { id: 6 },
+        { id: 7 },
+        { id: 8 }
+      ];
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let recentlyViewedItems = JSON.parse(localStorage.getItem('recentlyViewed')) || recentlyViewed;
+
+      // DOM Elements
+      const productsGrid2 = document.getElementById('productsGrid2');
+      const recommendationsGrid = document.getElementById('recommendationsGrid');
+      const sortSelect = document.getElementById('sortSelect');
+      const priceRange = document.getElementById('priceRange');
+      const colorOptions = document.querySelectorAll('.color-option');
+      const categoryCheckboxes = document.querySelectorAll('.filter-options input');
+      const applyFiltersBtn = document.querySelector('.filter-btn.apply');
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const toast = document.getElementById('toast');
+      const cursor = document.querySelector('.cursor');
+      const cursorFollower = document.querySelector('.cursor-follower');
+
+
+      const viewedProductsContainer = document.querySelector('.viewed-products');
+
+
+      // Initialize the page
+      function init() {
+        // Hide loading screen after page loads
+        setTimeout(() => {
+          loadingScreen.style.opacity = '0';
+          loadingScreen.style.visibility = 'hidden';
+        }, 1500);
+
+        renderProducts();
+        renderRecommendations();
+        renderRecentlyViewed();
+        setupEventListeners();
+        setupCustomCursor();
+        checkDarkModePreference();
+
+        // Play subtle background sound on page load
+        setTimeout(() => {
+          playSound(wishlistSound, 0.3);
+        }, 1000);
+      }
+
+      // Render products based on wishlist
+      function renderProducts() {
+        productsGrid2.innerHTML = '';
+
+        if (wishlist.length === 0) {
+          productsGrid2.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">
+              <i class="far fa-heart"></i>
+            </div>
+            <h2 class="empty-state-title">Your wishlist is empty</h2>
+            <p class="empty-state-text">Start exploring our collection and add items you love to your wishlist.</p>
+            <a href="#" class="browse-btn">Browse Products</a>
+          </div>
+        `;
+          return;
+        }
+
+        const wishlistProductIds = wishlist.map(item => item.id);
+        let filteredProducts = products.filter(product => wishlistProductIds.includes(product.id));
+
+        // Apply sorting
+        const sortValue = sortSelect.value;
+        switch (sortValue) {
+          case 'price-asc':
+            filteredProducts.sort((a, b) => a.price - b.price);
+            break;
+          case 'price-desc':
+            filteredProducts.sort((a, b) => b.price - a.price);
+            break;
+          case 'name-asc':
+            filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+          case 'name-desc':
+            filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+          default:
+            // Default sorting by date added (newest first)
+            filteredProducts.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+        }
+
+        // Update results count
+        document.querySelector('.results-count').textContent = `Showing ${filteredProducts.length} items`;
+
+        // Render product cards
+        filteredProducts.forEach((product, index) => {
+          const isInWishlist = wishlist.some(item => item.id === product.id);
+          const discount = product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
+
+          const productCard = document.createElement('div');
+          productCard.className = 'product-card';
+          productCard.dataset.id = product.id;
+          productCard.innerHTML = `
+          ${product.originalPrice ? `<span class="product-badge">${discount}% OFF</span>` : ''}
+          ${product.stock === 0 ? '<span class="product-badge" style="background: #7a7a7a;">Out of Stock</span>' : ''}
+          <div class="product-image-container">
+            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <div class="product-actions">
+              <button class="product-action-btn quick-view-btn" data-id="${product.id}">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="product-action-btn" data-id="${product.id}">
+                <i class="fas fa-exchange-alt"></i>
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">${product.name}</h3>
+            <p class="product-category">${product.category}</p>
+            <div class="product-price">
+              <span class="current-price">$${product.price.toFixed(2)}</span>
+              ${product.originalPrice ? `<span class="original-price">$${product.originalPrice.toFixed(2)}</span>` : ''}
+              ${product.originalPrice ? `<span class="discount-badge">Save ${discount}%</span>` : ''}
+            </div>
+            <p class="product-description">${product.description.substring(0, 80)}...</p>
+            <div class="product-card-actions">
+              <button class="add-to-cart" data-id="${product.id}" ${product.stock === 0 ? 'disabled' : ''}>${product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}</button>
+              <button class="wishlist-btn ${isInWishlist ? 'active' : ''}" data-id="${product.id}">
+                <i class="${isInWishlist ? 'fas' : 'far'} fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        `;
+
+          productsGrid2.appendChild(productCard);
+
+          // Animate in with delay
+          setTimeout(() => {
+            productCard.classList.add('animate-in');
+          }, index * 100);
+        });
+      }
+
+      // Render recommendations
+      function renderRecommendations() {
+        recommendationsGrid.innerHTML = '';
+
+        recommendations.forEach(product => {
+          const productCard = document.createElement('div');
+          productCard.className = 'product-card';
+          productCard.dataset.id = product.id;
+          productCard.innerHTML = `
+          <div class="product-image-container">
+            <img src="${product.image}" alt="${product.name}" class="product-image">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">${product.name}</h3>
+            <p class="product-category">${product.category}</p>
+            <div class="product-price">
+              <span class="current-price">$${product.price.toFixed(2)}</span>
+            </div>
+            <div class="product-card-actions">
+              <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
+              <button class="wishlist-btn" data-id="${product.id}">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        `;
+
+          recommendationsGrid.appendChild(productCard);
+
+          // Animate in with delay
+          setTimeout(() => {
+            productCard.classList.add('animate-in');
+          }, 100);
+        });
+      }
+
+      // Render recently viewed items
+      function renderRecentlyViewed() {
+        viewedProductsContainer.innerHTML = '';
+
+        recentlyViewedItems.forEach(item => {
+          const viewedProduct = document.createElement('div');
+          viewedProduct.className = 'viewed-product';
+          viewedProduct.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="viewed-product-image">
+          <div class="viewed-product-info">
+            <h4 class="viewed-product-title">${item.name}</h4>
+            <p class="viewed-product-price">$${item.price.toFixed(2)}</p>
+          </div>
+        `;
+
+          viewedProductsContainer.appendChild(viewedProduct);
+        });
+      }
+
+      // Setup event listeners
+      function setupEventListeners() {
+        // Sort select
+        sortSelect.addEventListener('change', renderProducts);
+
+        // Price range
+        priceRange.addEventListener('input', () => {
+          document.querySelector('.range-values span:last-child').textContent = `$${priceRange.value}`;
+        });
+
+        // Color options
+        colorOptions.forEach(option => {
+          option.addEventListener('click', () => {
+            option.classList.toggle('active');
+          });
+        });
+
+        // Apply filters button
+        applyFiltersBtn.addEventListener('click', applyFilters);
+
+        // Product grid event delegation
+        productsGrid2.addEventListener('click', handleProductGridClick);
+        recommendationsGrid.addEventListener('click', handleProductGridClick);
+
+
+
+        // Interactive elements sound effects
+        document.querySelectorAll('button, a, input, select').forEach(element => {
+          element.addEventListener('mouseenter', () => playSound(hoverSound, 0.2));
+          element.addEventListener('click', () => playSound(clickSound, 0.3));
+        });
+      }
+
+      // Handle product grid clicks
+      function handleProductGridClick(e) {
+        const target = e.target;
+        const productCard = target.closest('.product-card');
+        if (!productCard) return;
+
+        const productId = parseInt(productCard.dataset.id);
+
+        // Wishlist button
+        if (target.closest('.wishlist-btn')) {
+          e.preventDefault();
+          if (isInWishlist(productId)) {
+            removeFromWishlist(productId);
+          } else {
+            addToWishlist(productId);
+          }
+          return;
+        }
+
+        // Add to Cart button
+        if (target.closest('.add-to-cart')) {
+          e.preventDefault();
+          addToCart(productId);
+          return;
+        }
+
+        // Quick View button
+        if (target.closest('.quick-view-btn')) {
+          e.preventDefault();
+          showQuickView(productId);
+          return;
+        }
+      }
+
+      // Apply filters
+      function applyFilters() {
+        // Get selected categories
+        const selectedCategories = Array.from(categoryCheckboxes)
+          .filter(checkbox => checkbox.checked)
+          .map(checkbox => checkbox.id);
+
+        // Get selected colors
+        const selectedColors = Array.from(colorOptions)
+          .filter(option => option.classList.contains('active'))
+          .map(option => option.dataset.color);
+
+        // Get price range
+        const maxPrice = parseInt(priceRange.value);
+
+        // Filter products
+        const wishlistProductIds = wishlist.map(item => item.id);
+        let filteredProducts = products.filter(product => {
+          if (!wishlistProductIds.includes(product.id)) return false;
+          if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) return false;
+          if (selectedColors.length > 0 && !product.colors.some(color => selectedColors.includes(color))) return false;
+          if (product.price > maxPrice) return false;
+          return true;
+        });
+
+        // Apply sorting
+        const sortValue = sortSelect.value;
+        switch (sortValue) {
+          case 'price-asc':
+            filteredProducts.sort((a, b) => a.price - b.price);
+            break;
+          case 'price-desc':
+            filteredProducts.sort((a, b) => b.price - a.price);
+            break;
+          case 'name-asc':
+            filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+          case 'name-desc':
+            filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+          default:
+            // Default sorting by date added (newest first)
+            filteredProducts.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+        }
+
+        // Render filtered products
+        renderFilteredProducts(filteredProducts);
+      }
+
+      // Render filtered products
+      function renderFilteredProducts(filteredProducts) {
+        productsGrid2.innerHTML = '';
+
+        if (filteredProducts.length === 0) {
+          productsGrid2.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">
+              <i class="fas fa-filter"></i>
+            </div>
+            <h2 class="empty-state-title">No matching items</h2>
+            <p class="empty-state-text">Try adjusting your filters to see more results.</p>
+            <button class="browse-btn" id="resetFilters">Reset Filters</button>
+          </div>
+        `;
+
+          document.getElementById('resetFilters').addEventListener('click', () => {
+            categoryCheckboxes.forEach(checkbox => checkbox.checked = true);
+            colorOptions.forEach(option => option.classList.add('active'));
+            priceRange.value = 2000;
+            document.querySelector('.range-values span:last-child').textContent = '$2000';
+            renderProducts();
+          });
+
+          return;
+        }
+
+        // Update results count
+        document.querySelector('.results-count').textContent = `Showing ${filteredProducts.length} items`;
+
+        // Render product cards
+        filteredProducts.forEach((product, index) => {
+          const isInWishlist = wishlist.some(item => item.id === product.id);
+          const discount = product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
+
+          const productCard = document.createElement('div');
+          productCard.className = 'product-card';
+          productCard.dataset.id = product.id;
+          productCard.innerHTML = `
+          ${product.originalPrice ? `<span class="product-badge">${discount}% OFF</span>` : ''}
+          ${product.stock === 0 ? '<span class="product-badge" style="background: #7a7a7a;">Out of Stock</span>' : ''}
+          <div class="product-image-container">
+            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <div class="product-actions">
+              <button class="product-action-btn quick-view-btn" data-id="${product.id}">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="product-action-btn" data-id="${product.id}">
+                <i class="fas fa-exchange-alt"></i>
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">${product.name}</h3>
+            <p class="product-category">${product.category}</p>
+            <div class="product-price">
+              <span class="current-price">$${product.price.toFixed(2)}</span>
+              ${product.originalPrice ? `<span class="original-price">$${product.originalPrice.toFixed(2)}</span>` : ''}
+              ${product.originalPrice ? `<span class="discount-badge">Save ${discount}%</span>` : ''}
+            </div>
+            <p class="product-description">${product.description.substring(0, 80)}...</p>
+            <div class="product-card-actions">
+              <button class="add-to-cart" data-id="${product.id}" ${product.stock === 0 ? 'disabled' : ''}>${product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}</button>
+              <button class="wishlist-btn ${isInWishlist ? 'active' : ''}" data-id="${product.id}">
+                <i class="${isInWishlist ? 'fas' : 'far'} fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        `;
+
+          productsGrid2.appendChild(productCard);
+
+          // Animate in with delay
+          setTimeout(() => {
+            productCard.classList.add('animate-in');
+          }, index * 100);
+        });
+      }
+
+      // Check if product is in wishlist
+      function isInWishlist(id) {
+        return wishlist.some(item => item.id === id);
+      }
+
+      // Add to wishlist
+      function addToWishlist(id) {
+        if (!isInWishlist(id)) {
+          wishlist.push({ id });
+          localStorage.setItem('wishlist', JSON.stringify(wishlist));
+          renderProducts();
+          playSound(wishlistSound, 0.5);
+          showToast('Added to wishlist');
+          launchConfetti();
+        }
+      }
+
+      // Remove from wishlist
+      function removeFromWishlist(id) {
+        wishlist = wishlist.filter(item => item.id !== id);
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        renderProducts();
+        showToast('Removed from wishlist');
+      }
+
+      // Add to cart
+      function addToCart(id) {
+        const product = products.find(p => p.id === id);
+        if (product.stock === 0) return;
+
+        const existingItem = cart.find(item => item.id === id);
+
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({ id, quantity: 1 });
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        playSound(addToCartSound, 0.4);
+        showToast('Added to cart');
+        launchConfetti();
+
+        // Add success class to button
+        const addToCartBtn = document.querySelector(`.add-to-cart[data-id="${id}"]`);
+        addToCartBtn.classList.add('success');
+        addToCartBtn.textContent = 'Added to Cart!';
+
+        setTimeout(() => {
+          addToCartBtn.classList.remove('success');
+          addToCartBtn.textContent = 'Add to Cart';
+        }, 2000);
+      }
+
+      // Show quick view
+      function showQuickView(productId) {
+        // Implementation for quick view modal
+        showToast('Quick view feature coming soon!');
+      }
+
+
+
+
+
+
+
+      // Launch confetti animation
+      function launchConfetti() {
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const confettiPieces = [];
+        const colors = ['#0a0a0a', '#1a1a1a', '#2a2a2a', '#ffffff', '#f8f8f8', '#f0f0f0'];
+
+        for (let i = 0; i < 150; i++) {
+          confettiPieces.push({
+            x: Math.random() * canvas.width,
+            y: -10,
+            size: Math.random() * 10 + 5,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            speed: Math.random() * 3 + 2,
+            angle: Math.random() * 360,
+            rotation: Math.random() * 360,
+            rotationSpeed: Math.random() * 5 - 2.5
+          });
+        }
+
+        function animateConfetti() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          for (let i = 0; i < confettiPieces.length; i++) {
+            const piece = confettiPieces[i];
+
+            ctx.save();
+            ctx.translate(piece.x, piece.y);
+            ctx.rotate(piece.rotation * Math.PI / 180);
+
+            ctx.fillStyle = piece.color;
+            ctx.fillRect(-piece.size / 2, -piece.size / 2, piece.size, piece.size);
+
+            ctx.restore();
+
+            piece.y += piece.speed;
+            piece.x += Math.sin(piece.angle * Math.PI / 180) * 1.5;
+            piece.rotation += piece.rotationSpeed;
+
+            if (piece.y > canvas.height) {
+              piece.y = -10;
+              piece.x = Math.random() * canvas.width;
+            }
+          }
+
+          requestAnimationFrame(animateConfetti);
+        }
+
+        animateConfetti();
+
+        // Stop animation after 3 seconds
+        setTimeout(() => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }, 3000);
+      }
+
+      // Check dark mode preference
+      function checkDarkModePreference() {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.body.classList.add('dark-mode');
+        }
+      }
+
+      // Start the application
+      document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>

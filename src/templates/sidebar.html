@@ -1,0 +1,57 @@
+<!-- Sidebar Template -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <h3>Filters</h3>
+        <button class="sidebar-close" aria-label="Close sidebar">
+            <i class="icon-close"></i>
+        </button>
+    </div>
+
+    <div class="sidebar-body">
+        <div class="filter-section">
+            <h4>Categories</h4>
+            <ul class="filter-list">
+                <li><label><input type="checkbox" value="living-room"> Living Room</label></li>
+                <li><label><input type="checkbox" value="bedroom"> Bedroom</label></li>
+                <li><label><input type="checkbox" value="dining"> Dining</label></li>
+                <li><label><input type="checkbox" value="office"> Office</label></li>
+            </ul>
+        </div>
+
+        <div class="filter-section">
+            <h4>Price Range</h4>
+            <div class="price-range">
+                <input type="range" min="0" max="5000" value="0" class="price-slider" id="min-price">
+                <input type="range" min="0" max="5000" value="5000" class="price-slider" id="max-price">
+                <div class="price-display">
+                    <span id="min-price-display">$0</span> - <span id="max-price-display">$5000</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <h4>Material</h4>
+            <ul class="filter-list">
+                <li><label><input type="checkbox" value="wood"> Wood</label></li>
+                <li><label><input type="checkbox" value="metal"> Metal</label></li>
+                <li><label><input type="checkbox" value="fabric"> Fabric</label></li>
+                <li><label><input type="checkbox" value="leather"> Leather</label></li>
+            </ul>
+        </div>
+
+        <div class="filter-section">
+            <h4>Color</h4>
+            <div class="color-options">
+                <button class="color-btn" data-color="brown" style="background-color: #8B4513;"></button>
+                <button class="color-btn" data-color="black" style="background-color: #000000;"></button>
+                <button class="color-btn" data-color="white" style="background-color: #FFFFFF; border: 1px solid #ccc;"></button>
+                <button class="color-btn" data-color="gray" style="background-color: #808080;"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-footer">
+        <button class="btn btn-outline clear-filters">Clear All</button>
+        <button class="btn btn-primary apply-filters">Apply Filters</button>
+    </div>
+</aside>

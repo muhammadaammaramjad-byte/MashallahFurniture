@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | MashallahFurniture</title>
+    <link rel="stylesheet" href="/src/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar"></nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Shop Our Collection</h1>
+            <p>Discover premium furniture pieces for every room in your home</p>
+        </div>
+    </section>
+
+    <!-- Shop Content -->
+    <main class="shop-main">
+        <div class="container">
+            <div class="shop-layout">
+                <!-- Sidebar Filters -->
+                <aside class="shop-sidebar">
+                    <div class="filter-section">
+                        <h3>Categories</h3>
+                        <div class="filter-options" id="categoryFilters">
+                            <!-- Categories will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Price Range</h3>
+                        <div class="price-range">
+                            <input type="range" id="priceMin" min="0" max="5000" value="0">
+                            <input type="range" id="priceMax" min="0" max="5000" value="5000">
+                            <div class="price-display">
+                                <span id="minPrice">$0</span> - <span id="maxPrice">$5000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Material</h3>
+                        <div class="filter-options" id="materialFilters">
+                            <label><input type="checkbox" value="wood"> Wood</label>
+                            <label><input type="checkbox" value="metal"> Metal</label>
+                            <label><input type="checkbox" value="fabric"> Fabric</label>
+                            <label><input type="checkbox" value="leather"> Leather</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Color</h3>
+                        <div class="filter-options" id="colorFilters">
+                            <label><input type="checkbox" value="brown"> Brown</label>
+                            <label><input type="checkbox" value="black"> Black</label>
+                            <label><input type="checkbox" value="white"> White</label>
+                            <label><input type="checkbox" value="gray"> Gray</label>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Products Grid -->
+                <div class="shop-content">
+                    <!-- Sort and View Options -->
+                    <div class="shop-controls">
+                        <div class="results-count">
+                            <span id="resultsCount">0</span> products found
+                        </div>
+                        <div class="sort-options">
+                            <select id="sortSelect">
+                                <option value="name">Name A-Z</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="newest">Newest First</option>
+                                <option value="rating">Highest Rated</option>
+                            </select>
+                        </div>
+                        <div class="view-options">
+                            <button class="view-btn active" data-view="grid" id="gridView">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="view-btn" data-view="list" id="listView">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Products Container -->
+                    <div class="products-container" id="productsContainer">
+                        <!-- Products will be populated by JS -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" id="pagination">
+                        <!-- Pagination will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar"></div>
+
+    <!-- Footer -->
+    <footer id="footer"></footer>
+
+    <!-- Scripts -->
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/pages/shop.js"></script>
+</body>
+</html>
+        <li class="sidebar-nav-item">
+          <a href="/nav-btn/favourite.html" class="sidebar-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Offers/offers.html" class="sidebar-nav-link">
+            <i class="fas fa-gift"></i>
+            <span>Offers</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Left Sidebar (Desktop) -->
+    <div class="left-sidebar" id="leftSidebar">
+      <ul class="sidebar-nav-items">
+        <li class="sidebar-nav-item">
+          <a href="/Home/home.html" class="sidebar-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Shop/shop.html" class="sidebar-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Collections/collections.html" class="sidebar-nav-link">
+            <i class="fas fa-layer-group"></i>
+            <span>Collections</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/About/about.html" class="sidebar-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Contact/contact.html" class="sidebar-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/nav-btn/favourite.html" class="sidebar-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="/Offers/offers.html" class="sidebar-nav-link">
+            <i class="fas fa-gift"></i>
+            <span>Offers</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bottom Bar (Mobile) -->
+    <div class="bottom-bar">
+      <ul class="bottom-nav-items">
+        <li class="bottom-nav-item">
+          <a href="/Home/home.html" class="bottom-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/Shop/shop.html" class="bottom-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/Search/search.html" class="bottom-nav-link" id="mobileSearchIcon">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/nav-btn/favourite.html" class="bottom-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="/nav-btn/Account/account.html" class="bottom-nav-link" id="mobileUserIcon">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <!-- Shop Header -->
+    <header class="shop-header">
+      <h1>Minimalist Furniture Collection</h1>
+      <p>Elegant design, timeless comfort, curated for your modern living space.</p>
+      <a href="#" class="cta-button">Explore Collection</a>
+    </header>
+
+    <!-- Shop Content -->
+    <section class="shop-content container">
+      <!-- Filters Sidebar -->
+      <aside class="filters">
+        <div class="active-filters">
+          <!-- Active filters will be added here dynamically -->
+        </div>
+
+        <div class="filter-section">
+          <h3>Categories <i class="fas fa-chevron-down"></i></h3>
+          <div class="filter-options">
+            <div class="filter-option">
+              <input type="checkbox" id="category-sofas">
+              <label for="category-sofas">Sofas & Couches</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="category-chairs">
+              <label for="category-chairs">Chairs</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="category-tables">
+              <label for="category-tables">Tables</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="category-beds">
+              <label for="category-beds">Beds</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="category-storage">
+              <label for="category-storage">Storage</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <h3>Price Range <i class="fas fa-chevron-down"></i></h3>
+          <div class="price-range">
+            <div class="price-inputs">
+              <input type="number" placeholder="Min" value="0">
+              <input type="number" placeholder="Max" value="5000">
+            </div>
+            <input type="range" class="price-slider" min="0" max="10000" value="5000">
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <h3>Color <i class="fas fa-chevron-down"></i></h3>
+          <div class="color-options">
+            <div class="color-option color-black active"></div>
+            <div class="color-option color-white"></div>
+            <div class="color-option color-gray"></div>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <h3>Brand <i class="fas fa-chevron-down"></i></h3>
+          <div class="filter-options">
+            <div class="filter-option">
+              <input type="checkbox" id="brand-luxliving">
+              <label for="brand-luxliving">LuxLiving</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="brand-ecostyle">
+              <label for="brand-ecostyle">EcoStyle</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="brand-modacasa">
+              <label for="brand-modacasa">ModaCasa</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="brand-urbanflame">
+              <label for="brand-urbanflame">UrbanFlame</label>
+            </div>
+          </div>
+        </div>
+
+        <button class="filter-btn">Apply Filters</button>
+      </aside>
+
+      <!-- Products Section -->
+      <div class="products-section">
+        <div class="products-header">
+          <div class="products-count">Showing 12 of 48 products</div>
+          <div class="view-options">
+            <select class="sort-select">
+              <option value="popularity">Sort by: Popularity</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="newest">Newest First</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+            <div class="view-toggle">
+              <button class="view-btn active" data-view="grid"><i class="fas fa-th"></i></button>
+              <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="products-grid">
+          <!-- Product 1 -->
+          <div class="product-card">
+            <div class="product-badge">NEW</div>
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=958&q=80"
+                alt="Modern Sofa">
+              <div class="product-actions">
+                <button class="action-btn quick-view-btn" data-id="1"><i class="fas fa-eye"></i></button>
+                <button class="action-btn wishlist-btn"><i class="fas fa-heart"></i></button>
+                <button class="action-btn add-cart-btn"><i class="fas fa-shopping-cart"></i></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>Nordic Comfort Sofa</h3>
+              <div class="product-category">Sofas & Couches</div>
+              <div class="product-price">
+                <span class="current-price">$1,499</span>
+                <span class="original-price">$1,899</span>
+              </div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(128)</span>
+              </div>
+              <div class="stock-status in-stock">In Stock</div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card">
+            <div class="product-badge">SALE</div>
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80"
+                alt="Velvet Accent Chair">
+              <div class="product-actions">
+                <button class="action-btn quick-view-btn" data-id="2"><i class="fas fa-eye"></i></button>
+                <button class="action-btn wishlist-btn"><i class="fas fa-heart"></i></button>
+                <button class="action-btn add-cart-btn"><i class="fas fa-shopping-cart"></i></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>Velvet Accent Chair</h3>
+              <div class="product-category">Chairs</div>
+              <div class="product-price">
+                <span class="current-price">$499</span>
+                <span class="original-price">$649</span>
+              </div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(98)</span>
+              </div>
+              <div class="stock-status low-stock">Low Stock</div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+                alt="Dining Table">
+              <div class="product-actions">
+                <button class="action-btn quick-view-btn" data-id="3"><i class="fas fa-eye"></i></button>
+                <button class="action-btn wishlist-btn"><i class="fas fa-heart"></i></button>
+                <button class="action-btn add-cart-btn"><i class="fas fa-shopping-cart"></i></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>Minimalist Dining Table</h3>
+              <div class="product-category">Tables</div>
+              <div class="product-price">
+                <span class="current-price">$899</span>
+              </div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(64)</span>
+              </div>
+              <div class="stock-status in-stock">In Stock</div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card">
+            <div class="product-badge">POPULAR</div>
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+                alt="Bookshelf">
+              <div class="product-actions">
+                <button class="action-btn quick-view-btn" data-id="4"><i class="fas fa-eye"></i></button>
+                <button class="action-btn wishlist-btn"><i class="fas fa-heart"></i></button>
+                <button class="action-btn add-cart-btn"><i class="fas fa-shopping-cart"></i></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>Modular Bookshelf System</h3>
+              <div class="product-category">Storage</div>
+              <div class="product-price">
+                <span class="current-price">$1,299</span>
+              </div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(142)</span>
+              </div>
+              <div class="stock-status in-stock">In Stock</div>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                alt="Office Chair">
+              <div class="product-actions">
+                <button class="action-btn quick-view-btn" data-id="5"><i class="fas fa-eye"></i></button>
+                <button class="action-btn wishlist-btn"><i class="fas fa-heart"></i></button>
+                <button class="action-btn add-cart-btn"><i class="fas fa-shopping-cart"></i></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>Ergonomic Office Chair</h3>
+              <div class="product-category">Chairs</div>
+              <div class="product-price">
+                <span class="current-price">$399</span>
+                <span class="original-price">$499</span>
+              </div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(87)</span>
+              </div>
+              <div class="stock-status out-of-stock">Out of Stock</div>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="product-card">
+            <div class="product-badge">TRENDING</div>
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+                alt="Writing Desk">
+              <div class="product-actions">
+                <button class="action-btn quick-view-btn" data-id="6"><i class="fas fa-eye"></i></button>
+                <button class="action-btn wishlist-btn"><i class="fas fa-heart"></i></button>
+                <button class="action-btn add-cart-btn"><i class="fas fa-shopping-cart"></i></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>Minimalist Writing Desk</h3>
+              <div class="product-category">Tables</div>
+              <div class="product-price">
+                <span class="current-price">$599</span>
+              </div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(113)</span>
+              </div>
+              <div class="stock-status in-stock">In Stock</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Best Seller Section -->
+    <section class="best-seller-section">
+      <div class="container">
+        <div class="best-seller-header">
+          <h2>Best Sellers</h2>
+        </div>
+        <div class="best-seller-grid">
+          <!-- Best Seller 1 -->
+          <div class="product-card fade-in">
+            <div class="product-badge">BEST SELLER</div>
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1551298370-9d3d53740c72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                alt="Leather Sofa">
+              <div class="product-actions">
+                <button class="action-btn quick-view-btn" data-id="7"><i class="fas fa-eye"></i></button>
+                <button class="action-btn wishlist-btn"><i class="fas fa-heart"></i></button>
+                <button class="action-btn add-cart-btn"><i class="fas fa-shopping-cart"></i></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>Premium Leather Sofa</h3>
+              <div class="product-category">Sofas & Couches</div>
+              <div class="product-price">
+                <span class="current-price">$2,199</span>
+              </div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(256)</span>
+              </div>
+              <div class="stock-status in-stock">In Stock</div>
+            </div>
+          </div>
+
+          <!-- Best Seller 2 -->
+          <div class="product-card fade-in">
+            <div class="product-badge">BEST SELLER</div>
+            <div class="product-img">
+              <img
+                src="https://plus.unsplash.com/premium_photo-1711391585226-45a983eb8e70?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Coffee Table">
+              <div class="product-actions">
+                <button class="action-btn quick-view-btn" data-id="8"><i class="fas fa-eye"></i></button>
+                <button class="action-btn wishlist-btn"><i class="fas fa-heart"></i></button>
+                <button class="action-btn add-cart-btn"><i class="fas fa-shopping-cart"></i></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>Modern Coffee Table</h3>
+              <div class="product-category">Tables</div>
+              <div class="product-price">
+                <span class="current-price">$399</span>
+                <span class="original-price">$499</span>
+              </div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(189)</span>
+              </div>
+              <div class="stock-status in-stock">In Stock</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recently Viewed Section -->
+    <section class="recently-viewed">
+      <div class="container">
+        <h2>Recently Viewed</h2>
+        <div class="recently-viewed-grid" id="recentlyViewedGrid">
+          <!-- Recently viewed items will be populated here by JavaScript -->
+        </div>
+        <button class="clear-recently-viewed" id="clearRecentlyViewed">Clear History</button>
+      </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Quick View Modal -->
+    <div class="modal" id="quickViewModal">
+      <div class="modal-content">
+        <div class="modal-close"><i class="fas fa-times"></i></div>
+        <div class="modal-product">
+          <div class="modal-product-img">
+            <img src="" alt="Product image" id="modal-img">
+          </div>
+          <div class="modal-product-info">
+            <h2 id="modal-title"></h2>
+            <div class="modal-product-price" id="modal-price"></div>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(128)</span>
+            </div>
+            <p class="modal-product-desc" id="modal-desc"></p>
+
+            <div class="modal-product-options">
+              <div class="option-title">Color</div>
+              <div class="option-values">
+                <div class="option-value active">Black</div>
+                <div class="option-value">White</div>
+                <div class="option-value">Gray</div>
+              </div>
+
+              <div class="option-title">Quantity</div>
+              <div class="modal-product-actions">
+                <div class="quantity-selector">
+                  <button class="quantity-btn minus">-</button>
+                  <input type="text" class="quantity-input" value="1">
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart-btn">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer"></footer>
+
+    <!-- Scripts -->
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/pages/shop.js"></script>
+</body>
+</html>

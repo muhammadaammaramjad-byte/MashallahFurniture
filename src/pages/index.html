@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mashallah Furniture - Premium Home Furnishings</title>
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/src/css/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="/" class="logo">Mashallah Furniture</a>
+
+                <div class="nav-links">
+                    <a href="/" class="active">Home</a>
+                    <a href="/shop">Shop</a>
+                    <a href="/collections">Collections</a>
+                    <a href="/about">About</a>
+                    <a href="/contact">Contact</a>
+                </div>
+
+                <div class="nav-actions">
+                    <form class="search-form">
+                        <input type="search" placeholder="Search products..." aria-label="Search">
+                        <button type="submit" aria-label="Search">
+                            <i class="icon-search"></i>
+                        </button>
+                    </form>
+
+                    <button class="nav-btn" data-action="wishlist" aria-label="Wishlist">
+                        <i class="icon-heart"></i>
+                        <span class="wishlist-count">0</span>
+                    </button>
+
+                    <button class="nav-btn" data-action="cart" aria-label="Shopping cart">
+                        <i class="icon-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+
+                    <div class="user-menu">
+                        <button class="nav-btn" aria-label="User menu">
+                            <i class="icon-user"></i>
+                        </button>
+                        <div class="user-dropdown">
+                            <a href="/account">My Account</a>
+                            <a href="/account/orders">Orders</a>
+                            <a href="#" data-action="logout">Logout</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Welcome to Mashallah Furniture</h1>
+                    <p>Discover premium furniture crafted with tradition and quality</p>
+                    <div class="hero-actions">
+                        <a href="/shop" class="btn btn-primary">Shop Now</a>
+                        <a href="/collections" class="btn btn-outline">View Collections</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section class="featured-categories">
+            <div class="container">
+                <h2>Shop by Category</h2>
+                <div class="categories-grid">
+                    <!-- Categories will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="featured-products">
+            <div class="container">
+                <h2>Featured Products</h2>
+                <div class="products-grid">
+                    <!-- Products will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="container">
+                <h2>What Our Customers Say</h2>
+                <div class="testimonials-grid">
+                    <!-- Testimonials will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-section">
+                <h3>Mashallah Furniture</h3>
+                <p>Quality furniture for your home, crafted with care and tradition.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com" aria-label="Facebook">
+                        <i class="icon-facebook"></i>
+                    </a>
+                    <a href="https://instagram.com" aria-label="Instagram">
+                        <i class="icon-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com" aria-label="Twitter">
+                        <i class="icon-twitter"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/shop">Shop</a></li>
+                    <li><a href="/collections">Collections</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="/shipping">Shipping Info</a></li>
+                    <li><a href="/returns">Returns</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to get special offers and updates.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2024 Mashallah Furniture. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-close" aria-label="Close cart">
+                <i class="icon-close"></i>
+            </button>
+        </div>
+        <div class="cart-body">
+            <div class="empty-cart">
+                <p>Your cart is empty</p>
+                <a href="/shop" class="btn btn-primary">Continue Shopping</a>
+            </div>
+            <div class="cart-items"></div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">Total: $0.00</div>
+            <button class="btn btn-primary checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <div class="cart-overlay"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/pages/home.js"></script>
+</body>
+</html>
