@@ -21,7 +21,7 @@ const debounce = (fn, delay = 200) => {
 
 async function loadProducts() {
   try {
-    const response = await fetch('/data/products.json');
+    const response = await fetch('../assets/data/products.json');
     if (!response.ok) throw new Error('Failed to load products');
     allProducts = await response.json();
   } catch (error) {

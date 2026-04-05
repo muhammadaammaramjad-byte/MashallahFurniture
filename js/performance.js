@@ -40,37 +40,3 @@
     });
   });
 })();
-
-// js/performance.js - Expand this
-class PerformanceOptimizer {
-  // Lazy load images
-  lazyLoadImages() {
-    const images = document.querySelectorAll('img[data-src]');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          observer.unobserve(img);
-        }
-      });
-    });
-    images.forEach(img => observer.observe(img));
-  }
-
-  // Prefetch critical pages
-  prefetchPages() {
-    const pages = ['/shop', '/collections'];
-    pages.forEach(page => {
-      const link = document.createElement('link');
-      link.rel = 'prefetch';
-      link.href = page;
-      document.head.appendChild(link);
-    });
-  }
-
-  // Virtual scrolling for large product lists
-  virtualScroll(container, items, itemHeight, renderItem) {
-    // Implementation for rendering only visible items
-  }
-}

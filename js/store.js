@@ -1,120 +1,103 @@
-// js/store.js - Enhanced version
-class Store {
-  constructor() {
-    this.state = {
-      cart: [],
-      wishlist: [],
-      user: null,
-      products: [],
-      filters: {},
-      ui: { isLoading: false, toast: null }
-    };
-    this.listeners = new Map();
-    this.persistKeys = ['cart', 'wishlist', 'user'];
-    this.loadPersistedState();
+const CART_KEY = 'mashallah_cart';
+const WISHLIST_KEY = 'mashallah_wishlist';
+const WALLET_KEY = 'mashallah_wallet';
+
+const loadData = (key) => {
+  try {
+    return JSON.parse(localStorage.getItem(key) || '[]');
+  } catch (error) {
+    return [];
   }
+};
 
-  subscribe(key, callback) {
-    if (!this.listeners.has(key)) {
-      this.listeners.set(key, new Set());
-    }
-    this.listeners.get(key).add(callback);
-    return () => this.listeners.get(key).delete(callback);
-  }
+const saveData = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
 
-  setState(key, value) {
-    const oldValue = this.state[key];
-    this.state[key] = value;
+const dispatchUpdate = () => {
+  const storeData = { cart, wishlist, wallet };
+  window.dispatchEvent(new CustomEvent('mashallahStoreUpdated', { detail: storeData }));
+  window.dispatchEvent(new CustomEvent('cartUpdated', {
+    detail: { cart, subtotal: getCartTotal(), count: getCartCount() }
+  }));
+};
 
-    if (this.persistKeys.includes(key)) {
-      localStorage.setItem(`store_${key}`, JSON.stringify(value));
-    }
+const cart = loadData(CART_KEY);
+const wishlist = loadData(WISHLIST_KEY);
+const wallet = JSON.parse(localStorage.getItem(WALLET_KEY) || '{"balance":0}');
 
-    this.listeners.get(key)?.forEach(cb => cb(value, oldValue));
-  }
+const saveCart = () => saveData(CART_KEY, cart);
+const saveWishlist = () => saveData(WISHLIST_KEY, wishlist);
+const saveWallet = () => localStorage.setItem(WALLET_KEY, JSON.stringify(wallet));
 
-  loadPersistedState() {
-    this.persistKeys.forEach(key => {
-      const saved = localStorage.getItem(`store_${key}`);
-      if (saved) {
-        this.state[key] = JSON.parse(saved);
-      }
-    });
-  }
-}
+const notify = (message, type = 'success') => {
+  window.dispatchEvent(new CustomEvent('show-toast', {
+    detail: { message, type }
+  }));
+};
 
-export const store = new Store();
+const getCartTotal = () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+const getCartCount = () => cart.reduce((sum, item) => sum + item.quantity, 0);
 
-// Store helper functions for cart management
-export const getCart = () => store.state.cart;
-const wishlist = store.state.wishlist;
-const wallet = store.state.wallet || 0;
+const findCartItem = (productId) => cart.find((item) => item.id === productId);
 
-const addToCart = (product) => {
-  const currentCart = [...store.state.cart];
-  const existingIndex = currentCart.findIndex(item => item.id === product.id);
-  
-  if (existingIndex > -1) {
-    currentCart[existingIndex].quantity = (currentCart[existingIndex].quantity || 1) + 1;
+const addToCart = (product, quantity = 1) => {
+  const existing = findCartItem(product.id);
+  if (existing) {
+    existing.quantity += quantity;
   } else {
-    currentCart.push({ ...product, quantity: 1 });
+    cart.push({ ...product, quantity });
   }
-  
-  store.setState('cart', currentCart);
+  saveCart();
+  dispatchUpdate();
+  notify(`${product.name} added to cart`, 'success');
 };
 
 const removeFromCart = (productId) => {
-  const currentCart = store.state.cart.filter(item => item.id !== productId);
-  store.setState('cart', currentCart);
+  const index = cart.findIndex((item) => item.id === productId);
+  if (index !== -1) {
+    cart.splice(index, 1);
+    saveCart();
+    dispatchUpdate();
+    notify('Item removed from cart', 'info');
+  }
 };
 
-const updateQuantity = (productId, quantity) => {
-  const currentCart = store.state.cart.map(item => 
-    item.id === productId ? { ...item, quantity: Math.max(0, quantity) } : item
-  ).filter(item => item.quantity > 0);
-  store.setState('cart', currentCart);
+const updateQuantity = (productId, delta) => {
+  const item = findCartItem(productId);
+  if (!item) return;
+  const nextQuantity = item.quantity + delta;
+  if (nextQuantity <= 0) {
+    removeFromCart(productId);
+    return;
+  }
+  item.quantity = nextQuantity;
+  saveCart();
+  dispatchUpdate();
 };
 
 const clearCart = () => {
-  store.setState('cart', []);
+  cart.length = 0;
+  saveCart();
+  dispatchUpdate();
+  notify('Cart has been cleared', 'info');
 };
 
 const toggleWishlist = (product) => {
-  const currentWishlist = [...store.state.wishlist];
-  const index = currentWishlist.findIndex(item => item.id === product.id);
-  
-  if (index > -1) {
-    currentWishlist.splice(index, 1);
+  const index = wishlist.findIndex((item) => item.id === product.id);
+  if (index === -1) {
+    wishlist.push(product);
   } else {
-    currentWishlist.push(product);
+    wishlist.splice(index, 1);
   }
-  
-  store.setState('wishlist', currentWishlist);
-};
-
-const getCartTotal = () => {
-  return store.state.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-};
-
-const getCartCount = () => {
-  return store.state.cart.reduce((count, item) => count + item.quantity, 0);
+  saveWishlist();
+  dispatchUpdate();
 };
 
 const applyWalletCredit = (amount) => {
-  const currentWallet = store.state.wallet || 0;
-  store.setState('wallet', currentWallet - amount);
-};
-
-const saveCart = () => {
-  // Already handled by setState
-};
-
-const saveWishlist = () => {
-  // Already handled by setState
-};
-
-const saveWallet = () => {
-  // Already handled by setState
+  wallet.balance = Math.max(0, wallet.balance - amount);
+  saveWallet();
+  dispatchUpdate();
 };
 
 window.MashallahStore = {
@@ -135,6 +118,7 @@ window.MashallahStore = {
 };
 
 export {
+  cart,
   wishlist,
   wallet,
   addToCart,

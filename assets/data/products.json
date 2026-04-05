@@ -1,0 +1,194 @@
+[
+  {
+    "id": "fn001",
+    "name": "Velvet Tufted Sofa",
+    "brand": "LuxLiving",
+    "category": "Sofas",
+    "collection": "Luxury Velvet",
+    "price": 899,
+    "oldPrice": 1299,
+    "rating": 4.8,
+    "reviews": 128,
+    "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=958&q=80",
+    "inStock": true,
+    "colors": [
+      "teal",
+      "grey",
+      "navy"
+    ],
+    "badge": "NEW",
+    "description": "A plush velvet sofa with deep tufting and elegant curves for luxury living rooms."
+  },
+  {
+    "id": "fn002",
+    "name": "Solid Oak Dining Table",
+    "brand": "Rustic Oak",
+    "category": "Tables",
+    "collection": "Rustic Oak",
+    "price": 549,
+    "oldPrice": null,
+    "rating": 4.9,
+    "reviews": 76,
+    "image": "https://images.unsplash.com/photo-1549187774-b4e9d37b4f3c?auto=format&fit=crop&w=930&q=80",
+    "inStock": true,
+    "colors": [
+      "oak",
+      "walnut"
+    ],
+    "badge": "SALE",
+    "description": "A durable solid oak dining table with a warm finish and timeless silhouette."
+  },
+  {
+    "id": "fn003",
+    "name": "Modern Minimal Armchair",
+    "brand": "Modern Minimal",
+    "category": "Chairs",
+    "collection": "Modern Minimal",
+    "price": 229,
+    "oldPrice": 299,
+    "rating": 4.6,
+    "reviews": 98,
+    "image": "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=930&q=80",
+    "inStock": true,
+    "colors": [
+      "white",
+      "black",
+      "sage"
+    ],
+    "badge": "POPULAR",
+    "description": "A sleek accent chair with soft upholstery and a compact footprint for modern interiors."
+  },
+  {
+    "id": "fn004",
+    "name": "Edge-Lit Console Table",
+    "brand": "Contemporary Glow",
+    "category": "Storage",
+    "collection": "Contemporary Glow",
+    "price": 349,
+    "oldPrice": 419,
+    "rating": 4.5,
+    "reviews": 54,
+    "image": "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=774&q=80",
+    "inStock": true,
+    "colors": [
+      "black",
+      "white"
+    ],
+    "badge": "TRENDING",
+    "description": "A modern console table with edge lighting and hidden storage for contemporary foyers."
+  },
+  {
+    "id": "fn005",
+    "name": "Linen Accent Bed",
+    "brand": "Coastal Linen",
+    "category": "Beds",
+    "collection": "Coastal Linen",
+    "price": 1199,
+    "oldPrice": 1499,
+    "rating": 4.9,
+    "reviews": 42,
+    "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
+    "inStock": false,
+    "colors": [
+      "sand",
+      "cream"
+    ],
+    "badge": "OUT OF STOCK",
+    "description": "A luxurious linen bed frame with a soft upholstered headboard and coastal-inspired styling."
+  },
+  {
+    "id": "fn006",
+    "name": "Brass Floor Lamp",
+    "brand": "Golden Hour",
+    "category": "Lighting",
+    "collection": "Golden Hour",
+    "price": 129,
+    "oldPrice": null,
+    "rating": 4.7,
+    "reviews": 68,
+    "image": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=870&q=80",
+    "inStock": true,
+    "colors": [
+      "brass",
+      "black"
+    ],
+    "badge": "BEST SELLER",
+    "description": "A timeless brass floor lamp with soft warm light and an elegant slim profile."
+  },
+  {
+    "id": "fn007",
+    "name": "Modular Bookshelf System",
+    "brand": "UrbanFlame",
+    "category": "Storage",
+    "collection": "Urban Organics",
+    "price": 1299,
+    "oldPrice": null,
+    "rating": 4.7,
+    "reviews": 142,
+    "image": "https://images.unsplash.com/photo-1551298370-9d3d53740c72?auto=format&fit=crop&w=687&q=80",
+    "inStock": true,
+    "colors": [
+      "walnut",
+      "white"
+    ],
+    "badge": "DEAL",
+    "description": "A modular bookshelf system designed for flexible storage and curated display."
+  },
+  {
+    "id": "fn008",
+    "name": "Minimalist Writing Desk",
+    "brand": "Studio Work",
+    "category": "Tables",
+    "collection": "Studio Work",
+    "price": 599,
+    "oldPrice": null,
+    "rating": 4.5,
+    "reviews": 113,
+    "image": "https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=464&q=80",
+    "inStock": true,
+    "colors": [
+      "black",
+      "white"
+    ],
+    "badge": "NEW",
+    "description": "A clean-lined writing desk with cable management and a compact footprint."
+  },
+  {
+    "id": "fn009",
+    "name": "Rustic Leather Ottoman",
+    "brand": "Rustic Luxe",
+    "category": "Accent",
+    "collection": "Rustic Luxe",
+    "price": 249,
+    "oldPrice": 329,
+    "rating": 4.4,
+    "reviews": 87,
+    "image": "https://images.unsplash.com/photo-1519710164239-da123dc03ef5?auto=format&fit=crop&w=500&q=80",
+    "inStock": true,
+    "colors": [
+      "brown",
+      "tan"
+    ],
+    "badge": "LIMITED",
+    "description": "A handcrafted leather ottoman with rustic stitching and soft seating."
+  },
+  {
+    "id": "fn010",
+    "name": "Nordic Side Table",
+    "brand": "Nordic Calm",
+    "category": "Tables",
+    "collection": "Nordic Calm",
+    "price": 179,
+    "oldPrice": 229,
+    "rating": 4.6,
+    "reviews": 62,
+    "image": "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=500&q=80",
+    "inStock": true,
+    "colors": [
+      "birch",
+      "white"
+    ],
+    "badge": "POPULAR",
+    "description": "A compact nordic-inspired side table with a clean silhouette and light finish."
+  }
+]
