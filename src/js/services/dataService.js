@@ -14,7 +14,7 @@ class DataService {
     // ==========================================
 
     /**
-     * Fetch products from JSON file with caching
+     * Fetch products from JSON file and localStorage with caching
      * @returns {Promise<Array>} Array of products
      */
     async getProducts() {
@@ -26,21 +26,33 @@ class DataService {
         }
 
         try {
+            // Load static products from JSON
             const response = await fetch(`${this.baseUrl}/data/products.json`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            const products = await response.json();
+            const staticProducts = await response.json();
 
-            // Validate products
-            const validProducts = products.filter(product => this.validateProduct(product));
+            // Load admin products from localStorage
+            const adminProducts = JSON.parse(localStorage.getItem('mashallah_products') || '[]');
+
+            // Combine products, prioritizing admin products
+            let allProducts = [];
+
+            if (adminProducts.length > 0) {
+                // Use admin products if available
+                allProducts = adminProducts;
+            } else {
+                // Fallback to static products
+                allProducts = staticProducts.filter(product => this.validateProduct(product));
+            }
 
             // Cache the results
-            this.setCache(cacheKey, validProducts);
+            this.setCache(cacheKey, allProducts);
 
-            console.log(`✅ Loaded ${validProducts.length} products`);
-            return validProducts;
+            console.log(`✅ Loaded ${allProducts.length} products (${adminProducts.length} admin, ${staticProducts.length} static)`);
+            return allProducts;
 
         } catch (error) {
             console.error('❌ Failed to load products:', error);

@@ -239,20 +239,20 @@
 
             async saveProductToStorage(product) {
                 // Get existing products
-                const existingProducts = JSON.parse(localStorage.getItem('admin_products') || '[]');
+                const existingProducts = JSON.parse(localStorage.getItem('mashallah_products') || '[]');
 
                 // Add new product
                 existingProducts.push(product);
 
                 // Save back to localStorage
-                localStorage.setItem('admin_products', JSON.stringify(existingProducts));
+                localStorage.setItem('mashallah_products', JSON.stringify(existingProducts));
 
                 console.log('💾 Product saved to localStorage');
             }
 
             async loadExistingProducts() {
                 try {
-                    const products = JSON.parse(localStorage.getItem('admin_products') || '[]');
+                    const products = JSON.parse(localStorage.getItem('mashallah_products') || '[]');
                     this.renderProductsList(products);
                 } catch (error) {
                     console.error('Failed to load products:', error);
@@ -328,10 +328,10 @@
                 if (!confirm('Are you sure you want to delete this product?')) return;
 
                 try {
-                    const products = JSON.parse(localStorage.getItem('admin_products') || '[]');
+                    const products = JSON.parse(localStorage.getItem('mashallah_products') || '[]');
                     const filteredProducts = products.filter(p => p.id != productId);
 
-                    localStorage.setItem('admin_products', JSON.stringify(filteredProducts));
+                    localStorage.setItem('mashallah_products', JSON.stringify(filteredProducts));
 
                     showToast('Product deleted successfully', 'success');
                     this.loadExistingProducts();

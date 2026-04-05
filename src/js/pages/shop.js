@@ -60,20 +60,20 @@ class ShopPage {
 
     async loadCategories() {
         try {
-            // Load static products for categories
-            const staticProducts = await dataService.getProducts();
+            // Load admin products first (priority)
+            const adminProducts = JSON.parse(localStorage.getItem('mashallah_products') || '[]');
+            let productsForCategories = adminProducts;
 
-            // Load admin products
-            const adminProducts = JSON.parse(localStorage.getItem('admin_products') || '[]');
-
-            // Combine all products for category extraction
-            const allProducts = [...staticProducts, ...adminProducts];
+            if (adminProducts.length === 0) {
+                // Fallback to static products
+                productsForCategories = await dataService.getProducts();
+            }
 
             // Extract unique categories
-            const categorySet = new Set(allProducts.map(p => p.category).filter(Boolean));
+            const categorySet = new Set(productsForCategories.map(p => p.category).filter(Boolean));
             this.categories = Array.from(categorySet).map(cat => ({ id: cat, name: cat }));
 
-            console.log(`✅ Loaded ${this.categories.length} categories from ${allProducts.length} products`);
+            console.log(`✅ Loaded ${this.categories.length} categories from ${productsForCategories.length} products`);
 
         } catch (error) {
             console.error('Error loading categories:', error);
@@ -82,35 +82,27 @@ class ShopPage {
 
     async loadProducts() {
         try {
-            // Load products from JSON file (static products)
-            const staticProducts = await dataService.getProducts();
+            // Load admin products from localStorage first (priority)
+            const adminProducts = JSON.parse(localStorage.getItem('mashallah_products') || '[]');
 
-            // Load admin products from localStorage (dynamically added)
-            const adminProducts = JSON.parse(localStorage.getItem('admin_products') || '[]');
-
-            // Combine and deduplicate products
-            const allProducts = [...staticProducts];
-
-            // Add admin products, avoiding duplicates by ID
-            adminProducts.forEach(adminProduct => {
-                const existingIndex = allProducts.findIndex(p => p.id === adminProduct.id);
-                if (existingIndex === -1) {
-                    // New admin product
-                    allProducts.push(adminProduct);
-                } else {
-                    // Update existing product with admin data
-                    allProducts[existingIndex] = { ...allProducts[existingIndex], ...adminProduct };
-                }
-            });
-
-            this.allProducts = allProducts;
-            this.filteredProducts = [...this.allProducts];
-
-            console.log(`✅ Loaded ${staticProducts.length} static + ${adminProducts.length} admin products = ${allProducts.length} total`);
+            if (adminProducts.length > 0) {
+                // Use admin products if available
+                this.allProducts = adminProducts;
+                this.filteredProducts = [...this.allProducts];
+                console.log(`✅ Loaded ${adminProducts.length} products from admin panel`);
+            } else {
+                // Fallback to static JSON products
+                const staticProducts = await dataService.getProducts();
+                this.allProducts = staticProducts;
+                this.filteredProducts = [...this.allProducts];
+                console.log(`✅ Loaded ${staticProducts.length} products from static JSON`);
+            }
 
         } catch (error) {
             console.error('Error loading products:', error);
-            throw error;
+            // Ultimate fallback
+            this.allProducts = [];
+            this.filteredProducts = [];
         }
     }
 
