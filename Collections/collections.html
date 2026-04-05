@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collections | RammaFurniture</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="collections.css">
+  <link rel="stylesheet" href="../Home/home.css">
+
+</head>
+
+<body>
+
+
+  <div data-include="../components/navbar.html"></div>
+  <div data-include="../components/cart-mini.html"></div>
+  <div data-include="../components/toast.html"></div>
+  <div id="readingProgress" class="reading-progress" aria-hidden="true"></div>
+
+  <!-- Visual layers -->
+  <div id="springCells" aria-hidden="true"></div>
+  <div id="starLayer" aria-hidden="true"></div>
+  <div id="binaryLayer" aria-hidden="true"></div>
+
+  <!-- Cursor elements -->
+  <div id="cursorCore" class="cursor-core" aria-hidden="true"></div>
+  <div id="cursorOrb" class="cursor-orb" aria-hidden="true">
+    <!-- some orbiting mini particles (js will populate) -->
+  </div>
+
+  <!-- Confetti container -->
+  <div id="confettiContainer" class="confetti-container"></div>
+
+  <!-- Page Loader -->
+  <div class="loader" id="page-loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <i class="fas fa-couch"></i> Ramma<span>Furniture</span>
+      </div>
+      <div class="loader-spinner"></div>
+      <div class="loader-progress">
+        <div class="loader-progress-bar" id="loader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="../Home/home.html" class="logo">
+        <i class="fas fa-couch logo-icon"></i>
+        Ramma<span>Furniture</span>
+      </a>
+
+      <div class="nav-actions">
+        <div class="nav-action-btn search-wrapper">
+          <div class="search-icon-main" id="searchIcon">
+            <i class="fas fa-search icon-btn"></i>
+          </div>
+          <div class="search-container" id="searchContainer">
+            <div class="search-input-container">
+              <input type="text" class="search-input" placeholder="Search for furniture..." id="searchInput">
+              <i class="fas fa-search search-icon" id="searchButton"></i>
+            </div>
+            <div class="search-options">
+              <div class="search-option active" data-category="all">All</div>
+              <div class="search-option" data-category="chairs">Chairs</div>
+              <div class="search-option" data-category="tables">Tables</div>
+              <div class="search-option" data-category="sofas">Sofas</div>
+              <div class="search-option" data-category="storage">Storage</div>
+            </div>
+            <div class="search-results" id="searchResults">
+              <!-- Results will appear here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-action-btn wishlist-wrapper">
+          <a class="icon-btn" id="wishlistIcon" href="../nav-btn/favourite.html" aria-label="Wishlist">
+            <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            <span class="count-badge" id="wishlistCount">3</span>
+          </a>
+          <div class="wishlist-preview" id="wishlistPreview">
+            <h3>Your Wishlist</h3>
+            <div id="wishlistItemsPreview">
+              <!-- Wishlist items will appear here -->
+            </div>
+            <a href="../nav-btn/favourite.html" class="view-wishlist-btn" id="viewWishlistBtn">View Full Wishlist</a>
+          </div>
+        </div>
+
+        <div class="nav-action-btn">
+          <a href="../nav-btn/cart.html" id="cartIcon">
+            <i class="fas fa-shopping-cart icon-btn"></i>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+
+        <div class="nav-action-btn">
+          <a class="icon-btn" id="userIcon" href="../nav-btn/Account/account.html" aria-label="User Account"
+            aria-current="page">
+            <i class="fas fa-user"></i>
+          </a>
+        </div>
+
+        <button class="nav-action-btn menu-toggle" id="menuToggle" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Mobile Sidebar -->
+  <div class="mobile-sidebar" id="mobileSidebar">
+    <button class="close-sidebar" id="closeSidebar" aria-label="Close menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <ul class="sidebar-nav-items">
+      <li class="sidebar-nav-item">
+        <a href="../Home/home.html" class="sidebar-nav-link">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="../Shop/shop.html" class="sidebar-nav-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Shop</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="collections.html" class="sidebar-nav-link">
+          <i class="fas fa-layer-group"></i>
+          <span>Collections</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="../About/about.html" class="sidebar-nav-link">
+          <i class="fas fa-info-circle"></i>
+          <span>About</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="../Contact/contact.html" class="sidebar-nav-link">
+          <i class="fas fa-phone"></i>
+          <span>Contact</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="../nav-btn/favourite.html" class="sidebar-nav-link">
+          <i class="fas fa-heart"></i>
+          <span>Wishlist</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="../Offers/offers.html" class="sidebar-nav-link">
+          <i class="fas fa-gift"></i>
+          <span>Offers</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Left Sidebar (Desktop) -->
+  <div class="left-sidebar" id="leftSidebar">
+    <ul class="sidebar-nav-items">
+      <li class="sidebar-nav-item">
+        <a href="../Home/home.html" class="sidebar-nav-link">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="../Shop/shop.html" class="sidebar-nav-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Shop</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="collections.html" class="sidebar-nav-link">
+          <i class="fas fa-layer-group"></i>
+          <span>Collections</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="../About/about.html" class="sidebar-nav-link">
+          <i class="fas fa-info-circle"></i>
+          <span>About</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="../Contact/contact.html" class="sidebar-nav-link">
+          <i class="fas fa-phone"></i>
+          <span>Contact</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="../nav-btn/favourite.html" class="sidebar-nav-link">
+          <i class="fas fa-heart"></i>
+          <span>Wishlist</span>
+        </a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="../Offers/offers.html" class="sidebar-nav-link">
+          <i class="fas fa-gift"></i>
+          <span>Offers</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Bottom Bar (Mobile) -->
+  <div class="bottom-bar">
+    <ul class="bottom-nav-items">
+      <li class="bottom-nav-item">
+        <a href="../Home/home.html" class="bottom-nav-link">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="bottom-nav-item">
+        <a href="../Shop/shop.html" class="bottom-nav-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Shop</span>
+        </a>
+      </li>
+      <li class="bottom-nav-item">
+        <a href="../Search/search.html" class="bottom-nav-link" id="mobileSearchIcon">
+          <i class="fas fa-search"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li class="bottom-nav-item">
+        <a href="../nav-btn/favourite.html" class="bottom-nav-link">
+          <i class="fas fa-heart"></i>
+          <span>Wishlist</span>
+        </a>
+      </li>
+      <li class="bottom-nav-item">
+        <a href="../nav-btn/Account/account.html" class="bottom-nav-link" id="mobileUserIcon">
+          <i class="fas fa-user"></i>
+          <span>Account</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <main>
+    <div class="toast" id="toast"></div>
+
+    <section class="products-header">
+      <h1>Our Collection</h1>
+    </section>
+
+    <!-- New Collection Spotlight Section -->
+    <section class="collection-spotlight">
+      
+      <div class="spotlight-header">
+        <h2>Featured Collections</h2>
+        <p>Discover our most popular furniture lines</p>
+      </div>
+
+      <section class="products-content">
+      <!-- Categories Navigation -->
+      <div class="categories-nav">
+        <button class="category-btn active" data-category="all">All Products</button>
+        <button class="category-btn" data-category="sofas">Sofas & Couches</button>
+        <button class="category-btn" data-category="chairs">Chairs</button>
+        <button class="category-btn" data-category="tables">Tables</button>
+        <button class="category-btn" data-category="beds">Beds</button>
+        <button class="category-btn" data-category="storage">Storage</button>
+        <button class="category-btn" data-category="decor">Decor</button>
+      </div>
+
+      <!-- Products Filters -->
+      <div class="products-filters">
+        <button class="filter-toggle">
+          <i class="fas fa-filter"></i> Filters
+        </button>
+        <div class="sort-container">
+          <select class="sort-select">
+            <option value="default">Default Sorting</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="popularity">Popularity</option>
+            <option value="rating">Average Rating</option>
+            <option value="newest">Newest First</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid">
+        <!-- Product 1 -->
+        <div class="product-card" data-category="sofas">
+          <div class="product-badge">NEW</div>
+          <div class="product-img">
+            <img
+              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=958&q=80"
+              alt="Modern Sofa">
+            <div class="product-actions">
+              <button class="action-btn quick-view-btn" data-id="1"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-heart"></i></button>
+              <button class="action-btn"><i class="fas fa-shopping-cart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3>Nordic Comfort Sofa</h3>
+            <div class="product-category">Sofas & Couches</div>
+            <div class="product-price">
+              <span class="current-price">$1,499</span>
+              <span class="original-price">$1,899</span>
+            </div>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(128)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card" data-category="chairs">
+          <div class="product-badge">SALE</div>
+          <div class="product-img">
+            <img
+              src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80"
+              alt="Velvet Accent Chair">
+            <div class="product-actions">
+              <button class="action-btn quick-view-btn" data-id="2"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-heart"></i></button>
+              <button class="action-btn"><i class="fas fa-shopping-cart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3>Velvet Accent Chair</h3>
+            <div class="product-category">Chairs</div>
+            <div class="product-price">
+              <span class="current-price">$499</span>
+              <span class="original-price">$649</span>
+            </div>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <span>(98)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card" data-category="tables">
+          <div class="product-img">
+            <img
+              src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+              alt="Dining Table">
+            <div class="product-actions">
+              <button class="action-btn quick-view-btn" data-id="3"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-heart"></i></button>
+              <button class="action-btn"><i class="fas fa-shopping-cart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3>Minimalist Dining Table</h3>
+            <div class="product-category">Tables</div>
+            <div class="product-price">
+              <span class="current-price">$899</span>
+            </div>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <span>(64)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card" data-category="storage">
+          <div class="product-badge">POPULAR</div>
+          <div class="product-img">
+            <img
+              src="https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+              alt="Bookshelf">
+            <div class="product-actions">
+              <button class="action-btn quick-view-btn" data-id="4"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-heart"></i></button>
+              <button class="action-btn"><i class="fas fa-shopping-cart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3>Modular Bookshelf System</h3>
+            <div class="product-category">Storage</div>
+            <div class="product-price">
+              <span class="current-price">$1,299</span>
+            </div>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(142)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card" data-category="chairs">
+          <div class="product-img">
+            <img
+              src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              alt="Office Chair">
+            <div class="product-actions">
+              <button class="action-btn quick-view-btn" data-id="5"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-heart"></i></button>
+              <button class="action-btn"><i class="fas fa-shopping-cart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3>Ergonomic Office Chair</h3>
+            <div class="product-category">Chairs</div>
+            <div class="product-price">
+              <span class="current-price">$399</span>
+              <span class="original-price">$499</span>
+            </div>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <span>(87)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card" data-category="tables">
+          <div class="product-badge">TRENDING</div>
+          <div class="product-img">
+            <img
+              src="https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+              alt="Writing Desk">
+            <div class="product-actions">
+              <button class="action-btn quick-view-btn" data-id="6"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-heart"></i></button>
+              <button class="action-btn"><i class="fas fa-shopping-cart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3>Minimal Writing Desk</h3>
+            <div class="product-category">Tables</div>
+            <div class="product-price">
+              <span class="current-price">$599</span>
+              <span class="original-price">$749</span>
+            </div>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(112)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </section>
+      <div class="spotlight-grid">
+        <div class="spotlight-card animate-on-scroll">
+          <div class="spotlight-img">
+            <img
+              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              alt="Modern Living Room">
+          </div>
+          <div class="spotlight-content">
+            <h3>Modern Living</h3>
+            <p>Contemporary designs for the modern home</p>
+            <a href="#" class="spotlight-btn">Explore</a>
+          </div>
+        </div>
+        <div class="spotlight-card animate-on-scroll">
+          <div class="spotlight-img">
+            <img
+              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=958&q=80"
+              alt="Scandinavian Design">
+          </div>
+          <div class="spotlight-content">
+            <h3>Scandinavian</h3>
+            <p>Minimalist and functional Nordic designs</p>
+            <a href="#" class="spotlight-btn">Explore</a>
+          </div>
+        </div>
+        <div class="spotlight-card animate-on-scroll">
+          <div class="spotlight-img">
+            <img
+              src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              alt="Industrial Style">
+          </div>
+          <div class="spotlight-content">
+            <h3>Industrial</h3>
+            <p>Raw materials and utilitarian aesthetic</p>
+            <a href="#" class="spotlight-btn">Explore</a>
+          </div>
+        </div>
+        <div class="spotlight-card animate-on-scroll">
+          <div class="spotlight-img">
+            <img
+              src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              alt="Industrial Style">
+          </div>
+          <div class="spotlight-content">
+            <h3>Industrial</h3>
+            <p>Raw materials and utilitarian aesthetic</p>
+            <a href="#" class="spotlight-btn">Explore</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <!-- Featured Collection -->
+    <section class="featured-collection">
+      <div class="featured-container">
+        <h2 class="section-title">Newly Launched</h2>
+        <div class="featured-product">
+          <div class="featured-image">
+            <img
+              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              alt="Featured Furniture">
+          </div>
+          <div class="featured-content">
+            <h3 class="featured-name">Elysian Sofa</h3>
+            <p class="featured-description">Crafted with precision and attention to detail, the Elysian Sofa combines
+              luxurious comfort with minimalist design. Featuring premium materials and expert craftsmanship, this
+              piece
+              will become the centerpiece of your living space.</p>
+            <div class="featured-price">$2,499</div>
+            <button class="featured-cta">View Details</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <!-- Background Elements -->
+    <div class="bg-elements" id="bgElements"></div>
+
+    <!-- Floating Particles -->
+    <div class="floating-particles" id="floatingParticles"></div>
+
+    <!-- NEW: Brand Modal -->
+    <div class="brand-modal" id="brandModal">
+      <div class="modal-content" id="modalContent">
+        <div class="modal-close" id="modalClose">
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="modal-body" id="modalBody">
+          <!-- Content will be dynamically inserted -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Brands Section -->
+    <section class="featured-brands">
+      <div class="brands-header">
+        <h2 class="animate-on-scroll text-reveal">Select Your Design</h2>
+        <p class="animate-on-scroll">Curated selection from premium designers who share our passion for quality and
+          innovation</p>
+      </div>
+
+      <!-- NEW: Brand Filter -->
+      <div class="brand-filter animate-on-scroll" id="brandFilter">
+        <button class="filter-btn active" data-filter="all">All Brands</button>
+        <button class="filter-btn" data-filter="premium">Premium</button>
+        <button class="filter-btn" data-filter="sustainable">Sustainable</button>
+        <button class="filter-btn" data-filter="modern">Modern</button>
+        <button class="filter-btn" data-filter="traditional">Traditional</button>
+      </div>
+
+      <div class="brands-grid" id="brandsGrid">
+        <div class="brand-item animate-on-scroll" data-brand="nordicdesign" data-category="premium modern">
+          <div class="brand-logo-container">
+            <div class="brand-hover-effect"></div>
+            <div class="brand-logo">NordicDesign</div>
+          </div>
+          <div class="brand-info">
+            <p class="brand-description">Scandinavian minimalism meets functional design. NordicDesign brings the
+              essence
+              of Nordic living to modern interiors with clean lines and natural materials.</p>
+            <div class="brand-stats">
+              <div class="stat-item">
+                <span class="stat-value">12</span>
+                <span class="stat-label">Collections</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">24</span>
+                <span class="stat-label">Years</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">98%</span>
+                <span class="stat-label">Satisfaction</span>
+              </div>
+            </div>
+            <a href="#" class="brand-link shine-effect" data-brand="nordicdesign">Explore Brand</a>
+          </div>
+        </div>
+
+        <div class="brand-item animate-on-scroll" data-brand="minimalliving" data-category="sustainable modern">
+          <div class="brand-logo-container">
+            <div class="brand-hover-effect"></div>
+            <div class="brand-logo">MinimalLiving</div>
+          </div>
+          <div class="brand-info">
+            <p class="brand-description">Embrace simplicity with purpose. MinimalLiving creates transformative pieces
+              that
+              maximize space and minimize clutter without compromising on style.</p>
+            <div class="brand-stats">
+              <div class="stat-item">
+                <span class="stat-value">8</span>
+                <span class="stat-label">Collections</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">15</span>
+                <span class="stat-label">Years</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">96%</span>
+                <span class="stat-label">Satisfaction</span>
+              </div>
+            </div>
+            <a href="#" class="brand-link shine-effect" data-brand="minimalliving">Explore Brand</a>
+          </div>
+        </div>
+
+        <div class="brand-item animate-on-scroll" data-brand="urbancraft" data-category="premium modern">
+          <div class="brand-logo-container">
+            <div class="brand-hover-effect"></div>
+            <div class="brand-logo">UrbanCraft</div>
+          </div>
+          <div class="brand-info">
+            <p class="brand-description">Where urban aesthetics meet artisanal craftsmanship. UrbanCraft blends
+              industrial
+              elements with handcrafted details for distinctive statement pieces.</p>
+            <div class="brand-stats">
+              <div class="stat-item">
+                <span class="stat-value">10</span>
+                <span class="stat-label">Collections</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">18</span>
+                <span class="stat-label">Years</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">97%</span>
+                <span class="stat-label">Satisfaction</span>
+              </div>
+            </div>
+            <a href="#" class="brand-link shine-effect" data-brand="urbancraft">Explore Brand</a>
+          </div>
+        </div>
+
+        <div class="brand-item animate-on-scroll" data-brand="scandistyle" data-category="premium sustainable">
+          <div class="brand-logo-container">
+            <div class="brand-hover-effect"></div>
+            <div class="brand-logo">ScandiStyle</div>
+          </div>
+          <div class="brand-info">
+            <p class="brand-description">Authentic Scandinavian design philosophy that prioritizes light, space and
+              harmony. ScandiStyle creates environments that promote wellbeing and comfort.</p>
+            <div class="brand-stats">
+              <div class="stat-item">
+                <span class="stat-value">14</span>
+                <span class="stat-label">Collections</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">22</span>
+                <span class="stat-label">Years</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">99%</span>
+                <span class="stat-label">Satisfaction</span>
+              </div>
+            </div>
+            <a href="#" class="brand-link shine-effect" data-brand="scandistyle">Explore Brand</a>
+          </div>
+        </div>
+
+        <div class="brand-item animate-on-scroll" data-brand="artisanwood" data-category="sustainable traditional">
+          <div class="brand-logo-container">
+            <div class="brand-hover-effect"></div>
+            <div class="brand-logo">ArtisanWood</div>
+          </div>
+          <div class="brand-info">
+            <p class="brand-description">Celebrating the natural beauty of wood through master craftsmanship.
+              ArtisanWood
+              creates heirloom-quality pieces using sustainable practices and traditional techniques.</p>
+            <div class="brand-stats">
+              <div class="stat-item">
+                <span class="stat-value">6</span>
+                <span class="stat-label">Collections</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">30</span>
+                <span class="stat-label">Years</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">100%</span>
+                <span class="stat-label">Satisfaction</span>
+              </div>
+            </div>
+            <a href="#" class="brand-link shine-effect" data-brand="artisanwood">Explore Brand</a>
+          </div>
+        </div>
+
+        <div class="brand-item animate-on-scroll" data-brand="modernist" data-category="premium modern">
+          <div class="brand-logo-container">
+            <div class="brand-hover-effect"></div>
+            <div class="brand-logo">Modernist</div>
+          </div>
+          <div class="brand-info">
+            <p class="brand-description">Bold, forward-thinking designs that challenge conventions. Modernist combines
+              cutting-edge materials with innovative forms to create the furniture of tomorrow.</p>
+            <div class="brand-stats">
+              <div class="stat-item">
+                <span class="stat-value">9</span>
+                <span class="stat-label">Collections</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">12</span>
+                <span class="stat-label">Years</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">95%</span>
+                <span class="stat-label">Satisfaction</span>
+              </div>
+            </div>
+            <a href="#" class="brand-link shine-effect" data-brand="modernist">Explore Brand</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="brands-cta animate-on-scroll">
+        <p>Discover exclusive collaborations and limited edition pieces from these exceptional designers, available
+          only
+          at RammaFurniture.</p>
+        <a href="#" class="cta-button shine-effect">View All Brands</a>
+      </div>
+    </section>
+
+   
+
+
+   
+
+    <!-- Filter Sidebar -->
+    <div class="filter-sidebar">
+      <div class="filter-close">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="filter-section">
+        <h3>Categories</h3>
+        <div class="filter-options">
+          <div class="filter-option">
+            <input type="checkbox" id="category-sofas">
+            <label for="category-sofas">Sofas & Couches</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="category-chairs">
+            <label for="category-chairs">Chairs</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="category-tables">
+            <label for="category-tables">Tables</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="category-beds">
+            <label for="category-beds">Beds</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="category-storage">
+            <label for="category-storage">Storage</label>
+          </div>
+        </div>
+      </div>
+      <div class="filter-section">
+        <h3>Price Range</h3>
+        <div class="price-range">
+          <div class="price-inputs">
+            <input type="number" placeholder="Min" value="0">
+            <input type="number" placeholder="Max" value="5000">
+          </div>
+        </div>
+      </div>
+      <div class="filter-section">
+        <h3>Colors</h3>
+        <div class="color-options">
+          <div class="color-option color-black active"></div>
+          <div class="color-option color-white"></div>
+          <div class="color-option color-gray"></div>
+        </div>
+      </div>
+      <div class="filter-section">
+        <h3>Availability</h3>
+        <div class="filter-options">
+          <div class="filter-option">
+            <input type="checkbox" id="in-stock" checked>
+            <label for="in-stock">In Stock</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="out-of-stock">
+            <label for="out-of-stock">Out of Stock</label>
+          </div>
+        </div>
+      </div>
+      <button class="filter-btn">Apply Filters</button>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="modal" id="quickViewModal">
+      <div class="modal-content">
+        <div class="modal-close">
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="modal-product">
+          <div class="modal-product-img">
+            <img
+              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=958&q=80"
+              alt="Modern Sofa">
+          </div>
+          <div class="modal-product-info">
+            <h2>Nordic Comfort Sofa</h2>
+            <div class="modal-product-price">$1,499 <span class="original-price">$1,899</span></div>
+            <p class="modal-product-desc">
+              Experience ultimate comfort with our Nordic Comfort Sofa. Designed with premium materials and expert
+              craftsmanship, this sofa offers both style and functionality for your living space.
+            </p>
+            <div class="modal-product-options">
+              <div class="option-title">Color</div>
+              <div class="option-values">
+                <div class="option-value active">Black</div>
+                <div class="option-value">White</div>
+                <div class="option-value">Gray</div>
+              </div>
+              <div class="option-title">Size</div>
+              <div class="option-values">
+                <div class="option-value active">Standard</div>
+                <div class="option-value">Large</div>
+              </div>
+            </div>
+            <div class="modal-product-actions">
+              <div class="quantity-selector">
+                <button class="quantity-btn">-</button>
+                <input type="text" class="quantity-input" value="1">
+                <button class="quantity-btn">+</button>
+              </div>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Dark Mode Toggle Button -->
+    <div class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+      <i id="darkModeIcon" class="fas fa-moon"></i>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer" title="Background music">
+      <i class="fas fa-music"></i>
+    </div>
+
+    <!-- Sound Controls -->
+    <div class="sound-controls" id="soundControls">
+      <div class="sound-control" id="soundUp" title="Increase volume">
+        <i class="fas fa-volume-up"></i>
+      </div>
+      <div class="sound-control" id="soundDown" title="Decrease volume">
+        <i class="fas fa-volume-down"></i>
+      </div>
+      <div class="sound-control" id="soundMute" title="Mute sounds">
+        <i class="fas fa-volume-mute"></i>
+      </div>
+    </div>
+
+    <!-- Confetti container -->
+    <div id="confettiContainer" class="confetti-container"></div>
+    <div data-include="../components/footer.html"></div>
+</body>
+<script src="../js/components.js"></script>
+<script src="../js/toast.js"></script>
+<script src="collections.js"></script>
+<script src="../Home/home.js"></script>
+
+</html>

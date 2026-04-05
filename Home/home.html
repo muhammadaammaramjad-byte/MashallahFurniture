@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MashallahFurniture | Premium Home Furnishings</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="home.css">
+
+</head>
+
+<body>
+
+
+  <div id="readingProgress" class="reading-progress" aria-hidden="true"></div>
+
+  <div data-include="../components/navbar.html"></div>
+  <div data-include="../components/cart-mini.html"></div>
+  <div data-include="../components/toast.html"></div>
+
+  <!-- Visual layers -->
+  <div id="springCells" aria-hidden="true"></div>
+  <div id="starLayer" aria-hidden="true"></div>
+  <div id="binaryLayer" aria-hidden="true"></div>
+
+  <!-- Cursor elements -->
+  <div id="cursorCore" class="cursor-core" aria-hidden="true"></div>
+  <div id="cursorOrb" class="cursor-orb" aria-hidden="true">
+    <!-- some orbiting mini particles (js will populate) -->
+  </div>
+
+  <!-- Confetti container -->
+  <div id="confettiContainer" class="confetti-container"></div>
+
+  <!-- Page Loader -->
+  <div class="loader" id="page-loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <i class="fas fa-couch"></i> Ramma<span>Furniture</span>
+      </div>
+      <div class="loader-spinner"></div>
+      <div class="loader-progress">
+        <div class="loader-progress-bar" id="loader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="home.html" class="logo">
+        <i class="fas fa-couch logo-icon"></i>
+        Mashallah   <span>Furniture</span>
+      </a>
+
+      <div class="nav-actions"> 
+        <div class="nav-action-btn search-wrapper">
+          <div class="search-icon-main" id="searchIcon">
+            <i class="fas fa-search icon-btn"></i>
+          </div>
+          <div class="search-container" id="searchContainer">
+            <div class="search-input-container"> 
+              <input type="text" class="search-input" placeholder="Search for furniture..." id="searchInput">
+              <i class="fas fa-search search-icon" id="searchButton"></i>
+            </div>
+            <div class="search-options">
+              <div class="search-option active" data-category="all">All</div>
+              <div class="search-option" data-category="chairs">Chairs</div>
+              <div class="search-option" data-category="tables">Tables</div>
+              <div class="search-option" data-category="sofas">Sofas</div>
+              <div class="search-option" data-category="storage">Storage</div>
+            </div>
+            <div class="search-results" id="searchResults">
+              <!-- Results will appear here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-action-btn wishlist-wrapper">
+          <a class="icon-btn" id="wishlistIcon" href="../nav-btn/favourite.html" aria-label="Wishlist">
+            <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            <span class="count-badge" id="wishlistCount">3</span>
+          </a>
+          <div class="wishlist-preview" id="wishlistPreview">
+            <h3>Your Wishlist</h3>
+            <div id="wishlistItemsPreview">
+              <!-- Wishlist items will appear here -->
+            </div>
+            <a href="../nav-btn/favourite.html" class="view-wishlist-btn" id="viewWishlistBtn">View Full Wishlist</a>
+          </div>
+        </div>
+
+        <div class="nav-action-btn">
+          <a href="../nav-btn/cart.html" id="cartIcon">
+            <i class="fas fa-shopping-cart icon-btn"></i>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+
+        <div class="nav-action-btn">
+          <a class="icon-btn" id="userIcon" href="../nav-btn/Account/account.html" aria-label="User Account"
+            aria-current="page">
+            <i class="fas fa-user"></i>
+          </a>
+        </div>
+
+        <button class="nav-action-btn menu-toggle" id="menuToggle" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+      <button class="close-sidebar" id="closeSidebar" aria-label="Close menu">
+        <i class="fas fa-times"></i>
+      </button>
+      <ul class="sidebar-nav-items">
+        <li class="sidebar-nav-item">
+          <a href="home.html" class="sidebar-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="../Shop/shop.html" class="sidebar-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="../Collections/collections.html" class="sidebar-nav-link">
+            <i class="fas fa-layer-group"></i>
+            <span>Collections</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="../About/about.html" class="sidebar-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="../Contact/contact.html" class="sidebar-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="../nav-btn/favourite.html" class="sidebar-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="../Offers/offers.html" class="sidebar-nav-link">
+            <i class="fas fa-gift"></i>
+            <span>Offers</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Left Sidebar (Desktop) -->
+    <div class="left-sidebar" id="leftSidebar">
+      <ul class="sidebar-nav-items">
+        <li class="sidebar-nav-item">
+          <a href="home.html" class="sidebar-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="../Shop/shop.html" class="sidebar-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="../Collections/collections.html" class="sidebar-nav-link">
+            <i class="fas fa-layer-group"></i>
+            <span>Collections</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="../About/about.html" class="sidebar-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="../Contact/contact.html" class="sidebar-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="../nav-btn/favourite.html" class="sidebar-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="../Offers/offers.html" class="sidebar-nav-link">
+            <i class="fas fa-gift"></i>
+            <span>Offers</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bottom Bar (Mobile) -->
+    <div class="bottom-bar">
+      <ul class="bottom-nav-items">
+        <li class="bottom-nav-item">
+          <a href="home.html" class="bottom-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="../Shop/shop.html" class="bottom-nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Shop</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="../Search/search.html" class="bottom-nav-link" id="mobileSearchIcon">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="../nav-btn/favourite.html" class="bottom-nav-link">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="../nav-btn/Account/account.html" class="bottom-nav-link" id="mobileUserIcon">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <!-- Floating Decorative Elements -->
+      <div class="floating-element float-1"></div>
+      <div class="floating-element float-2"></div>
+      <div class="floating-element float-3"></div>
+
+      <!-- Particle Effects -->
+      <div class="particles" id="particles"></div>
+
+      <div class="hero-content">
+        <div class="hero-content-inner">
+          <h1 class="slide-in-left">Elegant Furniture for Modern Living</h1>
+          <p class="slide-in-right">Discover our curated collection of premium furniture designed to transform your
+            space
+            with style and comfort.</p>
+          <div class="hero-buttons">
+            <a href="#" class="btn zoom-in">Shop Now</a>
+            <a href="#" class="btn btn-white zoom-in">Explore Collections</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>Why Choose Us</h2>
+          <p>We provide the best furniture shopping experience with quality products and excellent service</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card fade-in">
+            <i class="fas fa-truck feature-icon"></i>
+            <h3>Affordable Shipping</h3>
+            <p>Enjoy free delivery on all orders over $99. Fast and reliable shipping to your doorstep.</p>
+          </div>
+
+          <div class="feature-card fade-in">
+            <i class="fas fa-shield-alt feature-icon"></i>
+            <h3>Quality Assurance</h3>
+            <p>All our products undergo rigorous quality checks to ensure they meet our high standards.</p>
+          </div>
+
+          
+
+          <div class="feature-card fade-in">
+            <i class="fas fa-headset feature-icon"></i>
+            <h3>24/7 Support</h3>
+            <p>Our customer service team is available around the clock to assist with any inquiries.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Shop By Category</h2>
+          <p>Find the perfect pieces for every room</p>
+        </div>
+
+        <div class="categories-grid">
+          <div class="category-card slide-in-left">
+            <img
+              src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+              alt="Living Room">
+            <div class="category-overlay">
+              <h3>Living Room</h3>
+              <p>45 products</p>
+            </div>
+          </div>
+
+          <div class="category-card slide-in-right">
+            <img
+              src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+              alt="Bedroom">
+            <div class="category-overlay">
+              <h3>Bedroom</h3>
+              <p>32 products</p>
+            </div>
+          </div>
+
+          <div class="category-card slide-in-left">
+            <img
+              src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+              alt="Office">
+            <div class="category-overlay">
+              <h3>Office</h3>
+              <p>28 products</p>
+            </div>
+          </div>
+
+          <div class="category-card slide-in-right">
+            <img
+              src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+              alt="Outdoor">
+            <div class="category-overlay">
+              <h3>Outdoor</h3>
+              <p>21 products</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text slide-in-left">
+            <h2>Our Story</h2>
+            <p>RammaFurniture was founded with a simple vision: to create beautiful, functional furniture that stands
+              the test of time. Since 2010, we've been crafting pieces that combine traditional craftsmanship with
+              contemporary design.</p>
+            <p>Every item in our collection is thoughtfully designed and meticulously constructed using the finest
+              materials. We believe that furniture should not only be visually appealing but also built to last for
+              generations.</p>
+            <a href="#" class="btn">Learn More</a>
+          </div>
+          <div class="about-image slide-in-right">
+            <img
+              src="https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"
+              alt="Our Workshop">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+      <div class="container">
+        <div class="section-title">
+          <h2>What Our Customers Say</h2>
+          <p>Real feedback from our satisfied customers</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card fade-in">
+            <div class="testimonial-text">
+              "I've never been happier with a furniture purchase! The quality is exceptional and it looks even better in
+              person than online. Delivery was prompt and the assembly instructions were clear."
+            </div>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Johnson">
+              </div>
+              <div class="author-details">
+                <h4>Sarah Johnson</h4>
+                <p>Verified Customer</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card fade-in">
+            <div class="testimonial-text">
+              "The customer service was outstanding! They helped me choose the perfect pieces for my living room and
+              even provided design suggestions. The furniture arrived ahead of schedule and was exactly what I wanted."
+            </div>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+              </div>
+              <div class="author-details">
+                <h4>Michael Chen</h4>
+                <p>Verified Customer</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card fade-in">
+            <div class="testimonial-text">
+              "After searching for months for the right dining set, I finally found it at RammaFurniture. The
+              craftsmanship is impeccable and it's become the centerpiece of our home. Highly recommend!"
+            </div>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Emma Rodriguez">
+              </div>
+              <div class="author-details">
+                <h4>Emma Rodriguez</h4>
+                <p>Verified Customer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <div class="container">
+      <section class="stats-section">
+        <h2 class="section-title">Our Achievements</h2>
+
+        <div class="stats-container">
+          <div class="stat-item">
+            <i class="fas fa-tasks stat-icon"></i>
+            <div class="stat-number" data-target="250">0</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+
+          <div class="stat-item">
+            <i class="fas fa-smile stat-icon"></i>
+            <div class="stat-number" data-target="98">0</div>
+            <div class="stat-label">Client Satisfaction (%)</div>
+          </div>
+
+          <div class="stat-item">
+            <i class="fas fa-award stat-icon"></i>
+            <div class="stat-number" data-target="15">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>MashallahFurniture</h3>
+          <p>Creating beautiful spaces with thoughtfully designed furniture that combines form, function, and
+            durability.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h3>Shop</h3>
+          <ul class="footer-links">
+            <li><a href="#">Living Room</a></li>
+            <li><a href="#">Dining Room</a></li>
+            <li><a href="#">Bedroom</a></li>
+            <li><a href="#">Office</a></li>
+            <li><a href="#">Outdoor</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Company</h3>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Sustainability</a></li>
+            <li><a href="#">Affiliate Program</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul class="footer-links">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">Warranty</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Store Locator</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Newsletter</h3>
+          <p>Subscribe to get special offers, free giveaways, and new product alerts. </p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email address">
+            <button type="submit">Subscribe <i class="fas fa-paper-plane" id="rotate"></i></button>
+          </form>
+        </div>
+     </div>
+
+      <div class="copyright">
+        <p>&copy; 2023 RammaFurniture. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Dark Mode Toggle Button -->
+  <div class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+    <i id="darkModeIcon" class="fas fa-moon"></i>
+  </div>
+
+  <!-- Music Player -->
+  <div class="music-player" id="musicPlayer" title="Background music">
+    <i class="fas fa-music"></i>
+  </div>
+
+  <!-- Sound Controls -->
+  <div class="sound-controls" id="soundControls">
+    <div class="sound-control" id="soundUp" title="Increase volume">
+      <i class="fas fa-volume-up"></i>
+    </div>
+    <div class="sound-control" id="soundDown" title="Decrease volume">
+      <i class="fas fa-volume-down"></i>
+    </div>
+    <div class="sound-control" id="soundMute" title="Mute sounds">
+      <i class="fas fa-volume-mute"></i>
+    </div>
+  </div>
+
+  <!-- Confetti container -->
+  <div id="confettiContainer" class="confetti-container"></div>
+
+  <div data-include="../components/footer.html"></div>
+</body>
+<script src="../js/components.js"></script>
+<script src="../js/toast.js"></script>
+<script src="home.js"></script>
+
+</html>
