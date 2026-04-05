@@ -1,10 +1,8 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-    root: 'src/pages',
-    publicDir: '../../public',
     build: {
-        outDir: '../../dist',
+        outDir: 'dist',
         emptyOutDir: true,
         rollupOptions: {
             input: {
@@ -17,16 +15,15 @@ export default defineConfig({
                 cart: 'src/pages/cart.html',
                 wishlist: 'src/pages/wishlist.html',
                 checkout: 'src/pages/checkout.html',
-                account: 'src/pages/account/profile.html',
-                login: 'src/pages/account/login.html',
-                register: 'src/pages/account/register.html',
-                orders: 'src/pages/account/orders.html'
+                account: 'src/pages/account/profile.html'
             }
         }
     },
     server: {
         port: 3000,
         open: true
+    },
+    publicDir: 'public'
     },
     resolve: {
         alias: {
