@@ -1,16 +1,9 @@
 import { defineConfig } from 'vite';
-import { visualizer } from 'vite-plugin-bundle-visualizer';
 
 export default defineConfig({
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['axios', 'lodash'], // Add your dependencies
-          ui: ['@popperjs/core', 'focus-trap']
-        }
-      }
-    },
+    outDir: 'dist',
+    assetsDir: 'assets',
     target: 'es2020',
     minify: 'terser',
     terserOptions: {
@@ -19,11 +12,10 @@ export default defineConfig({
         drop_debugger: true
       }
     },
-    // Performance budget
-    chunkSizeWarningLimit: 500, // KB
+    chunkSizeWarningLimit: 500,
     reportCompressedSize: true
   },
-  plugins: [visualizer()],
+  publicDir: 'public',
   server: {
     headers: {
       'Cache-Control': 'no-cache'
