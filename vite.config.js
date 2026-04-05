@@ -15,7 +15,8 @@ export default defineConfig({
                 cart: 'src/pages/cart.html',
                 wishlist: 'src/pages/wishlist.html',
                 checkout: 'src/pages/checkout.html',
-                account: 'src/pages/account/profile.html'
+                account: 'src/pages/account/profile.html',
+                'image-uploader-demo': 'src/pages/image-uploader-demo.html'
             }
         }
     },
