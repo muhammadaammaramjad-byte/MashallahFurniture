@@ -1,5 +1,5 @@
 import { includeHTML } from '../js/components.js';
-import { addToCart as storeAddToCart, getCartTotal, getCartCount, cart as storeCart } from '../js/store.js';
+import { addToCart as storeAddToCart, getCartTotal, getCartCount, getCart } from '../js/store.js';
 
 const productsGrid = document.querySelector('.products-grid');
 const productsCount = document.querySelector('.products-count');
@@ -23,7 +23,7 @@ function formatCurrency(value) {
   return value.toFixed(2);
 }
 
-function updateCartMiniUI(cartData = storeCart) {
+function updateCartMiniUI(cartData = getCart()) {
   if (!cartMiniItems || !cartMiniSubtotal || !cartCountLabel) return;
   const count = cartData.reduce((sum, item) => sum + item.quantity, 0);
   cartCountLabel.textContent = count;

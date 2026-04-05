@@ -46,7 +46,7 @@ class Store {
 export const store = new Store();
 
 // Store helper functions for cart management
-export const cart = store.state.cart;
+export const getCart = () => store.state.cart;
 const wishlist = store.state.wishlist;
 const wallet = store.state.wallet || 0;
 
