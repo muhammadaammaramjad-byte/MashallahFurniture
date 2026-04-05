@@ -6,14 +6,44 @@
   NODE_VERSION = "18"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"
   status = 200
+
+[[redirects]]
+  from = "/Home/"
+  to = "/Home/home.html"
+  status = 301
+
+[[redirects]]
+  from = "/Shop/"
+  to = "/Shop/shop.html"
+  status = 301
+
+[[redirects]]
+  from = "/Collections/"
+  to = "/Collections/collections.html"
+  status = 301
+
+[[redirects]]
+  from = "/Contact/"
+  to = "/Contact/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/Offers/"
+  to = "/Offers/offers.html"
+  status = 301
+
+[[redirects]]
+  from = "/Search/"
+  to = "/Search/search.html"
+  status = 301
+
+[[redirects]]
+  from = "/nav-btn/"
+  to = "/nav-btn/cart.html"
+  status = 301
 
 [[headers]]
   for = "/*"
