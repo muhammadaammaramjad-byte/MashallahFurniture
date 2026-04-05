@@ -37,21 +37,20 @@ class DataService {
             // Load admin products from localStorage
             const adminProducts = JSON.parse(localStorage.getItem('mashallah_products') || '[]');
 
-            // Combine products, prioritizing admin products
-            let allProducts = [];
+            // Combine products: admin products take priority, then add static products that don't conflict
+            let allProducts = [...adminProducts]; // Start with admin products
 
-            if (adminProducts.length > 0) {
-                // Use admin products if available
-                allProducts = adminProducts;
-            } else {
-                // Fallback to static products
-                allProducts = staticProducts.filter(product => this.validateProduct(product));
-            }
+            // Add static products that don't have IDs conflicting with admin products
+            const adminIds = new Set(adminProducts.map(p => p.id));
+            const additionalStaticProducts = staticProducts
+                .filter(product => this.validateProduct(product) && !adminIds.has(product.id));
+
+            allProducts = allProducts.concat(additionalStaticProducts);
 
             // Cache the results
             this.setCache(cacheKey, allProducts);
 
-            console.log(`✅ Loaded ${allProducts.length} products (${adminProducts.length} admin, ${staticProducts.length} static)`);
+            console.log(`✅ Loaded ${allProducts.length} products (${adminProducts.length} admin, ${additionalStaticProducts.length} static)`);
             return allProducts;
 
         } catch (error) {

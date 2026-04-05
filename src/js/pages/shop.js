@@ -29,6 +29,8 @@ class ShopPage {
     async refreshProducts() {
         try {
             showLoader();
+            // Clear dataService cache to ensure fresh data
+            dataService.clearCache();
             await this.loadCategories();
             await this.loadProducts();
             this.renderProducts();
@@ -60,14 +62,8 @@ class ShopPage {
 
     async loadCategories() {
         try {
-            // Load admin products first (priority)
-            const adminProducts = JSON.parse(localStorage.getItem('mashallah_products') || '[]');
-            let productsForCategories = adminProducts;
-
-            if (adminProducts.length === 0) {
-                // Fallback to static products
-                productsForCategories = await dataService.getProducts();
-            }
+            // Use dataService to get all products (admin + static)
+            const productsForCategories = await dataService.getProducts();
 
             // Extract unique categories
             const categorySet = new Set(productsForCategories.map(p => p.category).filter(Boolean));
@@ -82,24 +78,21 @@ class ShopPage {
 
     async loadProducts() {
         try {
-            // Load admin products from localStorage first (priority)
-            const adminProducts = JSON.parse(localStorage.getItem('mashallah_products') || '[]');
+            // Use dataService which handles admin products + static products automatically
+            const products = await dataService.getProducts();
 
-            if (adminProducts.length > 0) {
-                // Use admin products if available
-                this.allProducts = adminProducts;
+            if (products.length > 0) {
+                this.allProducts = products;
                 this.filteredProducts = [...this.allProducts];
-                console.log(`✅ Loaded ${adminProducts.length} products from admin panel`);
+                console.log(`✅ Loaded ${products.length} products from dataService`);
             } else {
-                // Fallback to static JSON products
-                const staticProducts = await dataService.getProducts();
-                this.allProducts = staticProducts;
-                this.filteredProducts = [...this.allProducts];
-                console.log(`✅ Loaded ${staticProducts.length} products from static JSON`);
+                console.warn('⚠️ No products loaded from dataService');
+                this.allProducts = [];
+                this.filteredProducts = [];
             }
 
         } catch (error) {
-            console.error('Error loading products:', error);
+            console.error('❌ Error loading products:', error);
             // Ultimate fallback
             this.allProducts = [];
             this.filteredProducts = [];
