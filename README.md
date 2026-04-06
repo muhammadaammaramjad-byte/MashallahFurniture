@@ -131,11 +131,11 @@ MashallahFurniture/
 2. Use filters and search to find specific items
 3. Add items to cart or wishlist
 4. View cart summary in the slide-out mini cart
-5. Proceed to full cart page for checkout
+5. Proceed to the full cart page for checkout
 
 ### Account & Wallet
 - Create/manage user account
-- Add funds to wallet for purchases
+- Add funds to the wallet for purchases
 - View order history and saved items
 
 ## 🎨 Design Philosophy
@@ -159,7 +159,7 @@ The project uses a custom component system for reusability:
 - LocalStorage integration for persistence
 
 ### Adding New Features
-1. Create component in `components/` folder
+1. Create a component in the `components/` folder
 2. Include via `data-include` attribute
 3. Update navigation links as needed
 4. Test across all pages
