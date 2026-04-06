@@ -1,4 +1,4 @@
-# MashallahFurniture
+# MashallahFurniture 🛋️
 
 A modern, responsive e-commerce website for premium furniture showcasing elegant designs with advanced shopping features.
 
