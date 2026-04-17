@@ -1,0 +1,66 @@
+[
+  {
+    "id": "living-room",
+    "name": "Living Room",
+    "description": "Sofas, armchairs, coffee tables, and accents that set the stage for everyday comfort.",
+    "image": "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=1200&q=80",
+    "productCount": 6,
+    "featuredTags": ["sofas", "loveseats", "coffee tables", "ottomans"]
+  },
+  {
+    "id": "bedroom",
+    "name": "Bedroom",
+    "description": "Beds, nightstands, and wardrobes crafted for calm, restorative sleep.",
+    "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+    "productCount": 5,
+    "featuredTags": ["beds", "mattresses", "wardrobes", "nightstands"]
+  },
+  {
+    "id": "dining",
+    "name": "Dining",
+    "description": "Dining tables and chairs built for family gatherings and dinner parties.",
+    "image": "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=1200&q=80",
+    "productCount": 4,
+    "featuredTags": ["tables", "chairs", "benches", "sideboards"]
+  },
+  {
+    "id": "office",
+    "name": "Home Office",
+    "description": "Desks, task seating, and storage designed for focus, comfort, and productivity.",
+    "image": "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&w=1200&q=80",
+    "productCount": 3,
+    "featuredTags": ["desks", "office chairs", "bookcases"]
+  },
+  {
+    "id": "lighting",
+    "name": "Lighting",
+    "description": "Statement chandeliers, floor lamps, and bedside lighting to set every mood.",
+    "image": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1200&q=80",
+    "productCount": 3,
+    "featuredTags": ["floor lamps", "chandeliers", "table lamps"]
+  },
+  {
+    "id": "outdoor",
+    "name": "Outdoor",
+    "description": "Weather-ready teak and all-season furniture for patios and balconies.",
+    "image": "https://images.unsplash.com/photo-1597072691206-96d8e2c66a05?auto=format&fit=crop&w=1200&q=80",
+    "productCount": 1,
+    "featuredTags": ["lounge sets", "dining sets", "loungers"]
+  },
+  {
+    "id": "kids",
+    "name": "Kids",
+    "description": "Safe, durable furniture that grows with your kids — tested to U.S. ASTM safety standards.",
+    "image": "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80",
+    "productCount": 1,
+    "featuredTags": ["bunk beds", "bookcases", "kids seating"]
+  },
+  {
+    "id": "decor",
+    "name": "Decor & Accents",
+    "description": "Rugs, planters, wall art, and statement pieces to layer personality into any room.",
+    "image": "https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&w=1200&q=80",
+    "productCount": 4,
+    "featuredTags": ["rugs", "wall art", "planters", "ottomans"]
+  }
+]

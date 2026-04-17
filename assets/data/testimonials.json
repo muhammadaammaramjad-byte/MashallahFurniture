@@ -1,0 +1,68 @@
+[
+  {
+    "id": "t001",
+    "name": "Sarah Johnson",
+    "location": "New York, NY",
+    "avatar": "https://randomuser.me/api/portraits/women/65.jpg",
+    "rating": 5,
+    "product": "Velvet Tufted Sofa",
+    "verified": true,
+    "date": "2026-02-14",
+    "text": "I've never been happier with a furniture purchase. The quality is exceptional and it looks even better in person than online. Delivery was prompt and the assembly instructions were clear."
+  },
+  {
+    "id": "t002",
+    "name": "Michael Chen",
+    "location": "San Francisco, CA",
+    "avatar": "https://randomuser.me/api/portraits/men/32.jpg",
+    "rating": 5,
+    "product": "Smart Standing Desk",
+    "verified": true,
+    "date": "2026-01-22",
+    "text": "The customer service was outstanding. They helped me choose the perfect pieces for my home office and even provided ergonomic suggestions. The desk arrived ahead of schedule."
+  },
+  {
+    "id": "t003",
+    "name": "Emma Rodriguez",
+    "location": "Austin, TX",
+    "avatar": "https://randomuser.me/api/portraits/women/44.jpg",
+    "rating": 4.5,
+    "product": "Solid Oak Dining Table",
+    "verified": true,
+    "date": "2025-12-10",
+    "text": "After searching for months for the right dining set, I finally found it at Mashallah Furniture. The craftsmanship is impeccable and it's become the centerpiece of our home."
+  },
+  {
+    "id": "t004",
+    "name": "David Park",
+    "location": "Seattle, WA",
+    "avatar": "https://randomuser.me/api/portraits/men/76.jpg",
+    "rating": 5,
+    "product": "Japandi Platform Bed",
+    "verified": true,
+    "date": "2026-03-02",
+    "text": "The Japandi bed is so thoughtfully designed. Zero creaks after six months of daily use, and the finish is flawless. Plus the unboxing experience felt premium."
+  },
+  {
+    "id": "t005",
+    "name": "Priya Sharma",
+    "location": "London, UK",
+    "avatar": "https://randomuser.me/api/portraits/women/12.jpg",
+    "rating": 5,
+    "product": "Free Design Consultation",
+    "verified": true,
+    "date": "2026-03-18",
+    "text": "Their free design consultation was the highlight. The designer understood my small apartment's constraints and matched me with pieces that actually fit and look stunning."
+  },
+  {
+    "id": "t006",
+    "name": "James O'Connor",
+    "location": "Toronto, CA",
+    "avatar": "https://randomuser.me/api/portraits/men/47.jpg",
+    "rating": 4.5,
+    "product": "Mid-Century Media Console",
+    "verified": true,
+    "date": "2026-02-06",
+    "text": "Solid build, gorgeous cane detail, and cable management that actually works. Shipping was fast and the white-glove delivery option was worth every penny."
+  }
+]

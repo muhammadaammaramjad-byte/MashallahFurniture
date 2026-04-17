@@ -935,7 +935,7 @@ Tiny, performance-aware runtime
   }
 
   // Expose quick debug in window (optional)
-  window.RammaCursor = { spawnAura, burst, clickRipple, createRandomStar };
+  window.MashallahCursor = { spawnAura, burst, clickRipple, createRandomStar };
 
   // initial tiny flourish
   setTimeout(() => {

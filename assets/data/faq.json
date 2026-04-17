@@ -1,0 +1,66 @@
+[
+  {
+    "category": "Shipping & Delivery",
+    "items": [
+      {
+        "q": "How much does shipping cost?",
+        "a": "Standard shipping is free on orders over $99 within the continental US. Smaller orders ship for a flat $9.99. White-glove delivery (in-home placement + packaging removal) is available on larger items for $149."
+      },
+      {
+        "q": "How long will delivery take?",
+        "a": "Smaller accents typically arrive in 3–5 business days. Upholstered pieces and beds ship in 7–14 business days. Each product page shows an estimated lead time."
+      },
+      {
+        "q": "Do you ship internationally?",
+        "a": "Yes — we ship to Canada, the UK, and most EU countries. International shipping cost and delivery time are calculated at checkout."
+      }
+    ]
+  },
+  {
+    "category": "Returns & Warranty",
+    "items": [
+      {
+        "q": "What is your return policy?",
+        "a": "We offer a 30-day no-hassle return policy on most items. Mattresses come with a 100-night home trial. Custom orders are final sale."
+      },
+      {
+        "q": "Do your products come with a warranty?",
+        "a": "Yes. Most furniture comes with a 5-year structural warranty. Heritage pieces include a 10- or 15-year warranty. Warranty details are listed on each product page."
+      },
+      {
+        "q": "What if my item arrives damaged?",
+        "a": "Report damage within 7 days with photos, and we'll arrange a free replacement or full refund — whichever you prefer."
+      }
+    ]
+  },
+  {
+    "category": "Design & Customization",
+    "items": [
+      {
+        "q": "Do you offer a free design consultation?",
+        "a": "Yes. Book a complimentary 30-minute video consultation with one of our in-house designers. They'll help you pick pieces that fit your space, style, and budget."
+      },
+      {
+        "q": "Can I customize upholstery colors or materials?",
+        "a": "Many upholstered pieces offer fabric and leather customization. Look for the 'Customize' option on the product page. Lead times are 6–8 weeks for custom orders."
+      },
+      {
+        "q": "Do you offer trade pricing?",
+        "a": "Yes — interior designers, architects, and stagers can apply for our Trade Program for preferred pricing and dedicated support."
+      }
+    ]
+  },
+  {
+    "category": "Sustainability",
+    "items": [
+      {
+        "q": "Where do you source your materials?",
+        "a": "We work only with FSC-certified wood suppliers, LWG-certified leather tanneries, and OEKO-TEX certified fabrics. Each product page lists its sustainability credentials."
+      },
+      {
+        "q": "Do you take back old furniture?",
+        "a": "Yes — our 'Second Life' program picks up your old furniture when we deliver your new one, and donates or responsibly recycles it. Available in select cities."
+      }
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "luxury-velvet",
+    "name": "Luxury Velvet",
+    "tagline": "Deep-tufted silhouettes in rich, hand-dyed velvet.",
+    "story": "A family-run Milanese workshop hand-tufts each piece in this collection using Italian velvet and kiln-dried hardwood frames — built to last generations.",
+    "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80",
+    "productIds": ["fn001", "fn030"]
+  },
+  {
+    "id": "japandi-serenity",
+    "name": "Japandi Serenity",
+    "tagline": "Japanese restraint meets Scandinavian warmth.",
+    "story": "Low profiles, rounded edges, and natural ash. Every piece in Japandi Serenity is built to center a room without overwhelming it.",
+    "image": "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=1200&q=80",
+    "productIds": ["fn012"]
+  },
+  {
+    "id": "atelier-stone",
+    "name": "Atelier Stone",
+    "tagline": "Marble, terrazzo, and sculptural stone.",
+    "story": "Sourced from quarries operating water-recycling systems, our stone pieces are sealed to resist stains and built to become heirlooms.",
+    "image": "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?auto=format&fit=crop&w=1200&q=80",
+    "productIds": ["fn014", "fn022", "fn025", "fn029"]
+  },
+  {
+    "id": "golden-hour",
+    "name": "Golden Hour",
+    "tagline": "Brass, linen, and warm ambient light.",
+    "story": "Inspired by the last hour of daylight — our lighting collection combines brushed brass, linen shades, and dimmable warm bulbs to make every room feel like 6pm in June.",
+    "image": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80",
+    "productIds": ["fn006", "fn016", "fn021"]
+  },
+  {
+    "id": "studio-work",
+    "name": "Studio Work",
+    "tagline": "Ergonomic workspaces that put your body first.",
+    "story": "BIFMA-certified office chairs, height-adjustable desks, and cable-managed storage — engineered for creative professionals who spend hours at the desk.",
+    "image": "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&w=1200&q=80",
+    "productIds": ["fn008", "fn018", "fn028"]
+  },
+  {
+    "id": "terra-weave",
+    "name": "Terra Weave",
+    "tagline": "Hand-woven rattan, teak, and natural craft.",
+    "story": "Small-batch craft by artisan cooperatives in Bali. Naturally renewable materials, hand-tools, and techniques passed down through generations.",
+    "image": "https://images.unsplash.com/photo-1519961655809-34fa156820cf?auto=format&fit=crop&w=1200&q=80",
+    "productIds": ["fn015", "fn020", "fn026"]
+  }
+]

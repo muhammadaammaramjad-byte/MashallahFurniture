@@ -10,14 +10,31 @@
     "rating": 4.8,
     "reviews": 128,
     "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=958&q=80",
-    "inStock": true,
-    "colors": [
-      "teal",
-      "grey",
-      "navy"
+    "gallery": [
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80"
     ],
+    "inStock": true,
+    "stockCount": 18,
+    "colors": ["teal", "grey", "navy"],
     "badge": "NEW",
-    "description": "A plush velvet sofa with deep tufting and elegant curves for luxury living rooms."
+    "sku": "LUX-VLT-SF-001",
+    "description": "A plush velvet sofa with deep tufting and elegant curves for luxury living rooms.",
+    "highlights": [
+      "Hand-tufted premium Italian velvet",
+      "Kiln-dried hardwood frame with corner-blocked joinery",
+      "High-resilience foam cushions wrapped in down-alternative fill"
+    ],
+    "materials": ["Italian velvet", "Kiln-dried hardwood", "Stainless steel legs"],
+    "dimensions": { "width": 220, "depth": 94, "height": 82, "unit": "cm" },
+    "weightKg": 68,
+    "features": ["Stain-resistant finish", "Removable cushion covers", "Flame-retardant foam"],
+    "warranty": "10-year structural warranty",
+    "assembly": "Legs attach with provided bolts; 10 minutes, no tools needed",
+    "shippingTime": "7–10 business days",
+    "sustainability": ["FSC-certified wood", "OEKO-TEX certified fabric"],
+    "tags": ["living-room", "luxury", "velvet", "tufted", "statement"]
   },
   {
     "id": "fn002",
@@ -30,13 +47,30 @@
     "rating": 4.9,
     "reviews": 76,
     "image": "https://images.unsplash.com/photo-1549187774-b4e9d37b4f3c?auto=format&fit=crop&w=930&q=80",
-    "inStock": true,
-    "colors": [
-      "oak",
-      "walnut"
+    "gallery": [
+      "https://images.unsplash.com/photo-1549187774-b4e9d37b4f3c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=1200&q=80"
     ],
+    "inStock": true,
+    "stockCount": 9,
+    "colors": ["oak", "walnut"],
     "badge": "SALE",
-    "description": "A durable solid oak dining table with a warm finish and timeless silhouette."
+    "sku": "RUS-OAK-DT-002",
+    "description": "A durable solid oak dining table with a warm finish and timeless silhouette.",
+    "highlights": [
+      "Crafted from a single slab of sustainably harvested oak",
+      "Water-based natural oil finish",
+      "Seats 6 comfortably"
+    ],
+    "materials": ["Solid oak", "Natural oil finish"],
+    "dimensions": { "width": 180, "depth": 90, "height": 75, "unit": "cm" },
+    "weightKg": 54,
+    "features": ["Food-safe finish", "Scratch-resistant surface", "Extendable to 240cm"],
+    "warranty": "15-year craftsmanship warranty",
+    "assembly": "Base attaches with 4 bolts; 20 minutes with included hex key",
+    "shippingTime": "10–14 business days",
+    "sustainability": ["FSC-certified solid wood", "Non-toxic natural oil finish"],
+    "tags": ["dining", "oak", "farmhouse", "family"]
   },
   {
     "id": "fn003",
@@ -49,14 +83,30 @@
     "rating": 4.6,
     "reviews": 98,
     "image": "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=930&q=80",
-    "inStock": true,
-    "colors": [
-      "white",
-      "black",
-      "sage"
+    "gallery": [
+      "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1200&q=80"
     ],
+    "inStock": true,
+    "stockCount": 24,
+    "colors": ["white", "black", "sage"],
     "badge": "POPULAR",
-    "description": "A sleek accent chair with soft upholstery and a compact footprint for modern interiors."
+    "sku": "MMN-ARM-CH-003",
+    "description": "A sleek accent chair with soft upholstery and a compact footprint for modern interiors.",
+    "highlights": [
+      "Ergonomic lumbar support",
+      "Boucle-style woven fabric",
+      "Perfect for small spaces and reading nooks"
+    ],
+    "materials": ["Boucle-blend fabric", "Engineered wood frame", "Powder-coated steel legs"],
+    "dimensions": { "width": 72, "depth": 78, "height": 82, "unit": "cm" },
+    "weightKg": 14,
+    "features": ["Compact footprint", "Low-profile silhouette", "Stain-guard treatment"],
+    "warranty": "5-year warranty",
+    "assembly": "Legs screw on; 5 minutes, no tools needed",
+    "shippingTime": "5–7 business days",
+    "sustainability": ["Recycled polyester fill", "Low-VOC finish"],
+    "tags": ["accent", "boucle", "small-space", "minimal"]
   },
   {
     "id": "fn004",
@@ -69,13 +119,30 @@
     "rating": 4.5,
     "reviews": 54,
     "image": "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=774&q=80",
-    "inStock": true,
-    "colors": [
-      "black",
-      "white"
+    "gallery": [
+      "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1200&q=80"
     ],
+    "inStock": true,
+    "stockCount": 12,
+    "colors": ["black", "white"],
     "badge": "TRENDING",
-    "description": "A modern console table with edge lighting and hidden storage for contemporary foyers."
+    "sku": "CGL-CON-TB-004",
+    "description": "A modern console table with edge lighting and hidden storage for contemporary foyers.",
+    "highlights": [
+      "Integrated ambient LED strip (warm white)",
+      "Smart-touch dimmer",
+      "Soft-close drawers with felt-lined interiors"
+    ],
+    "materials": ["Engineered wood", "Brushed aluminum trim", "Tempered glass top"],
+    "dimensions": { "width": 140, "depth": 38, "height": 78, "unit": "cm" },
+    "weightKg": 32,
+    "features": ["LED edge lighting", "Two soft-close drawers", "Cable management channel"],
+    "warranty": "3-year warranty, 1-year LED warranty",
+    "assembly": "About 30 minutes; all hardware included",
+    "shippingTime": "7–10 business days",
+    "sustainability": ["Low-emission MDF (CARB2)"],
+    "tags": ["entryway", "storage", "lit", "modern"]
   },
   {
     "id": "fn005",
@@ -88,13 +155,31 @@
     "rating": 4.9,
     "reviews": 42,
     "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
-    "inStock": false,
-    "colors": [
-      "sand",
-      "cream"
+    "gallery": [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80"
     ],
+    "inStock": false,
+    "stockCount": 0,
+    "restockDate": "2026-05-20",
+    "colors": ["sand", "cream"],
     "badge": "OUT OF STOCK",
-    "description": "A luxurious linen bed frame with a soft upholstered headboard and coastal-inspired styling."
+    "sku": "CLN-LIN-BD-005",
+    "description": "A luxurious linen bed frame with a soft upholstered headboard and coastal-inspired styling.",
+    "highlights": [
+      "European flax linen upholstery",
+      "Slatted base — no box spring required",
+      "Reinforced wooden frame for long-lasting durability"
+    ],
+    "materials": ["European flax linen", "Solid pine slats", "Hardwood frame"],
+    "dimensions": { "width": 170, "depth": 215, "height": 120, "unit": "cm" },
+    "weightKg": 62,
+    "features": ["King size", "Removable slipcover (dry clean)", "No box spring needed"],
+    "warranty": "10-year frame warranty",
+    "assembly": "About 45 minutes for two people",
+    "shippingTime": "12–18 business days",
+    "sustainability": ["European flax (low water usage)", "FSC-certified pine slats"],
+    "tags": ["bedroom", "king", "upholstered", "coastal"]
   },
   {
     "id": "fn006",
@@ -107,13 +192,30 @@
     "rating": 4.7,
     "reviews": 68,
     "image": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=870&q=80",
-    "inStock": true,
-    "colors": [
-      "brass",
-      "black"
+    "gallery": [
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1200&q=80"
     ],
+    "inStock": true,
+    "stockCount": 33,
+    "colors": ["brass", "black"],
     "badge": "BEST SELLER",
-    "description": "A timeless brass floor lamp with soft warm light and an elegant slim profile."
+    "sku": "GLD-BRS-FL-006",
+    "description": "A timeless brass floor lamp with soft warm light and an elegant slim profile.",
+    "highlights": [
+      "Solid brushed brass body",
+      "Linen shade softly diffuses warm light",
+      "Smart bulb compatible (E27)"
+    ],
+    "materials": ["Brushed brass", "Linen shade", "Marble base"],
+    "dimensions": { "width": 42, "depth": 42, "height": 155, "unit": "cm" },
+    "weightKg": 9,
+    "features": ["Dimmable (bulb-dependent)", "Step-foot switch", "Smart bulb compatible"],
+    "warranty": "3-year warranty",
+    "assembly": "Shade attaches to stem; 5 minutes",
+    "shippingTime": "3–5 business days",
+    "sustainability": ["Recycled brass (30%)"],
+    "tags": ["lighting", "ambient", "brass", "accent"]
   },
   {
     "id": "fn007",
@@ -126,13 +228,30 @@
     "rating": 4.7,
     "reviews": 142,
     "image": "https://images.unsplash.com/photo-1551298370-9d3d53740c72?auto=format&fit=crop&w=687&q=80",
-    "inStock": true,
-    "colors": [
-      "walnut",
-      "white"
+    "gallery": [
+      "https://images.unsplash.com/photo-1551298370-9d3d53740c72?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=1200&q=80"
     ],
+    "inStock": true,
+    "stockCount": 7,
+    "colors": ["walnut", "white"],
     "badge": "DEAL",
-    "description": "A modular bookshelf system designed for flexible storage and curated display."
+    "sku": "URB-MDB-BS-007",
+    "description": "A modular bookshelf system designed for flexible storage and curated display.",
+    "highlights": [
+      "Re-configurable modular design",
+      "Floor-to-ceiling install option with anti-tip kit",
+      "Mix-and-match open shelves and closed cabinets"
+    ],
+    "materials": ["Walnut veneer", "Powder-coated steel"],
+    "dimensions": { "width": 200, "depth": 38, "height": 220, "unit": "cm" },
+    "weightKg": 85,
+    "features": ["Anti-tip hardware included", "Expandable modules", "Cable pass-throughs"],
+    "warranty": "10-year structural warranty",
+    "assembly": "Two-person, ~90 minutes",
+    "shippingTime": "10–14 business days",
+    "sustainability": ["Formaldehyde-free adhesive"],
+    "tags": ["shelving", "modular", "storage", "walnut"]
   },
   {
     "id": "fn008",
@@ -145,13 +264,30 @@
     "rating": 4.5,
     "reviews": 113,
     "image": "https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=464&q=80",
-    "inStock": true,
-    "colors": [
-      "black",
-      "white"
+    "gallery": [
+      "https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1200&q=80"
     ],
+    "inStock": true,
+    "stockCount": 21,
+    "colors": ["black", "white"],
     "badge": "NEW",
-    "description": "A clean-lined writing desk with cable management and a compact footprint."
+    "sku": "STW-MIN-DK-008",
+    "description": "A clean-lined writing desk with cable management and a compact footprint.",
+    "highlights": [
+      "Hidden rear cable tray",
+      "Ergonomic height (75cm)",
+      "Anti-fingerprint matte finish"
+    ],
+    "materials": ["Powder-coated steel", "Engineered wood top"],
+    "dimensions": { "width": 120, "depth": 60, "height": 75, "unit": "cm" },
+    "weightKg": 22,
+    "features": ["Cable management tray", "Leveling feet", "Single shallow drawer"],
+    "warranty": "5-year warranty",
+    "assembly": "~25 minutes",
+    "shippingTime": "5–7 business days",
+    "sustainability": ["Recycled steel (40%)", "Low-VOC finish"],
+    "tags": ["office", "desk", "workspace", "compact"]
   },
   {
     "id": "fn009",
@@ -164,13 +300,29 @@
     "rating": 4.4,
     "reviews": 87,
     "image": "https://images.unsplash.com/photo-1519710164239-da123dc03ef5?auto=format&fit=crop&w=500&q=80",
-    "inStock": true,
-    "colors": [
-      "brown",
-      "tan"
+    "gallery": [
+      "https://images.unsplash.com/photo-1519710164239-da123dc03ef5?auto=format&fit=crop&w=1200&q=80"
     ],
+    "inStock": true,
+    "stockCount": 15,
+    "colors": ["brown", "tan"],
     "badge": "LIMITED",
-    "description": "A handcrafted leather ottoman with rustic stitching and soft seating."
+    "sku": "RLX-LTH-OT-009",
+    "description": "A handcrafted leather ottoman with rustic stitching and soft seating.",
+    "highlights": [
+      "Full-grain top-dyed leather that patinas beautifully",
+      "Hand-stitched with waxed thread",
+      "Doubles as extra seating or coffee-table surface"
+    ],
+    "materials": ["Full-grain leather", "Hardwood frame", "High-density foam"],
+    "dimensions": { "width": 65, "depth": 65, "height": 42, "unit": "cm" },
+    "weightKg": 12,
+    "features": ["Reversible tray top available", "Non-slip base"],
+    "warranty": "3-year warranty",
+    "assembly": "No assembly required",
+    "shippingTime": "5–7 business days",
+    "sustainability": ["LWG-certified tannery"],
+    "tags": ["accent", "leather", "rustic", "seating"]
   },
   {
     "id": "fn010",
@@ -183,12 +335,729 @@
     "rating": 4.6,
     "reviews": 62,
     "image": "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=500&q=80",
-    "inStock": true,
-    "colors": [
-      "birch",
-      "white"
+    "gallery": [
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80"
     ],
+    "inStock": true,
+    "stockCount": 40,
+    "colors": ["birch", "white"],
     "badge": "POPULAR",
-    "description": "A compact nordic-inspired side table with a clean silhouette and light finish."
+    "sku": "NRD-SDE-TB-010",
+    "description": "A compact nordic-inspired side table with a clean silhouette and light finish.",
+    "highlights": [
+      "Solid birch legs with natural wax finish",
+      "Versatile — pairs with sofas, chairs, or beds",
+      "Arrives fully assembled"
+    ],
+    "materials": ["Solid birch", "Engineered top", "Natural wax finish"],
+    "dimensions": { "width": 45, "depth": 45, "height": 55, "unit": "cm" },
+    "weightKg": 7,
+    "features": ["Flat-bottom construction", "Scratch-resistant top"],
+    "warranty": "5-year warranty",
+    "assembly": "No assembly required",
+    "shippingTime": "3–5 business days",
+    "sustainability": ["FSC-certified birch"],
+    "tags": ["side-table", "scandi", "birch", "small"]
+  },
+  {
+    "id": "fn011",
+    "name": "Boucle Curved Loveseat",
+    "brand": "Cloud Studio",
+    "category": "Sofas",
+    "collection": "Cloud Studio",
+    "price": 1099,
+    "oldPrice": 1399,
+    "rating": 4.8,
+    "reviews": 54,
+    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 6,
+    "colors": ["ivory", "sand", "charcoal"],
+    "badge": "NEW",
+    "sku": "CLD-BCL-LS-011",
+    "description": "A sculptural curved loveseat upholstered in soft boucle — a modern statement for compact living spaces.",
+    "highlights": [
+      "Curved silhouette with no sharp edges",
+      "Plush dual-density seat cushions",
+      "Hand-upholstered by master craftspeople"
+    ],
+    "materials": ["Premium boucle", "Kiln-dried hardwood", "Stainless steel hardware"],
+    "dimensions": { "width": 170, "depth": 90, "height": 78, "unit": "cm" },
+    "weightKg": 48,
+    "features": ["Deep seat for lounging", "Plush lumbar pillow included", "Zippered cushion covers"],
+    "warranty": "10-year frame warranty",
+    "assembly": "Legs attach via bolts; 10 minutes",
+    "shippingTime": "10–14 business days",
+    "sustainability": ["Recycled polyester fill", "FSC-certified frame"],
+    "tags": ["loveseat", "curved", "boucle", "statement"]
+  },
+  {
+    "id": "fn012",
+    "name": "Japandi Platform Bed",
+    "brand": "Hinoki",
+    "category": "Beds",
+    "collection": "Japandi Serenity",
+    "price": 899,
+    "oldPrice": null,
+    "rating": 4.9,
+    "reviews": 76,
+    "image": "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 11,
+    "colors": ["natural", "walnut", "black"],
+    "badge": "ECO",
+    "sku": "HNK-JPD-BD-012",
+    "description": "A low-profile platform bed blending Japanese restraint with Scandinavian warmth.",
+    "highlights": [
+      "Low-profile floor-hugging silhouette",
+      "Solid wood slats — no box spring",
+      "Soft rounded edges throughout"
+    ],
+    "materials": ["Solid ash wood", "Water-based finish"],
+    "dimensions": { "width": 160, "depth": 210, "height": 30, "unit": "cm" },
+    "weightKg": 55,
+    "features": ["Queen size", "Under-bed clearance: 18cm", "Solid slats — no box spring"],
+    "warranty": "15-year structural warranty",
+    "assembly": "~40 minutes for two people",
+    "shippingTime": "10–14 business days",
+    "sustainability": ["FSC-certified ash", "Water-based finish"],
+    "tags": ["bedroom", "japandi", "platform", "minimal"]
+  },
+  {
+    "id": "fn013",
+    "name": "Smart Reclining Media Chair",
+    "brand": "Kinetic Home",
+    "category": "Chairs",
+    "collection": "Kinetic Home",
+    "price": 1299,
+    "oldPrice": 1599,
+    "rating": 4.6,
+    "reviews": 89,
+    "image": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 4,
+    "colors": ["charcoal", "espresso"],
+    "badge": "TECH",
+    "sku": "KNT-RCL-CH-013",
+    "description": "A power-reclining media chair with built-in USB-C ports, cup holders, and memory positions.",
+    "highlights": [
+      "Power recline with memory positions",
+      "Built-in USB-C and USB-A charging",
+      "Heated lumbar and massage functions"
+    ],
+    "materials": ["Top-grain leather", "Engineered hardwood frame", "High-density foam"],
+    "dimensions": { "width": 96, "depth": 104, "height": 108, "unit": "cm" },
+    "weightKg": 43,
+    "features": ["Power recline", "USB-C + USB-A charging", "Heat + massage", "Memory positions"],
+    "warranty": "5-year mechanical, 3-year electrical",
+    "assembly": "~20 minutes; power cord included",
+    "shippingTime": "7–10 business days",
+    "sustainability": ["LWG-certified leather"],
+    "tags": ["media", "recliner", "tech", "smart"]
+  },
+  {
+    "id": "fn014",
+    "name": "Marble-Top Coffee Table",
+    "brand": "Atelier Stone",
+    "category": "Tables",
+    "collection": "Atelier Stone",
+    "price": 749,
+    "oldPrice": 899,
+    "rating": 4.7,
+    "reviews": 61,
+    "image": "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 8,
+    "colors": ["carrara", "black-marquina"],
+    "badge": "LUXE",
+    "sku": "ATL-MRB-CT-014",
+    "description": "An oval coffee table with genuine Italian Carrara marble top and brushed brass base.",
+    "highlights": [
+      "Genuine Italian Carrara marble",
+      "Sealed to resist stains and etching",
+      "Brushed brass base for warm contrast"
+    ],
+    "materials": ["Italian Carrara marble", "Brushed brass"],
+    "dimensions": { "width": 130, "depth": 72, "height": 42, "unit": "cm" },
+    "weightKg": 58,
+    "features": ["Sealed marble — stain resistant", "Felt-lined feet"],
+    "warranty": "5-year warranty",
+    "assembly": "Top rests on base, ~15 minutes",
+    "shippingTime": "10–14 business days",
+    "sustainability": ["Quarried with water-recycling operations"],
+    "tags": ["coffee-table", "marble", "brass", "luxe"]
+  },
+  {
+    "id": "fn015",
+    "name": "Rattan Peacock Accent Chair",
+    "brand": "Terra Weave",
+    "category": "Chairs",
+    "collection": "Terra Weave",
+    "price": 459,
+    "oldPrice": null,
+    "rating": 4.5,
+    "reviews": 47,
+    "image": "https://images.unsplash.com/photo-1519961655809-34fa156820cf?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1519961655809-34fa156820cf?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 13,
+    "colors": ["natural"],
+    "badge": "HANDMADE",
+    "sku": "TRW-RTN-CH-015",
+    "description": "A hand-woven rattan peacock chair with sculptural presence and boho elegance.",
+    "highlights": [
+      "100% natural rattan, hand-woven",
+      "Sculptural fan-back silhouette",
+      "Indoor use recommended"
+    ],
+    "materials": ["Natural rattan", "Bamboo frame"],
+    "dimensions": { "width": 90, "depth": 80, "height": 150, "unit": "cm" },
+    "weightKg": 11,
+    "features": ["Hand-woven in small batches", "Lightweight, easy to move"],
+    "warranty": "2-year warranty",
+    "assembly": "No assembly required",
+    "shippingTime": "7–10 business days",
+    "sustainability": ["Naturally renewable rattan"],
+    "tags": ["boho", "rattan", "accent", "statement"]
+  },
+  {
+    "id": "fn016",
+    "name": "Pendant Globe Chandelier",
+    "brand": "Golden Hour",
+    "category": "Lighting",
+    "collection": "Golden Hour",
+    "price": 329,
+    "oldPrice": null,
+    "rating": 4.6,
+    "reviews": 52,
+    "image": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 18,
+    "colors": ["brass", "matte-black"],
+    "badge": "NEW",
+    "sku": "GLD-GLB-PD-016",
+    "description": "A sculptural 6-globe chandelier with adjustable arms, perfect for dining and foyers.",
+    "highlights": [
+      "Six adjustable arms",
+      "Dimmable with compatible bulbs",
+      "UL-listed for dry locations"
+    ],
+    "materials": ["Brushed brass", "Opal glass globes"],
+    "dimensions": { "width": 85, "depth": 85, "height": 60, "unit": "cm" },
+    "weightKg": 8,
+    "features": ["Adjustable arms", "Dimmable", "Hard-wired"],
+    "warranty": "3-year warranty",
+    "assembly": "Professional installation recommended",
+    "shippingTime": "5–7 business days",
+    "sustainability": ["Recycled brass (30%)"],
+    "tags": ["lighting", "chandelier", "dining", "foyer"]
+  },
+  {
+    "id": "fn017",
+    "name": "Handwoven Wool Area Rug 8x10",
+    "brand": "Heritage Looms",
+    "category": "Rugs",
+    "collection": "Heritage Looms",
+    "price": 549,
+    "oldPrice": 749,
+    "rating": 4.8,
+    "reviews": 103,
+    "image": "https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 22,
+    "colors": ["ivory", "terracotta", "olive"],
+    "badge": "SALE",
+    "sku": "HRL-WL8X10-017",
+    "description": "A hand-woven 8x10 ft wool rug with neutral tones and a timeless pattern.",
+    "highlights": [
+      "Hand-woven by artisan cooperatives",
+      "100% New Zealand wool",
+      "Naturally flame-resistant"
+    ],
+    "materials": ["100% wool", "Cotton backing"],
+    "dimensions": { "width": 244, "depth": 305, "height": 1, "unit": "cm" },
+    "weightKg": 18,
+    "features": ["Hand-woven", "Low-pile", "Rug pad recommended"],
+    "warranty": "2-year warranty",
+    "assembly": "Unroll and flatten",
+    "shippingTime": "5–7 business days",
+    "sustainability": ["Fair Trade certified", "Natural fibers"],
+    "tags": ["rug", "wool", "living-room", "handmade"]
+  },
+  {
+    "id": "fn018",
+    "name": "Ergonomic Executive Chair",
+    "brand": "Studio Work",
+    "category": "Chairs",
+    "collection": "Studio Work",
+    "price": 649,
+    "oldPrice": 799,
+    "rating": 4.7,
+    "reviews": 188,
+    "image": "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 17,
+    "colors": ["black", "grey"],
+    "badge": "ERGONOMIC",
+    "sku": "STW-ERG-EX-018",
+    "description": "An ergonomic executive chair with adaptive lumbar support, adjustable arms, and breathable mesh.",
+    "highlights": [
+      "4D adjustable armrests",
+      "Adaptive lumbar support",
+      "Breathable elastic-mesh back"
+    ],
+    "materials": ["Elastic mesh", "Aluminum base", "PU-leather seat"],
+    "dimensions": { "width": 68, "depth": 68, "height": 125, "unit": "cm" },
+    "weightKg": 19,
+    "features": ["Tilt-lock", "Height + depth adjust", "Synchro-tilt mechanism"],
+    "warranty": "12-year warranty (BIFMA certified)",
+    "assembly": "~20 minutes; tools included",
+    "shippingTime": "3–5 business days",
+    "sustainability": ["BIFMA Level 2 certified", "Recycled aluminum base"],
+    "tags": ["office", "ergonomic", "mesh", "home-office"]
+  },
+  {
+    "id": "fn019",
+    "name": "Industrial Open Wardrobe",
+    "brand": "UrbanFlame",
+    "category": "Storage",
+    "collection": "Urban Organics",
+    "price": 479,
+    "oldPrice": 579,
+    "rating": 4.4,
+    "reviews": 71,
+    "image": "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 14,
+    "colors": ["walnut-black", "oak-black"],
+    "badge": "DEAL",
+    "sku": "URB-IND-WR-019",
+    "description": "An industrial-style open wardrobe with hanging rod, shoe shelves, and adjustable storage.",
+    "highlights": [
+      "Open-style design — easy access",
+      "Floor-to-ceiling storage",
+      "Powder-coated steel frame"
+    ],
+    "materials": ["Powder-coated steel", "Engineered wood shelves"],
+    "dimensions": { "width": 150, "depth": 50, "height": 200, "unit": "cm" },
+    "weightKg": 38,
+    "features": ["Adjustable shelves", "Hanging rod", "Anti-tip kit included"],
+    "warranty": "5-year warranty",
+    "assembly": "~60 minutes for two people",
+    "shippingTime": "7–10 business days",
+    "sustainability": ["Recycled steel (50%)"],
+    "tags": ["bedroom", "storage", "wardrobe", "industrial"]
+  },
+  {
+    "id": "fn020",
+    "name": "Outdoor Teak Lounge Set (3-piece)",
+    "brand": "Terra Weave",
+    "category": "Outdoor",
+    "collection": "Terra Weave",
+    "price": 1899,
+    "oldPrice": 2299,
+    "rating": 4.8,
+    "reviews": 39,
+    "image": "https://images.unsplash.com/photo-1597072691206-96d8e2c66a05?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1597072691206-96d8e2c66a05?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 5,
+    "colors": ["teak-natural"],
+    "badge": "OUTDOOR",
+    "sku": "TRW-OUT-LS-020",
+    "description": "A 3-piece outdoor teak lounge set: sofa, two chairs, and quick-dry weatherproof cushions.",
+    "highlights": [
+      "Genuine plantation-grown teak",
+      "Quick-dry, fade-resistant cushions",
+      "Weathers gracefully to a silver-grey patina"
+    ],
+    "materials": ["Plantation teak", "Sunbrella-style outdoor fabric"],
+    "dimensions": { "width": 205, "depth": 85, "height": 75, "unit": "cm" },
+    "weightKg": 92,
+    "features": ["Weather-resistant", "Quick-dry foam cushions", "UV-resistant fabric"],
+    "warranty": "5-year structural, 2-year fabric",
+    "assembly": "~60 minutes for two people",
+    "shippingTime": "10–18 business days",
+    "sustainability": ["FSC-certified plantation teak", "Recycled-poly cushion fill"],
+    "tags": ["outdoor", "teak", "patio", "lounge"]
+  },
+  {
+    "id": "fn021",
+    "name": "Ceramic Table Lamp Pair",
+    "brand": "Golden Hour",
+    "category": "Lighting",
+    "collection": "Golden Hour",
+    "price": 189,
+    "oldPrice": 239,
+    "rating": 4.6,
+    "reviews": 72,
+    "image": "https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 24,
+    "colors": ["ivory", "sage"],
+    "badge": "PAIR",
+    "sku": "GLD-CRM-TL-021",
+    "description": "A matched pair of ceramic table lamps with linen shades — ideal for bedrooms and living rooms.",
+    "highlights": [
+      "Sold as a matched pair",
+      "Hand-glazed ceramic bases",
+      "USB-A port built into the base"
+    ],
+    "materials": ["Hand-glazed ceramic", "Linen drum shade"],
+    "dimensions": { "width": 35, "depth": 35, "height": 62, "unit": "cm" },
+    "weightKg": 6,
+    "features": ["Pair of 2", "USB-A port in base", "In-line switch"],
+    "warranty": "2-year warranty",
+    "assembly": "Shade attaches to harp; 5 minutes each",
+    "shippingTime": "3–5 business days",
+    "sustainability": ["Lead-free glazes"],
+    "tags": ["lighting", "bedside", "pair", "ceramic"]
+  },
+  {
+    "id": "fn022",
+    "name": "Mid-Century Media Console",
+    "brand": "Atelier Stone",
+    "category": "Storage",
+    "collection": "Atelier Stone",
+    "price": 899,
+    "oldPrice": null,
+    "rating": 4.7,
+    "reviews": 58,
+    "image": "https://images.unsplash.com/photo-1519710164239-da123dc03ef6?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1519710164239-da123dc03ef6?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 10,
+    "colors": ["walnut", "ash"],
+    "badge": "BEST SELLER",
+    "sku": "ATL-MCC-MD-022",
+    "description": "A tapered-leg mid-century media console with cane doors and cable management.",
+    "highlights": [
+      "Hand-woven cane door fronts",
+      "Tapered solid wood legs",
+      "Cable management cutouts"
+    ],
+    "materials": ["Walnut veneer", "Natural cane", "Solid wood legs"],
+    "dimensions": { "width": 170, "depth": 40, "height": 60, "unit": "cm" },
+    "weightKg": 36,
+    "features": ["Fits 70\" TVs", "Soft-close doors", "Adjustable interior shelves"],
+    "warranty": "5-year warranty",
+    "assembly": "~30 minutes",
+    "shippingTime": "7–10 business days",
+    "sustainability": ["FSC-certified veneers"],
+    "tags": ["media", "mid-century", "cane", "storage"]
+  },
+  {
+    "id": "fn023",
+    "name": "Upholstered Dining Chairs (Set of 4)",
+    "brand": "Rustic Oak",
+    "category": "Chairs",
+    "collection": "Rustic Oak",
+    "price": 499,
+    "oldPrice": 649,
+    "rating": 4.5,
+    "reviews": 124,
+    "image": "https://images.unsplash.com/photo-1561365452-adb940139ffa?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1561365452-adb940139ffa?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 16,
+    "colors": ["oat", "charcoal", "terracotta"],
+    "badge": "SET",
+    "sku": "RUS-UPH-DC-023",
+    "description": "A set of 4 upholstered dining chairs with solid oak legs and stain-resistant performance fabric.",
+    "highlights": [
+      "Performance fabric — easy to clean",
+      "Solid oak legs",
+      "Sold as a matched set of 4"
+    ],
+    "materials": ["Performance poly-blend fabric", "Solid oak legs"],
+    "dimensions": { "width": 48, "depth": 60, "height": 88, "unit": "cm" },
+    "weightKg": 28,
+    "features": ["Set of 4", "Stain-resistant", "Floor-protecting pads"],
+    "warranty": "5-year warranty",
+    "assembly": "Legs attach with bolts; ~10 minutes per chair",
+    "shippingTime": "5–7 business days",
+    "sustainability": ["Recycled-poly fabric", "FSC-certified oak legs"],
+    "tags": ["dining", "chairs", "set", "upholstered"]
+  },
+  {
+    "id": "fn024",
+    "name": "Kids Bunk Bed with Storage",
+    "brand": "Nordic Calm",
+    "category": "Beds",
+    "collection": "Nordic Calm",
+    "price": 799,
+    "oldPrice": null,
+    "rating": 4.7,
+    "reviews": 81,
+    "image": "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 6,
+    "colors": ["white", "natural"],
+    "badge": "KIDS",
+    "sku": "NRD-KDS-BB-024",
+    "description": "A twin-over-twin bunk bed with integrated storage drawers and a built-in reading nook.",
+    "highlights": [
+      "Meets U.S. ASTM safety standards",
+      "Integrated drawers below bottom bunk",
+      "Built-in reading nook"
+    ],
+    "materials": ["Solid pine", "Engineered wood drawer fronts"],
+    "dimensions": { "width": 105, "depth": 205, "height": 165, "unit": "cm" },
+    "weightKg": 65,
+    "features": ["Twin/twin", "Under-bed drawers", "Reading nook with outlet"],
+    "warranty": "5-year structural warranty",
+    "assembly": "~2 hours for two people",
+    "shippingTime": "10–14 business days",
+    "sustainability": ["FSC-certified pine", "Low-VOC finish"],
+    "tags": ["kids", "bunk", "storage", "bedroom"]
+  },
+  {
+    "id": "fn025",
+    "name": "Terrazzo Round Dining Table",
+    "brand": "Atelier Stone",
+    "category": "Tables",
+    "collection": "Atelier Stone",
+    "price": 1099,
+    "oldPrice": 1349,
+    "rating": 4.8,
+    "reviews": 44,
+    "image": "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 7,
+    "colors": ["ivory-terrazzo", "charcoal-terrazzo"],
+    "badge": "STATEMENT",
+    "sku": "ATL-TRZ-DT-025",
+    "description": "A round dining table with a sealed terrazzo top and tapered solid-wood base — seats 4 generously.",
+    "highlights": [
+      "Sealed terrazzo top",
+      "Tapered solid-wood base",
+      "Seats 4 comfortably"
+    ],
+    "materials": ["Terrazzo composite", "Solid ash base"],
+    "dimensions": { "width": 120, "depth": 120, "height": 75, "unit": "cm" },
+    "weightKg": 66,
+    "features": ["Stain-sealed top", "Felt-lined feet", "Seats 4"],
+    "warranty": "5-year warranty",
+    "assembly": "Top rests on base; ~15 minutes for two people",
+    "shippingTime": "10–14 business days",
+    "sustainability": ["Recycled aggregate content (40%)"],
+    "tags": ["dining", "round", "terrazzo", "statement"]
+  },
+  {
+    "id": "fn026",
+    "name": "Ceramic Planter Trio",
+    "brand": "Terra Weave",
+    "category": "Accent",
+    "collection": "Terra Weave",
+    "price": 89,
+    "oldPrice": 119,
+    "rating": 4.6,
+    "reviews": 152,
+    "image": "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 60,
+    "colors": ["terracotta", "sage", "ivory"],
+    "badge": "GIFT",
+    "sku": "TRW-PLT-3P-026",
+    "description": "A set of three hand-thrown ceramic planters with matching saucers — small, medium, large.",
+    "highlights": [
+      "Hand-thrown in small batches",
+      "Includes matching saucers",
+      "Drainage holes included"
+    ],
+    "materials": ["Stoneware ceramic"],
+    "dimensions": { "width": 25, "depth": 25, "height": 28, "unit": "cm" },
+    "weightKg": 4,
+    "features": ["Set of 3 (S/M/L)", "Drainage holes", "Matching saucers"],
+    "warranty": "30-day returns",
+    "assembly": "No assembly required",
+    "shippingTime": "3–5 business days",
+    "sustainability": ["Lead-free glazes", "Small-batch production"],
+    "tags": ["accent", "planter", "gift", "ceramic"]
+  },
+  {
+    "id": "fn027",
+    "name": "Memory Foam King Mattress",
+    "brand": "Cloud Studio",
+    "category": "Beds",
+    "collection": "Cloud Studio",
+    "price": 899,
+    "oldPrice": 1199,
+    "rating": 4.8,
+    "reviews": 312,
+    "image": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 42,
+    "colors": ["white"],
+    "badge": "SLEEP",
+    "sku": "CLD-MFK-MT-027",
+    "description": "A medium-firm king memory foam mattress with cooling gel infusion and pressure-relief zones.",
+    "highlights": [
+      "Cooling gel-infused top layer",
+      "Medium-firm (6.5/10)",
+      "100-night home trial"
+    ],
+    "materials": ["Gel-infused memory foam", "High-density support foam", "Knit cover"],
+    "dimensions": { "width": 193, "depth": 203, "height": 30, "unit": "cm" },
+    "weightKg": 45,
+    "features": ["100-night home trial", "10-year warranty", "Certi-PUR US certified"],
+    "warranty": "10-year warranty",
+    "assembly": "Unbox and let expand for 24 hours",
+    "shippingTime": "3–5 business days",
+    "sustainability": ["CertiPUR-US certified foam"],
+    "tags": ["mattress", "king", "memory-foam", "sleep"]
+  },
+  {
+    "id": "fn028",
+    "name": "Smart Standing Desk",
+    "brand": "Studio Work",
+    "category": "Tables",
+    "collection": "Studio Work",
+    "price": 699,
+    "oldPrice": 899,
+    "rating": 4.7,
+    "reviews": 205,
+    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 19,
+    "colors": ["black", "white", "walnut"],
+    "badge": "TECH",
+    "sku": "STW-SMT-SD-028",
+    "description": "An electric height-adjustable standing desk with programmable memory and anti-collision.",
+    "highlights": [
+      "Programmable height memory (4 presets)",
+      "Dual-motor lift (up to 300 lbs)",
+      "Anti-collision safety"
+    ],
+    "materials": ["Powder-coated steel frame", "Bamboo top"],
+    "dimensions": { "width": 140, "depth": 70, "height": 125, "unit": "cm" },
+    "weightKg": 42,
+    "features": ["Height range: 63–125cm", "Dual motors", "4 memory presets", "Anti-collision"],
+    "warranty": "7-year frame, 3-year electronics",
+    "assembly": "~45 minutes with provided tools",
+    "shippingTime": "5–7 business days",
+    "sustainability": ["FSC-certified bamboo top"],
+    "tags": ["office", "standing", "ergonomic", "smart"]
+  },
+  {
+    "id": "fn029",
+    "name": "Abstract Canvas Wall Art Set",
+    "brand": "Atelier Stone",
+    "category": "Accent",
+    "collection": "Atelier Stone",
+    "price": 149,
+    "oldPrice": 199,
+    "rating": 4.4,
+    "reviews": 77,
+    "image": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 35,
+    "colors": ["neutral", "warm", "monochrome"],
+    "badge": "GALLERY",
+    "sku": "ATL-CNV-WA-029",
+    "description": "A curated set of three gallery-wrapped canvases in complementary neutral tones.",
+    "highlights": [
+      "Set of three canvases",
+      "Gallery-wrapped — ready to hang",
+      "Museum-quality giclée print"
+    ],
+    "materials": ["Gallery-wrapped canvas", "Pine frame", "Archival inks"],
+    "dimensions": { "width": 60, "depth": 3, "height": 80, "unit": "cm" },
+    "weightKg": 3,
+    "features": ["Set of 3", "Hanging hardware included", "UV-resistant print"],
+    "warranty": "1-year warranty",
+    "assembly": "Hang with included hardware",
+    "shippingTime": "3–5 business days",
+    "sustainability": ["FSC-certified frame", "Water-based archival inks"],
+    "tags": ["wall-art", "decor", "accent", "gallery"]
+  },
+  {
+    "id": "fn030",
+    "name": "Velvet Storage Bench",
+    "brand": "LuxLiving",
+    "category": "Storage",
+    "collection": "Luxury Velvet",
+    "price": 329,
+    "oldPrice": 409,
+    "rating": 4.5,
+    "reviews": 68,
+    "image": "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "inStock": true,
+    "stockCount": 20,
+    "colors": ["emerald", "blush", "navy"],
+    "badge": "DUAL-USE",
+    "sku": "LUX-VLT-SB-030",
+    "description": "An upholstered velvet bench with hidden storage — perfect for entryways and foot-of-bed.",
+    "highlights": [
+      "Hidden storage under padded seat",
+      "Soft-close hinge",
+      "Supports 250 lbs"
+    ],
+    "materials": ["Velvet", "Engineered wood", "Metal hinge"],
+    "dimensions": { "width": 120, "depth": 45, "height": 48, "unit": "cm" },
+    "weightKg": 18,
+    "features": ["Hidden storage", "Soft-close hinge", "250 lb weight capacity"],
+    "warranty": "3-year warranty",
+    "assembly": "~15 minutes",
+    "shippingTime": "5–7 business days",
+    "sustainability": ["OEKO-TEX certified velvet"],
+    "tags": ["bench", "entryway", "storage", "velvet"]
   }
 ]
