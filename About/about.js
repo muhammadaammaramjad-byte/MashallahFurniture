@@ -159,7 +159,7 @@ function initInteractiveMap() {
   text.setAttribute("text-anchor", "middle");
   text.setAttribute("fill", "#000000");
   text.setAttribute("font-size", "3");
-  text.textContent = "Ramma Furniture Showroom";
+  text.textContent = "Mashallah Furniture Showroom";
   svg.appendChild(text);
 
   mapContainer.appendChild(svg);

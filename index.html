@@ -1,116 +1,647 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MashallahFurniture | Welcome</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mashallah Furniture | Premium Furniture, Crafted to Last</title>
+  <meta name="description"
+    content="Mashallah Furniture — a curated catalog of sofas, beds, tables, lighting, and decor crafted by trusted makers. Shop collections, book a free design consultation, and explore our sustainability pledge." />
+  <meta name="theme-color" content="#1d1d1d" />
+  <meta property="og:title" content="Mashallah Furniture" />
+  <meta property="og:description"
+    content="Premium furniture, crafted to last. Browse 30+ hand-picked pieces, six signature collections, and heritage brands." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
   <style>
     :root {
-      font-family: 'Space Grotesk', sans-serif;
-      color: #1d1d1d;
-      background: radial-gradient(circle at top left, rgba(255, 236, 216, 0.95), transparent 35%), linear-gradient(135deg, #fbf5ef, #fff 65%);
+      --ink: #1d1d1d;
+      --ink-soft: #3a3a3a;
+      --muted: #6f6f6f;
+      --line: rgba(29, 29, 29, 0.08);
+      --card: rgba(255, 255, 255, 0.92);
+      --accent: #b5783e;
+      --accent-soft: rgba(181, 120, 62, 0.12);
+      --bg: #fbf5ef;
+      --radius: 20px;
+      --shadow-sm: 0 10px 30px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 24px 60px rgba(0, 0, 0, 0.1);
     }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       min-height: 100vh;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(255, 236, 216, 0.8), transparent 38%),
+        linear-gradient(160deg, #fbf5ef 0%, #fff 55%, #fef3e5 100%);
+      background-attachment: fixed;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* Announcement bar */
+    .announcement {
+      background: var(--ink);
+      color: #fdf6ec;
+      text-align: center;
+      font-size: 0.86rem;
+      padding: 0.55rem 1rem;
+      letter-spacing: 0.02em;
+      font-weight: 500;
+    }
+    .announcement strong { color: #ffd7a8; font-weight: 600; }
+
+    /* Top nav */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-row {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.9rem 1.4rem;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      background-image: url('https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1200&q=80');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.65);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .page {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.94);
-      border-radius: 32px;
-      box-shadow: 0 36px 90px rgba(0, 0, 0, 0.12);
-      padding: 2.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(14px);
-    }
-    h1 {
-      margin: 0 0 1rem;
-      font-size: clamp(2rem, 3vw, 3rem);
-      letter-spacing: -0.03em;
-      font-family: 'Cormorant Garamond', serif;
-    }
-    p {
-      margin: .5rem 0 1.5rem;
-      line-height: 1.75;
-      font-family: 'Inter', sans-serif;
-      color: #3a3a3a;
-    }
-    .grid {
-      display: grid;
+      justify-content: space-between;
       gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     }
-    a.card {
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.45rem;
+      letter-spacing: -0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .brand i { color: var(--accent); }
+    .brand span { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.7rem; letter-spacing: 0.24em; color: var(--muted); text-transform: uppercase; margin-left: 0.5rem; }
+    .nav-links { display: flex; gap: 1.6rem; align-items: center; }
+    .nav-links a { font-size: 0.92rem; font-weight: 500; color: var(--ink-soft); transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.4rem;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 0 3rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding-top: 2.5rem; } }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      background: var(--accent-soft);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.2rem;
+    }
+    h1.hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.2rem;
+    }
+    .hero p.lede {
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      max-width: 52ch;
+      margin: 0 0 1.8rem;
+    }
+    .hero-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.9rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform .2s, box-shadow .2s, background .2s, color .2s;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--ink); color: #fff; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-ghost { background: transparent; color: var(--ink); border-color: rgba(29,29,29,0.18); }
+    .btn-ghost:hover { background: var(--ink); color: #fff; }
+
+    .hero-media {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--line);
+    }
+    .hero-media img {
+      width: 100%; height: 100%;
+      object-fit: cover;
       display: block;
-      padding: 1.4rem 1.2rem;
-      border: 1px solid rgba(220, 180, 140, 0.22);
-      border-radius: 24px;
-      text-decoration: none;
-      color: inherit;
-      background: rgba(255, 255, 255, 0.65);
-      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-      backdrop-filter: blur(12px);
     }
-    a.card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
-      border-color: rgba(220, 180, 140, 0.4);
+    .hero-badge {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+      padding: 0.8rem 1rem;
+      font-size: 0.85rem;
+      box-shadow: var(--shadow-sm);
+      display: flex; align-items: center; gap: 0.6rem;
     }
-    a.card strong {
+    .hero-badge i { color: var(--accent); }
+
+    /* Stats strip */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.3rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 4rem;
+    }
+    @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+    .stat { text-align: center; }
+    .stat .num { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.75rem; color: var(--ink); line-height: 1; }
+    .stat .lbl { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.4rem; }
+
+    /* Sections */
+    .section { padding: 3.5rem 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .section-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      letter-spacing: -0.02em;
+      margin: 0 0 0.5rem;
+    }
+    .section-head p { color: var(--muted); max-width: 56ch; margin: 0; }
+    .section-head .more { font-weight: 600; color: var(--accent); font-size: 0.9rem; white-space: nowrap; }
+    .section-head .more:hover { text-decoration: underline; }
+
+    /* Destination grid */
+    .destinations {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+    }
+    .destination {
       display: block;
-      margin-bottom: .55rem;
-      font-size: 1.08rem;
-      color: #111;
+      padding: 1.4rem 1.3rem;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--line);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      position: relative;
+      overflow: hidden;
     }
-    footer {
-      margin-top: 2rem;
-      color: #5a5a5a;
-      font-size: .95rem;
+    .destination::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(181,120,62,0) 0%, rgba(181,120,62,0.08) 100%);
+      opacity: 0;
+      transition: opacity .3s;
+      pointer-events: none;
     }
+    .destination:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(181, 120, 62, 0.35);
+    }
+    .destination:hover::after { opacity: 1; }
+    .destination .icon {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      font-size: 1.05rem;
+      margin-bottom: 0.9rem;
+    }
+    .destination strong { display: block; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.35rem; }
+    .destination p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+    .destination .chev { position: absolute; top: 1.3rem; right: 1.3rem; color: var(--muted); transition: transform .25s, color .25s; }
+    .destination:hover .chev { transform: translateX(4px); color: var(--accent); }
+
+    /* Collections strip */
+    .collections {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+    @media (max-width: 900px) { .collections { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .collections { grid-template-columns: 1fr; } }
+    .collection {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .collection:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .collection .thumb {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+    .collection .thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s ease;
+    }
+    .collection:hover .thumb img { transform: scale(1.05); }
+    .collection .body { padding: 1.1rem 1.2rem 1.3rem; }
+    .collection h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      margin: 0 0 0.3rem;
+    }
+    .collection p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+
+    /* Feature cards */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 900px) { .features { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .features { grid-template-columns: 1fr; } }
+    .feature {
+      padding: 1.4rem;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+    .feature i {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-bottom: 0.8rem;
+    }
+    .feature h4 { margin: 0 0 0.35rem; font-size: 1.02rem; font-weight: 700; }
+    .feature p { margin: 0; font-size: 0.9rem; color: var(--muted); }
+
+    /* New content banner */
+    .whats-new {
+      background: linear-gradient(135deg, #1d1d1d, #2a2a2a);
+      color: #fdf6ec;
+      border-radius: 26px;
+      padding: 2.2rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      margin: 1rem 0 0;
+    }
+    @media (max-width: 720px) { .whats-new { grid-template-columns: 1fr; } }
+    .whats-new h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin: 0 0 0.6rem;
+      color: #fff;
+    }
+    .whats-new p { color: rgba(255,255,255,0.75); margin: 0 0 0.8rem; max-width: 60ch; }
+    .whats-new .meta { display: flex; gap: 1.2rem; flex-wrap: wrap; font-size: 0.85rem; color: #ffd7a8; font-weight: 500; }
+    .whats-new .meta i { margin-right: 0.3rem; }
+    .whats-new .btn-primary { background: #fff; color: var(--ink); }
+    .whats-new .btn-primary:hover { background: #ffd7a8; }
+
+    /* Footer */
+    footer.site-foot {
+      padding: 3rem 0 2rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--line);
+      margin-top: 3rem;
+      text-align: center;
+    }
+    footer.site-foot .foot-brand { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.1rem; color: var(--ink); }
   </style>
 </head>
+
 <body>
-  <article class="page">
-    <header>
-      <h1>Welcome to MashallahFurniture</h1>
-      <p>Start with the Home page or navigate directly to Shop, Collections, Contact, and account pages.</p>
-    </header>
-    <section class="grid">
-      <a class="card" href="Home/home.html"><strong>Home</strong>Explore the brand experience and hero landing section.</a>
-      <a class="card" href="Shop/shop.html"><strong>Shop</strong>Browse products and continue your shopping journey.</a>
-      <a class="card" href="Collections/collections.html"><strong>Collections</strong>Review curated furniture collections.</a>
-      <a class="card" href="About/about.html"><strong>About</strong>Learn more about the brand and story.</a>
-      <a class="card" href="Contact/contact.html"><strong>Contact</strong>Send a message or reach out to customer support.</a>
-      <a class="card" href="Offers/offers.html"><strong>Offers</strong>See current promotions and featured deals.</a>
-      <a class="card" href="nav-btn/cart.html"><strong>Cart</strong>Review shopping cart items and checkout.</a>
-      <a class="card" href="nav-btn/favourite.html"><strong>Wishlist</strong>View your saved favorites.</a>
-      <a class="card" href="nav-btn/Account/account.html"><strong>Account</strong>Open the account page and wallet section.</a>
-      <a class="card" href="Search/search.html"><strong>Search</strong>Use the placeholder search page.</a>
+  <div class="announcement">
+    <strong>Free shipping</strong> on orders over $99 &middot; Book a <strong>free 30-min design consultation</strong> with our in-house designers
+  </div>
+
+  <header class="top-nav">
+    <div class="nav-row">
+      <a class="brand" href="Home/home.html" aria-label="Mashallah Furniture home">
+        <i class="fa-solid fa-couch" aria-hidden="true"></i>
+        Mashallah Furniture
+        <span>Est. 2005</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="Shop/shop.html">Shop</a>
+        <a href="Collections/collections.html">Collections</a>
+        <a href="Offers/offers.html">Offers</a>
+        <a href="About/about.html">About</a>
+        <a href="Contact/contact.html">Contact</a>
+      </nav>
+      <a class="nav-cta" href="Home/home.html">
+        <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
+        Enter Store
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <span class="eyebrow">New arrivals &middot; Spring 2026</span>
+        <h1 class="hero-title" id="hero-title">Premium furniture, crafted to last generations.</h1>
+        <p class="lede">
+          Thirty hand-picked pieces from sixteen heritage brands — organized into six signature collections.
+          Every product ships with full material provenance, warranty details, and assembly guidance.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="Shop/shop.html">
+            <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+            Shop the catalog
+          </a>
+          <a class="btn btn-ghost" href="Collections/collections.html">
+            Explore collections
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80"
+          alt="A softly lit contemporary living room with a curved boucle loveseat and marble coffee table." />
+        <div class="hero-badge">
+          <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+          <div>
+            <strong>Sustainably sourced</strong><br />
+            <span style="color: var(--muted); font-size: 0.78rem;">FSC &middot; OEKO-TEX &middot; LWG</span>
+          </div>
+        </div>
+      </div>
     </section>
-    <footer>New starter files were added, and the existing page references were repaired for local browsing.</footer>
-  </article>
+
+    <div class="stats" aria-label="Site highlights">
+      <div class="stat"><div class="num">30+</div><div class="lbl">Curated products</div></div>
+      <div class="stat"><div class="num">16</div><div class="lbl">Heritage brands</div></div>
+      <div class="stat"><div class="num">6</div><div class="lbl">Signature collections</div></div>
+      <div class="stat"><div class="num">4.7/5</div><div class="lbl">Average rating</div></div>
+    </div>
+
+    <section class="section" aria-labelledby="destinations-title">
+      <div class="section-head">
+        <div>
+          <h2 id="destinations-title">Where would you like to go?</h2>
+          <p>Every part of the storefront, one click away.</p>
+        </div>
+      </div>
+
+      <div class="destinations">
+        <a class="destination" href="Home/home.html">
+          <div class="icon"><i class="fa-solid fa-house"></i></div>
+          <strong>Home</strong>
+          <p>Hero, featured categories, and brand story.</p>
+          <i class="fa-solid fa-arrow-right chev"></i>
+        </a>
+        <a class="destination" href="Shop/shop.html">
+          <div class="icon"><i class="fa-solid fa-bag-shopping"></i></div>
+          <strong>Shop</strong>
+          <p>Filter, sort, and add to cart across 30+ items.</p>
+          <i class="fa-solid fa-arrow-right chev"></i>
+        </a>
+        <a class="destination" href="Collections/collections.html">
+          <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
+          <strong>Collections</strong>
+          <p>Six curated collections with designer stories.</p>
+          <i class="fa-solid fa-arrow-right chev"></i>
+        </a>
+        <a class="destination" href="Offers/offers.html">
+          <div class="icon"><i class="fa-solid fa-tags"></i></div>
+          <strong>Offers</strong>
+          <p>Current promotions and seasonal deals.</p>
+          <i class="fa-solid fa-arrow-right chev"></i>
+        </a>
+        <a class="destination" href="Search/search.html">
+          <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <strong>Search</strong>
+          <p>Find pieces by keyword, category, or tag.</p>
+          <i class="fa-solid fa-arrow-right chev"></i>
+        </a>
+        <a class="destination" href="nav-btn/favourite.html">
+          <div class="icon"><i class="fa-solid fa-heart"></i></div>
+          <strong>Wishlist</strong>
+          <p>Your saved favorites, synced across visits.</p>
+          <i class="fa-solid fa-arrow-right chev"></i>
+        </a>
+        <a class="destination" href="nav-btn/cart.html">
+          <div class="icon"><i class="fa-solid fa-cart-shopping"></i></div>
+          <strong>Cart</strong>
+          <p>Review items and proceed to checkout.</p>
+          <i class="fa-solid fa-arrow-right chev"></i>
+        </a>
+        <a class="destination" href="nav-btn/wallet.html">
+          <div class="icon"><i class="fa-solid fa-wallet"></i></div>
+          <strong>Wallet</strong>
+          <p>Store credit, gift cards, and order credits.</p>
+          <i class="fa-solid fa-arrow-right chev"></i>
+        </a>
+        <a class="destination" href="nav-btn/Account/account.html">
+          <div class="icon"><i class="fa-solid fa-user"></i></div>
+          <strong>Account</strong>
+          <p>Profile, order history, and preferences.</p>
+          <i class="fa-solid fa-arrow-right chev"></i>
+        </a>
+        <a class="destination" href="About/about.html">
+          <div class="icon"><i class="fa-solid fa-landmark"></i></div>
+          <strong>About</strong>
+          <p>Our story, makers, and sustainability pledge.</p>
+          <i class="fa-solid fa-arrow-right chev"></i>
+        </a>
+        <a class="destination" href="Contact/contact.html">
+          <div class="icon"><i class="fa-solid fa-envelope"></i></div>
+          <strong>Contact</strong>
+          <p>Support, design consultations, press.</p>
+          <i class="fa-solid fa-arrow-right chev"></i>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="collections-title">
+      <div class="section-head">
+        <div>
+          <h2 id="collections-title">Signature collections</h2>
+          <p>Each collection tells a story about craft, provenance, and design.</p>
+        </div>
+        <a class="more" href="Collections/collections.html">View all collections <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="collections">
+        <a class="collection" href="Collections/collections.html">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=80" alt="Luxury Velvet collection" /></div>
+          <div class="body">
+            <h3>Luxury Velvet</h3>
+            <p>Deep-tufted silhouettes in rich, hand-dyed Italian velvet.</p>
+          </div>
+        </a>
+        <a class="collection" href="Collections/collections.html">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=900&q=80" alt="Japandi Serenity collection" /></div>
+          <div class="body">
+            <h3>Japandi Serenity</h3>
+            <p>Japanese restraint meets Scandinavian warmth, in solid ash.</p>
+          </div>
+        </a>
+        <a class="collection" href="Collections/collections.html">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?auto=format&fit=crop&w=900&q=80" alt="Atelier Stone collection" /></div>
+          <div class="body">
+            <h3>Atelier Stone</h3>
+            <p>Marble, terrazzo, and sculptural stone — built to become heirlooms.</p>
+          </div>
+        </a>
+        <a class="collection" href="Collections/collections.html">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80" alt="Golden Hour collection" /></div>
+          <div class="body">
+            <h3>Golden Hour</h3>
+            <p>Brushed brass and linen lighting that sets the mood.</p>
+          </div>
+        </a>
+        <a class="collection" href="Collections/collections.html">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&w=900&q=80" alt="Studio Work collection" /></div>
+          <div class="body">
+            <h3>Studio Work</h3>
+            <p>Ergonomic workspaces for creative professionals.</p>
+          </div>
+        </a>
+        <a class="collection" href="Collections/collections.html">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1519961655809-34fa156820cf?auto=format&fit=crop&w=900&q=80" alt="Terra Weave collection" /></div>
+          <div class="body">
+            <h3>Terra Weave</h3>
+            <p>Hand-woven rattan, teak, and natural craft from Bali.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="features-title">
+      <div class="section-head">
+        <div>
+          <h2 id="features-title">What you can expect</h2>
+          <p>Small details that add up to a great ownership experience.</p>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <i class="fa-solid fa-truck-fast"></i>
+          <h4>Free over $99</h4>
+          <p>Standard shipping in 3–14 business days. White-glove delivery available.</p>
+        </div>
+        <div class="feature">
+          <i class="fa-solid fa-shield-halved"></i>
+          <h4>Up to 15-year warranty</h4>
+          <p>Every product includes a structural warranty — heritage pieces covered up to 15 years.</p>
+        </div>
+        <div class="feature">
+          <i class="fa-solid fa-leaf"></i>
+          <h4>Sustainably sourced</h4>
+          <p>FSC-certified wood, OEKO-TEX fabrics, and LWG-certified leather.</p>
+        </div>
+        <div class="feature">
+          <i class="fa-solid fa-pen-ruler"></i>
+          <h4>Free design help</h4>
+          <p>Book a 30-minute video call with one of our in-house interior designers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="whats-new-title">
+      <div class="whats-new" role="region" aria-labelledby="whats-new-title">
+        <div>
+          <h3 id="whats-new-title">What's new in this release</h3>
+          <p>We just rolled out a deeper catalog and richer product data so you can shop with confidence.</p>
+          <div class="meta">
+            <span><i class="fa-solid fa-cube"></i>30 curated products (up from 10)</span>
+            <span><i class="fa-solid fa-tags"></i>6 signature collections</span>
+            <span><i class="fa-solid fa-seedling"></i>Sustainability credentials on every product</span>
+            <span><i class="fa-solid fa-ruler-combined"></i>Dimensions, materials &amp; assembly</span>
+          </div>
+        </div>
+        <div>
+          <a class="btn btn-primary" href="Shop/shop.html">
+            <i class="fa-solid fa-bag-shopping"></i> Browse the catalog
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="container">
+      <div class="foot-brand">Mashallah Furniture</div>
+      <p>&copy; 2026 Mashallah Furniture. Crafted with care.</p>
+    </div>
+  </footer>
 </body>
 </html>

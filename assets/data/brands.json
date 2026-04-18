@@ -1,0 +1,18 @@
+[
+  { "id": "luxliving", "name": "LuxLiving", "tagline": "Luxury velvet silhouettes, hand-tufted in small batches.", "founded": 2008, "origin": "Milan, Italy" },
+  { "id": "rustic-oak", "name": "Rustic Oak", "tagline": "Time-honored joinery in solid American oak.", "founded": 2004, "origin": "Portland, OR" },
+  { "id": "modern-minimal", "name": "Modern Minimal", "tagline": "Clean lines for compact, considered living.", "founded": 2015, "origin": "Copenhagen, DK" },
+  { "id": "contemporary-glow", "name": "Contemporary Glow", "tagline": "Ambient-lit furniture for contemporary spaces.", "founded": 2017, "origin": "Berlin, DE" },
+  { "id": "coastal-linen", "name": "Coastal Linen", "tagline": "European flax linen, breezy silhouettes.", "founded": 2012, "origin": "Lisbon, PT" },
+  { "id": "golden-hour", "name": "Golden Hour", "tagline": "Warm brass and linen lighting, built to last.", "founded": 2011, "origin": "Paris, FR" },
+  { "id": "urbanflame", "name": "UrbanFlame", "tagline": "Modular, industrial storage for urban living.", "founded": 2014, "origin": "Brooklyn, NY" },
+  { "id": "studio-work", "name": "Studio Work", "tagline": "Ergonomic workspaces for focused work.", "founded": 2019, "origin": "Amsterdam, NL" },
+  { "id": "rustic-luxe", "name": "Rustic Luxe", "tagline": "Hand-stitched leather, rustic patina.", "founded": 2010, "origin": "Buenos Aires, AR" },
+  { "id": "nordic-calm", "name": "Nordic Calm", "tagline": "Scandi-inspired pieces in light wood and soft tones.", "founded": 2013, "origin": "Stockholm, SE" },
+  { "id": "cloud-studio", "name": "Cloud Studio", "tagline": "Cloud-soft seating and sleep, made to order.", "founded": 2020, "origin": "Los Angeles, CA" },
+  { "id": "hinoki", "name": "Hinoki", "tagline": "Japandi-rooted beds and tables in solid ash.", "founded": 2018, "origin": "Kyoto, JP" },
+  { "id": "kinetic-home", "name": "Kinetic Home", "tagline": "Smart power seating with built-in charging.", "founded": 2021, "origin": "Austin, TX" },
+  { "id": "atelier-stone", "name": "Atelier Stone", "tagline": "Marble, terrazzo, and artful stone pieces.", "founded": 2009, "origin": "Florence, IT" },
+  { "id": "terra-weave", "name": "Terra Weave", "tagline": "Naturally woven rattan, teak, and ceramic craft.", "founded": 2016, "origin": "Bali, ID" },
+  { "id": "heritage-looms", "name": "Heritage Looms", "tagline": "Fair Trade hand-woven rugs from New Zealand wool.", "founded": 2007, "origin": "Jaipur, IN" }
+]
